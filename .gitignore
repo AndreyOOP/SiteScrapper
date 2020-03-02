@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/CarPartsParser
+/CarPartsParser/.vs
+/CarPartsParser/bin/Debug
+/CarPartsParser/obj/Debug
+/packages
