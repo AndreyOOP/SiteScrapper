@@ -67,6 +67,8 @@
     <Compile Include="Models\SiteA\SiteAModelB.cs" />
     <Compile Include="Models\SiteB\SiteBModelA.cs" />
     <Compile Include="Models\SiteB\SiteBModelB.cs" />
+    <Compile Include="Parser\WebSiteParserA.cs" />
+    <Compile Include="Parser\WebSiteParserB.cs" />
     <Compile Include="Parser\WorkUnitsSiteB\WorkUnit1B.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,7 +83,9 @@
     <Compile Include="SiteParsers\RootParser\RootResult.cs" />
     <Compile Include="SiteParsers\SiteB\WebSiteParserB.cs" />
     <Compile Include="SiteParsers\SiteA\WebSiteParserA.cs" />
+    <Compile Include="Abstraction\IWebSiteParser.cs" />
     <Compile Include="Abstraction\WorkUnits\IWorkUnit.cs" />
+    <Compile Include="Parser\WebSiteParser.cs" />
     <Compile Include="Parser\WorkUnitsSiteA\WorkUnit1A.cs" />
     <Compile Include="Parser\WorkUnitsSiteA\WorkUnit2A.cs" />
   </ItemGroup>
