@@ -87,6 +87,7 @@
     <Compile Include="Abstraction\IWebSiteParser.cs" />
     <Compile Include="Abstraction\WorkUnits\IWorkUnit.cs" />
     <Compile Include="Parser\WebSiteParser.cs" />
+    <Compile Include="Parser\ParserExecutor.cs" />
     <Compile Include="Parser\WorkUnitsSiteA\WorkUnit1A.cs" />
     <Compile Include="Parser\WorkUnitsSiteA\WorkUnit2A.cs" />
     <Compile Include="Factories\WebSiteParsersFactory.cs" />
