@@ -1,9 +1,9 @@
-﻿using CarPartsParser.SiteParsers.Abstraction;
+﻿using CarPartsParser.Abstraction.Factories;
+using CarPartsParser.Abstraction.WorkUtils;
+using CarPartsParser.Factories;
+using CarPartsParser.Parser.WorkUnitsSiteB;
 using CarPartsParser.SiteParsers.RootParser;
 using CarPartsParser.SiteParsers.SiteA;
-using CarPartsParser.SiteParsers.SiteB;
-using System;
-using System.Collections.Generic;
 using Unity;
 
 namespace CarPartsParser.ContainerSetup
@@ -19,15 +19,13 @@ namespace CarPartsParser.ContainerSetup
 
             container = new UnityContainer();
 
-            container.RegisterType<IWebSiteParser, WebSiteParserA>(nameof(WebSiteParserA));
-            container.RegisterType<IWebSiteParser, WebSiteParserB>(nameof(WebSiteParserB));
-            container.RegisterType<RootParser>();
+            container.RegisterType<IWorkUnitA, WorkUnit1A>(nameof(WorkUnit1A));
+            container.RegisterType<IWorkUnitA, WorkUnit2A>(nameof(WorkUnit2A));
+            container.RegisterType<IWorkUnitB, WorkUnit1B>(nameof(WorkUnit1B));
 
-            var adapters = new Dictionary<Type, IResultAdapter<IParsedResult>> { 
-                [typeof(ResultA)] = new AdapterA(),
-                [typeof(ResultB)] = new AdapterB()
-            };
-            container.RegisterInstance(adapters);
+            container.RegisterType<IWebSiteParsersFactory, WebSiteParsersFactory>();
+
+            container.RegisterType<ParserExecutor>();
 
             return container;
         }
