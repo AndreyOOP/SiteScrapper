@@ -57,7 +57,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstraction\Models\IWorkUnitModel.cs" />
     <Compile Include="ContainerSetup\ContainerProvider.cs" />
+    <Compile Include="Models\In.cs" />
+    <Compile Include="Models\ParserExecutorResult.cs" />
+    <Compile Include="Models\SiteA\SiteAModelA.cs" />
+    <Compile Include="Models\SiteA\SiteAModelB.cs" />
+    <Compile Include="Models\SiteB\SiteBModelA.cs" />
+    <Compile Include="Models\SiteB\SiteBModelB.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SiteParsers\Abstraction\IParsedResult.cs" />
