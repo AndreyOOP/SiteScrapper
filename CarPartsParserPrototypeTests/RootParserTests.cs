@@ -1,11 +1,7 @@
-﻿using CarPartsParser.Abstraction;
-using CarPartsParser.ContainerSetup;
+﻿using CarPartsParser.ContainerSetup;
 using CarPartsParser.Models;
-using CarPartsParser.SiteParsers.Abstraction;
 using CarPartsParser.SiteParsers.RootParser;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using Unity;
 
@@ -25,6 +21,16 @@ namespace CarPartsParserPrototypeTests
             
             Assert.AreEqual(2, result.Count());
             Assert.IsTrue(result.Any(r => r.GetType() == typeof(ParserExecutorResult)));
+
+            var aResult = result.ToArray()[0];
+            Assert.AreEqual(null, aResult.Exception);
+            Assert.AreEqual("WorkUnit_1_A set Prop1; Execute Service A", aResult.Prop1);
+            Assert.AreEqual("WorkUnit_2_A set Prop2; Execute Service B", aResult.Prop2);
+
+            var bResult = result.ToArray()[1];
+            Assert.AreEqual(null, bResult.Exception);
+            Assert.AreEqual("WorkUnit_1_B set Prop1", bResult.Prop1);
+            Assert.AreEqual(null, bResult.Prop2);
         }
     }
 }
