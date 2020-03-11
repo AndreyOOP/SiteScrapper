@@ -58,6 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstraction\Factories\IWebSiteParsersFactory.cs" />
+    <Compile Include="Abstraction\Services\IServiceA.cs" />
+    <Compile Include="Abstraction\Services\IServiceB.cs" />
+    <Compile Include="Abstraction\Services\IServiceProvider.cs" />
     <Compile Include="Abstraction\WorkUnits\IWorkUnitA.cs" />
     <Compile Include="Abstraction\WorkUnits\IWorkUnitB.cs" />
     <Compile Include="Abstraction\Models\IWorkUnitModel.cs" />
@@ -80,6 +83,9 @@
     <Compile Include="Parser\WorkUnitsSiteA\WorkUnit1A.cs" />
     <Compile Include="Parser\WorkUnitsSiteA\WorkUnit2A.cs" />
     <Compile Include="Factories\WebSiteParsersFactory.cs" />
+    <Compile Include="Services\ServiceA.cs" />
+    <Compile Include="Services\ServiceB.cs" />
+    <Compile Include="Services\ServiceProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
