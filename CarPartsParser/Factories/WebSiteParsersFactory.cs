@@ -1,9 +1,9 @@
 ﻿using CarPartsParser.Abstraction.Factories;
 using CarPartsParser.Abstraction.WorkUtils;
 using CarPartsParser.Parser;
+using CarPartsParser.Parser.WorkUnitsSiteA;
 using CarPartsParser.Parser.WorkUnitsSiteB;
 using CarPartsParser.SiteParsers.Abstraction;
-using CarPartsParser.SiteParsers.SiteA;
 using System;
 using System.Collections.Generic;
 using System.Linq;

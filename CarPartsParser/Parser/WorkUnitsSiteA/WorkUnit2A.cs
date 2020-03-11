@@ -1,15 +1,22 @@
 ﻿using CarPartsParser.Abstraction.Models;
-using CarPartsParser.Abstraction.WorkUtils;
+using CarPartsParser.Abstraction.Services;
 using CarPartsParser.Models;
 using CarPartsParser.Models.SiteA;
 
-namespace CarPartsParser.SiteParsers.SiteA
+namespace CarPartsParser.Parser.WorkUnitsSiteA
 {
-    public class WorkUnit2A : IWorkUnitA
+    public class WorkUnit2A : WorkUnitBaseA
     {
-        public IWorkUnitModel Execute(IWorkUnitModel input, ref IWorkUnitModel siteParserResult)
+        public WorkUnit2A(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            ((ParserExecutorResult)siteParserResult).Prop2 = "WorkUnit_2_A set Prop2";
+        }
+
+        public override IWorkUnitModel Execute(IWorkUnitModel input, ref IWorkUnitModel siteParserResult)
+        {
+            var serviceB = serviceProvider.GetServiceB(); 
+
+            ((ParserExecutorResult)siteParserResult).Prop2 = "WorkUnit_2_A set Prop2; " + serviceB.ExecuteServiceB();
+
             return new SiteAModelB();
         }
     }
