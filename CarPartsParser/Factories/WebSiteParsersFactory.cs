@@ -1,6 +1,7 @@
 ﻿using CarPartsParser.Abstraction.Factories;
 using CarPartsParser.Abstraction.WorkUtils;
 using CarPartsParser.Parser;
+using CarPartsParser.Parser.Tree;
 using CarPartsParser.Parser.WorkUnitsSiteA;
 using CarPartsParser.Parser.WorkUnitsSiteB;
 using CarPartsParser.SiteParsers.Abstraction;
@@ -33,21 +34,17 @@ namespace CarPartsParser.Factories
 
         private WebSiteParserA GetParserA()
         {
-            var parser = new WebSiteParserA();
+            var tree = new WorkUnitTree(workUnitsA[typeof(WorkUnit1A)]);
+            tree.AddNextNode(new WorkUnitTree(workUnitsA[typeof(WorkUnit2A)]));
 
-            parser.RegisterUnit(workUnitsA[typeof(WorkUnit1A)]);
-            parser.RegisterUnit(workUnitsA[typeof(WorkUnit2A)]);
-
-            return parser;
+            return new WebSiteParserA(tree);
         }
 
         private WebSiteParserB GetParserB()
         {
-            var parser = new WebSiteParserB();
+            var tree = new WorkUnitTree(workUnitsB[typeof(WorkUnit1B)]);
 
-            parser.RegisterUnit(workUnitsB[typeof(WorkUnit1B)]);
-
-            return parser;
+            return new WebSiteParserB(tree);
         }
     }
 }
