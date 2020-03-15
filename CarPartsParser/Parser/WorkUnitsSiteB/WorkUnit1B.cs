@@ -10,7 +10,7 @@ namespace CarPartsParser.Parser.WorkUnitsSiteB
         public IWorkUnitModel Execute(IWorkUnitModel input, ref IWorkUnitModel siteParserResult)
         {
             var inputModel = (In)input;
-            ((ParserExecutorResult)siteParserResult).Prop1 = "WorkUnit_1_B set Prop1"; ;
+            ((ParserExecutorResult)siteParserResult).Prop1 = "WorkUnit_1_B set Prop1";
             return new SiteBModelB();
         }
     }

@@ -1,33 +1,43 @@
 ﻿using CarPartsParser.Abstraction.Models;
 using CarPartsParser.Models;
+using CarPartsParser.Parser.Tree;
 using CarPartsParser.SiteParsers.Abstraction.WorkUnits;
-using System.Collections.Generic;
 
 namespace CarPartsParser.SiteParsers.Abstraction
 {
     public class WebSiteParser<TUnit> : IWebSiteParser where TUnit : IWorkUnit
     {
-        private Queue<IWorkUnit> queue = new Queue<IWorkUnit>();
+        private WorkUnitTree tree;
+
+        public WebSiteParser(WorkUnitTree tree)
+        {
+            this.tree = tree;
+        }
 
         public IWorkUnitModel Parse(IWorkUnitModel input)
         {
+            var node = tree;
             var model = input;
             IWorkUnitModel siteResult = new ParserExecutorResult();
 
-            foreach (var unit in queue)
+            for(;;)
             {
                 if (((ParserExecutorResult)siteResult).Exception != null)
                 {
                     break;
                 }
-                model = unit.Execute(model, ref siteResult);
-            }
-            return siteResult;
-        }
 
-        public void RegisterUnit(TUnit unit)
-        {
-            queue.Enqueue(unit);
+                var modelBeforeUpdate = model;
+
+                model = node.Unit.Execute(model, ref siteResult);
+
+                if (node.IsLastNode())
+                    break;
+
+                node = node.NextNode(modelBeforeUpdate, model);
+            }
+
+            return siteResult;
         }
     }
 }

@@ -58,8 +58,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mocks\TestWorkUnit.cs" />
     <Compile Include="RootParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorkUnitTreeTests\DrawWorkUnitTree.cs" />
+    <Compile Include="WorkUnitTreeTests\WorkUnitTreeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
