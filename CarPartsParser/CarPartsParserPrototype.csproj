@@ -86,6 +86,9 @@
     <Compile Include="Models\SiteA\SiteAModelB.cs" />
     <Compile Include="Models\SiteB\SiteBModelA.cs" />
     <Compile Include="Models\SiteB\SiteBModelB.cs" />
+    <Compile Include="Parser\Tree\ExecutionPath.cs" />
+    <Compile Include="Parser\Tree\IWorkUnitTree.cs" />
+    <Compile Include="Parser\Tree\WorkUnitTree.cs" />
     <Compile Include="Parser\WebSiteParserA.cs" />
     <Compile Include="Parser\WebSiteParserB.cs" />
     <Compile Include="Parser\WorkUnitsSiteA\WorkUnitBaseA.cs" />
