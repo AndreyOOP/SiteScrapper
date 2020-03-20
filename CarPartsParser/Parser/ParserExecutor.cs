@@ -14,14 +14,14 @@ namespace CarPartsParser.SiteParsers.RootParser
             this.factory = factory;
         }
 
-        public IEnumerable<ParserExecutorResult> Parse(IWorkUnitModel id)
+        public IEnumerable<ParserExecutorResultBase> Parse(IWorkUnitModel id)
         {
-            var result = new List<ParserExecutorResult>();
+            var result = new List<ParserExecutorResultBase>();
 
             foreach (var parser in factory.GetAll())
             {
                 var siteResult = parser.Parse(id);
-                result.Add((ParserExecutorResult)siteResult);
+                result.Add(siteResult);
             }
 
             return result;

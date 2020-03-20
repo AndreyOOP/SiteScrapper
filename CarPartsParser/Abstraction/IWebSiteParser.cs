@@ -1,9 +1,10 @@
 ﻿using CarPartsParser.Abstraction.Models;
+using CarPartsParser.Models;
 
 namespace CarPartsParser.SiteParsers.Abstraction
 {
-    public interface IWebSiteParser
+    public interface IWebSiteParser<out TOut> where TOut : ParserExecutorResultBase, new()
     {
-        IWorkUnitModel Parse(IWorkUnitModel input);
+        TOut Parse(IWorkUnitModel input);
     }
 }

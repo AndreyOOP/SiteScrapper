@@ -20,7 +20,7 @@ namespace CarPartsParserPrototypeTests
             var result = rootParser.Parse(new In { Id = "123" }).ToList();
             
             Assert.AreEqual(2, result.Count());
-            Assert.IsTrue(result.Any(r => r.GetType() == typeof(ParserExecutorResult)));
+            Assert.IsTrue(result.Any(r => r.GetType() == typeof(ParserExecutorResultBase)));
 
             var aResult = result.ToArray()[0];
             Assert.AreEqual(null, aResult.Exception);

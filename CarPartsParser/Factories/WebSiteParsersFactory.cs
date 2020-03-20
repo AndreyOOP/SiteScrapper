@@ -1,5 +1,6 @@
 ﻿using CarPartsParser.Abstraction.Factories;
 using CarPartsParser.Abstraction.WorkUtils;
+using CarPartsParser.Models;
 using CarPartsParser.Parser;
 using CarPartsParser.Parser.Tree;
 using CarPartsParser.Parser.WorkUnitsSiteA;
@@ -22,9 +23,9 @@ namespace CarPartsParser.Factories
             this.workUnitsB = workUnitsB.ToDictionary(k => k.GetType(), v => v);
         }
 
-        public IEnumerable<IWebSiteParser> GetAll()
+        public IEnumerable<IWebSiteParser<ParserExecutorResultBase>> GetAll()
         {
-            var parsers = new List<IWebSiteParser> 
+            var parsers = new List<IWebSiteParser<ParserExecutorResultBase>> 
             { 
                 GetParserA(), 
                 GetParserB()
