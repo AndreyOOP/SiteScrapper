@@ -1,4 +1,5 @@
 ﻿using CarPartsParser.Abstraction.Models;
+using CarPartsParser.Models;
 using CarPartsParser.Parser.Tree;
 using CarPartsParser.SiteParsers.Abstraction.WorkUnits;
 using System;
@@ -18,7 +19,7 @@ namespace CarPartsParserPrototypeTests.Mocks
             this.workUnit = workUnit ?? new TestWorkUnitModel();
         }
 
-        public IWorkUnitModel Execute(IWorkUnitModel input, ref IWorkUnitModel siteParserResult)
+        public IWorkUnitModel Execute(IWorkUnitModel input, ref ParserExecutorResultBase siteParserResult)
         {
             return workUnit;
         }

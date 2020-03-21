@@ -1,4 +1,5 @@
 ﻿using CarPartsParser.Abstraction.Models;
+using CarPartsParser.Models;
 
 namespace CarPartsParser.SiteParsers.Abstraction.WorkUnits
 {
@@ -10,6 +11,6 @@ namespace CarPartsParser.SiteParsers.Abstraction.WorkUnits
         /// <param name="input">input model</param>
         /// <param name="siteParserResult">final output model, it could be used in case some result could be get from the middle step. E.g error can be at any step</param>
         /// <returns></returns>
-        IWorkUnitModel Execute(IWorkUnitModel input, ref IWorkUnitModel siteParserResult);
+        IWorkUnitModel Execute(IWorkUnitModel input, ref ParserExecutorResultBase siteParserResult);
     }
 }

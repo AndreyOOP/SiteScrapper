@@ -1,6 +1,7 @@
 ﻿using CarPartsParser.Abstraction.Models;
 using CarPartsParser.Abstraction.Services;
 using CarPartsParser.Abstraction.WorkUtils;
+using CarPartsParser.Models;
 
 namespace CarPartsParser.Parser.WorkUnitsSiteA
 {
@@ -15,6 +16,6 @@ namespace CarPartsParser.Parser.WorkUnitsSiteA
             this.serviceProvider = serviceProvider;
         }
 
-        public abstract IWorkUnitModel Execute(IWorkUnitModel input, ref IWorkUnitModel siteParserResult);
+        public abstract IWorkUnitModel Execute(IWorkUnitModel input, ref ParserExecutorResultBase siteParserResult);
     }
 }

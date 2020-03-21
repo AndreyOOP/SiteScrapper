@@ -15,11 +15,11 @@ namespace CarPartsParser.Parser.WorkUnitsSiteA
             this.serviceProvider = serviceProvider;
         }
 
-        public IWorkUnitModel Execute(IWorkUnitModel input, ref IWorkUnitModel siteParserResult)
+        public IWorkUnitModel Execute(IWorkUnitModel input, ref ParserExecutorResultBase siteParserResult)
         {
             var serviceA = serviceProvider.GetServiceA();
 
-            ((ParserExecutorResult)siteParserResult).Prop1 = "WorkUnit_1_A set Prop1; " + serviceA.ExecuteServiceA();
+            siteParserResult.Prop1 = "WorkUnit_1_A set Prop1; " + serviceA.ExecuteServiceA();
 
             return new SiteAModelA();
         }

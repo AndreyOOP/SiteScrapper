@@ -11,11 +11,14 @@ namespace CarPartsParser.Parser.WorkUnitsSiteA
         {
         }
 
-        public override IWorkUnitModel Execute(IWorkUnitModel input, ref IWorkUnitModel siteParserResult)
+        public override IWorkUnitModel Execute(IWorkUnitModel input, ref ParserExecutorResultBase siteParserResult)
         {
-            var serviceB = serviceProvider.GetServiceB(); 
+            var serviceB = serviceProvider.GetServiceB();
 
-            ((ParserExecutorResult)siteParserResult).Prop2 = "WorkUnit_2_A set Prop2; " + serviceB.ExecuteServiceB();
+            var e = (ParserExecutorResult)siteParserResult;
+            e.Zzz = 42;
+
+            siteParserResult.Prop2 = "WorkUnit_2_A set Prop2; " + serviceB.ExecuteServiceB();
 
             return new SiteAModelB();
         }
