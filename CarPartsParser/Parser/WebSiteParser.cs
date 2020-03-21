@@ -2,10 +2,14 @@
 using CarPartsParser.Models;
 using CarPartsParser.Parser.Tree;
 using CarPartsParser.SiteParsers.Abstraction.WorkUnits;
+using Newtonsoft.Json;
+using System;
 
 namespace CarPartsParser.SiteParsers.Abstraction
 {
-    public class WebSiteParser<TUnit> : IWebSiteParser where TUnit : IWorkUnit
+    public class WebSiteParser<TUnit, TOut> : IWebSiteParser<TOut> 
+        where TUnit : IWorkUnit 
+        where TOut : ParserExecutorResultBase, new()
     {
         private WorkUnitTree tree;
 
@@ -14,30 +18,44 @@ namespace CarPartsParser.SiteParsers.Abstraction
             this.tree = tree;
         }
 
-        public IWorkUnitModel Parse(IWorkUnitModel input)
+        public TOut Parse(IWorkUnitModel input)
         {
             var node = tree;
             var model = input;
-            IWorkUnitModel siteResult = new ParserExecutorResult();
+            var siteResult = (ParserExecutorResultBase)new TOut();
 
             for(;;)
             {
-                if (((ParserExecutorResult)siteResult).Exception != null)
+                if (siteResult.Exception != null)
                 {
                     break;
                 }
 
                 var modelBeforeUpdate = model;
 
-                model = node.Unit.Execute(model, ref siteResult);
+                try
+                {
+                    siteResult.ExecutionPath += $"{node.Unit.GetType().Name} > ";
 
-                if (node.IsLastNode())
-                    break;
+                    model = node.Unit.Execute(model, ref siteResult);
+                    
+                    if (node.IsLastNode())
+                        break;
 
-                node = node.NextNode(modelBeforeUpdate, model);
+                    node = node.NextNode(modelBeforeUpdate, model);
+                }
+                catch (Exception ex)
+                {
+                    siteResult.Exception = JsonConvert.SerializeObject(new
+                    {
+                        UnitName = node.Unit.GetType().Name,
+                        Message = ex.Message,
+                        Path = siteResult.ExecutionPath
+                    });
+                }
             }
 
-            return siteResult;
+            return (TOut)siteResult;
         }
     }
 }
