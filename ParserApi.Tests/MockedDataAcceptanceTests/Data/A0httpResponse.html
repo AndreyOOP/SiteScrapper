@@ -1,0 +1,353 @@
+﻿<!DOCTYPE html>
+<html lang='ru'>
+<head>
+    <meta http-equiv='Content-type' content='text/html; charset=UTF-8' />
+    <meta name='Keywords' content='' />
+    <meta name='Description' content='' />
+    <meta name='Robots' content='index, follow' />
+    <meta name="google-site-verification" content="lE-CXqf4z8FR4mbG9MJ1h_tM14-fXrfsxFLdfb0IglY" />
+    <meta name='yandex-verification' content='67f2a58872775edc' />
+    <meta name="iua-site-verification" content="4438c706650fe116d3cf686a69570b8b" />
+    <link rel='shortcut icon' href='/favicon.ico' type='image/x-icon' />
+    <link rel='icon' href='/favicon.ico' type='image/x-icon' />
+    <link rel='stylesheet' href='/style/style.css?1=12' media='screen' />
+    <style>
+        .order_blk {
+            text-align: center;
+        }
+
+        .basket td input[type=number] {
+            width: 45px;
+        }
+
+        .bred {
+            border-color: #ff0000 !important;
+            box-shadow: 0px 0px 2px 1px #ff0000;
+        }
+
+        .order_blk input:disabled {
+            background: #333333 !important;
+        }
+
+        .order_blk input[type=text], .order_blk input[type=tel] {
+            font-size: 16px;
+            margin: 5px;
+            height: 33px;
+            padding: 3px;
+            box-sizing: border-box;
+        }
+
+        .order_blk li {
+            margin: 0 0 10px 0;
+        }
+
+        .basket tr:nth-child(even) {
+            background-color: #e0e0e0;
+        }
+    </style>
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-114.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-144.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-144.png" />
+    <link href="https://plus.google.com/111413035699526223570?prsrc=3" rel="publisher" />
+    <title>Результаты поиска "MD619865"- | Интернет магазин 911auto</title>
+    <link rel='stylesheet' href='/style/styleadd.css?1=5' media='screen' />
+    <script type='text/javascript'>
+  function Request(e,t,s){var n,o,a=this;this.obj=s,this.send=function(){try{n=new XMLHttpRequest}catch(e){if(window.ActiveXObject){mshttp=new Array("Msxml2.XMLHTTP.6.0","Msxml2.XMLHTTP.3.0","Msxml2.XMLHTTP","Microsoft.XMLHTTP");for(var s=0;mshttp.length>s;s++){try{n=new ActiveXObject(mshttp[s])}catch(e){}if(n)break}}}if(n&&""!=e&&""!=t&&(0==n.readyState||4==n.readyState))try{n.open("POST",e,!0),n.onreadystatechange=function(){if(4==n.readyState&&"200"==n.status){if(a.doctype=n.getResponseHeader("Content-type"),n.responseXML&&n.responseXML.documentElement){if(a.root=o=n.responseXML.documentElement,o&&o.getElementsByTagName("status").length>0){var e=o.getElementsByTagName("status")[0];showStatus(e.firstChild.data,e.getAttribute("error"))}}else n.responseText&&(a.root=n.responseText);a.onResponse&&a.onResponse()}},n.setRequestHeader("Content-type","application/x-www-form-urlencoded"),n.send(t)}catch(e){}}}
+    </script>
+    <script>
+function addToCart(){
+  var tcode,cart={},tb=document.getElementById('tny_basket'),bc=0;
+  function fade(o){setTimeout(function(){o.remove()},500)}
+  function plus(o){
+    var div=document.createElement('div'),css
+    if(o.parentNode.tagName.toLowerCase()=='td'){
+      css="position:absolute;top:6px;left:-14px;width:14px;height:14px;background:url('/style/2/plus.gif') 0 0 no-repeat;"
+    }
+    else{
+      css="position:absolute;top:-8px;left:95px;width:14px;height:14px;background:url('/style/2/plus.gif') 0 0 no-repeat;"
+    }
+    div.style.cssText=css
+    o.parentNode.appendChild(div)
+    return div;
+  }
+  function cookieCheck(){
+    var b,e,c
+    if(document.cookie.indexOf('cart')!=-1){
+      b=document.cookie.indexOf('cart')
+      e=document.cookie.indexOf(';',b)
+      if(e==-1){
+	c=document.cookie.substring(b+5)
+      }
+      else{
+	c=document.cookie.substring(b+5,e)
+      }
+      cart=JSON.parse(c)
+    }
+  }
+  cookieCheck()
+  tcode=this.getAttribute('cid')
+  if(cart[tcode]){
+    cart[tcode]+=1
+  }
+  else{
+    cart[tcode]=1
+  }
+  for (var i in cart){
+    bc+=cart[i]
+  }
+  document.cookie='cart='+JSON.stringify(cart)+';path=/'
+  fade(plus(this))
+  if(document.getElementsByClassName('basket_count').length>0){
+     document.getElementsByClassName('basket_count')[0].innerText=bc
+  }
+  else{
+    tb.innerHTML="<a href='/basket'>Корзина</a> (<span class='basket_count'>"+bc+"</span>)"
+  }
+
+}
+
+function placeOrder(){
+  var fio=document.getElementById('o_fio').value,phone=document.getElementById('o_phone').value,info={}
+  var btn=this
+  info={fio:fio,phone:phone}
+  document.cookie='info='+JSON.stringify(info)+';path=/'
+  r=new Request('/','m=cxhro&placeorder=1&fio='+encodeURIComponent(fio)+'&phone='+encodeURIComponent(phone))
+  r.send();
+  btn.disabled=true
+  r.onResponse=function(){
+    if(this.doctype.indexOf('json')!=-1){
+      result=JSON.parse(this.root)
+      if(result.status==1 || result.status==2){
+	if(document.getElementsByClassName('basket_count').length>0){
+	  document.getElementsByClassName('basket_count')[0].innerText=0
+	}
+	document.getElementById('basket_content').innerHTML="<div class='msg'>Ваш заказ <strong>№"+result.docno+"</strong> оформлен. Менеджер свяжется с Вами по указанному  телефону для уточнения деталей</div>"
+      }
+    }
+  }
+}</script>
+    <script type='text/javascript'>
+  function preview(e){function t(){c.className="hide"}this.onmouseout=t,this.onclick=t,this.onmousemove=function(e){var t,i,n,d,o,l,m,s,a,p,u,r;t=document.compatMode&&"BackCompat"!=document.compatMode?document.documentElement:document.body,n=(i=!!window.ActiveXObject)?event.clientX+t.scrollLeft:e.pageX,d=i?event.clientY+t.scrollTop:e.pageY,o=i?t.clientWidth:window.innerWidth-20,l=i?t.clientHeight:window.innerHeight-20,m=i?o-event.clientX:o-e.clientX,a=l-(s=i?l-event.clientY-10:l-e.clientY-10),p=c.offsetWidth,u=c.offsetHeight,c.style.left=m-10<p?n-p-10+"px":n+10+"px",s<=u?(r=d-10-u,a-10<=u&&(r=d-10-u-a)):r=d+10,c.style.top=r+"px"};var i=this.id.substring(1),n=new Image;n.src="/pic/"+i+".jpg";var c;if(c=document.getElementById("preview_div"))document.getElementById("tc").replaceChild(n,document.getElementById("tc").firstChild);else{(c=document.createElement("div")).setAttribute("id","preview_div"),c.className="hide";var d=document.createElement("div"),o=document.createElement("div");o.setAttribute("id","tc"),d.className="t",o.className="tc",d.appendChild(o),o.appendChild(n),c.appendChild(d),document.body.appendChild(c)}c.className="show"}
+    </script>
+    <meta name='viewport' content='width=device-width'>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20392091-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+    </script>
+</head>
+<div id='b1'>
+    <div id='top'>
+        <div id='logo'><a href='/'><img src='/style/2/logo2.png' alt='911auto.com.ua магазин автозапчастей' /></a></div><div id='menu'>
+            <div class='l1'><div id='tny_basket' class='basket'><span>Корзина</span></div><div class='phone'><ul><li><strong>Днепр:</strong>(067)634-20-45,&nbsp;(050)412-09-11,&nbsp;(063)394-40-72,&nbsp;(095)777-09-91&nbsp;<strong>Киев:</strong>(067)568-70-20,&nbsp;(093)063-84-35&nbsp;</li></ul></div></div><div class='l2'>
+                <div class='top_text'><span>Оригинальные запчасти Mitsubishi, Nissan, Subaru</span></div><div class='reg_login_link'><span><a id='login' href='#'>Вход для клиентов</a> / <a href='/register/'>Регистрация</a></span></div>
+                <script type='text/javascript'>
+document.getElementById('login').onmouseover=function(){
+var f,d
+  if(!document.getElementById('auth')){
+    f="<div class='auth'><div class='blk_head'><span>Авторизация</span></div><form method='post' action=''><ul><li><input id='l_f' type='text' value='' placeholder='Логин' /></li><li><input id='p_f' type='password' value='' placeholder='Пароль' /></li><li id='msg' class='red b'></li><li><input id='login_ok' type='button' value='Ok' /><input id='login_cancel' type='button' value='Отмена' /></li></ul></form></div>";
+    d=document.createElement('div');
+    d.className='bg';
+    d.setAttribute('id','auth');
+    d.style.zIndex='-1';
+    d.style.display='none';
+    d.innerHTML=f;
+    document.body.appendChild(d);
+  }
+}
+document.getElementById('login').onclick=function(){
+var d,p,r;
+  d=document.getElementById('auth')
+  d.style.zIndex='99';
+  d.style.display='block';
+  document.getElementById('l_f').focus();
+  d.onkeyup=function(e){
+    if(window.ActiveXObject){
+      e=window.event
+    }
+    if(e.keyCode==27){
+      document.getElementById('login_cancel').click()
+    }
+  }
+  document.getElementById('l_f').onkeypress=function(e){
+    if(window.ActiveXObject){
+      e=window.event
+    }
+    if(e.keyCode==13){
+      document.getElementById('p_f').focus()
+    }
+  }
+  document.getElementById('p_f').onkeypress=function(e){
+    if(window.ActiveXObject){
+      e=window.event
+    }
+    if(e.keyCode==13){
+      document.getElementById('login_ok').click()
+    }
+  }
+  document.getElementById('login_ok').onclick=function(e){
+    p='login_ok='+encodeURIComponent('Войти')+'&login_field='+encodeURIComponent(document.getElementById('l_f').value)+'&pass_field='+encodeURIComponent(document.getElementById('p_f').value)+'&mode=chxro'
+    r=new Request('/',p);
+    r.send();
+    r.onResponse=function(){
+      if(this.doctype.indexOf('text/xml')>-1){
+	if(this.root.firstChild.data=='OK'){
+	  document.location.assign('/')
+	}
+	else{
+	  document.getElementById('msg').innerHTML=this.root.firstChild.data
+	}
+      }
+    }
+  }
+  document.getElementById('login_cancel').onclick=function(){document.body.removeChild(d);};
+};
+                </script>
+            </div><div class='top_nav'><ul class='top_nav_links'><li><a href='/'>ГЛАВНАЯ</a></li><li><a href='/payment'>ОПЛАТА/ДОСТАВКА</a></li><li><a href='/contacts'>КОНТАКТЫ</a></li><li><a href='/about'>О НАС</a></li><li><a href='/partners'>ПАРТНЕРЫ</a></li><li><a href='/articles'>СТАТЬИ</a></li><li><a href='/buyer'>ОПТОВЫМ ПОКУПАТЕЛЯМ</a></li></ul><div class='clear'></div></div><div class='search_blk'>
+                <form id='search_form' method='post' action='/search/'><ul><li>Поиск запчасти&nbsp;<input id='search_field' class='input_fld' type='text' name='search_field' value='' size='50' /></li><li><input type='submit' name='sbtn' value='Найти' /></li></ul></form>
+                <script type='text/javascript'>sfld=document.getElementById('search_field');sfrm=document.getElementById('search_form');sfrm.onsubmit=function(){sfrm.action='/search/'+sfld.value;}</script>
+            </div>
+        </div><div class='clear'></div><div class='info_link'>
+            <p><span style="color: #ff0000;"><a href="../info3">Работа магазинов в период карантина</a>!</span></p>
+            <p><a href="../info"><span style="color: #0000ff;">Вакансии в Киеве!</span></a></p>
+        </div>
+    </div><div id='body'>
+        <div id='main'>
+            <div id='main_content'>
+                <div id='product_list'>
+                    <span class='cat_name'>Результаты поиска "MD619865"</span><table id='product_tbl' class='product_list'><tr><th colspan='6' class='group'>Двигатель (навесное оборудование, электрика)</th></tr><tr class='head'><th class='w100'>Наименование</th><th class='b' title='Ожидается в ближайшее время. Уточняйте сроки у менеджера'>В пути</th><th>Днепр</th><th>Киев</th><th>Киев 1 час</th><th>1 день</th><th>Цена,грн.</th><th>Заказ</th></tr><tr class='hl'><td><a id='p425832' href=/item/6943>Бендикс стартера MMC - MD619865</a></td><th> - </th><th><img title='В наличии' alt='есть' src='/style/2/plus.gif' /></th><th><img title='В наличии' alt='есть' src='/style/2/plus.gif' /></th><th> - </th><th> - </th><td>1110</td><td><input cid='9077' class='addToCartBtn' type='button' value='' /></td></tr></table><div id='zakaz_blk_svc' class='zakaz_blk_svc'></div>
+                    <script type='text/javascript'>
+ r=new Request('/','svc=1&q=%3D%3Dqn2GtoXydrn1dDZvwDXvMC'); r.send();r.onResponse=function(){
+      if(this.root){
+	document.getElementById('zakaz_blk_svc').innerHTML=this.root;
+	(function(){
+var atcb
+try{
+atcb=document.getElementsByClassName('zAddToCart')
+}
+catch(e){
+atcb=document.querySelectorAll('.zAddToCart')
+}
+if(atcb && atcb.length>0){
+    for(i in atcb ){
+        if(atcb[i].nodeType==1){
+            atcb[i].onclick=zAddToCart
+        }
+    }
+}
+})();
+	if(wait=document.getElementById('ws')){wait.style.display='none';}
+      }else{if(wait=document.getElementById('ws')){wait.style.display='none'}if(nfound=document.getElementById('nf')){nfound.style.display='block'}}}</script>
+                </div>
+                <script type='text/javascript'>
+    var links,atcb
+    links=document.links
+    reg=/^p\d+$/;
+    for(var i=0;i<links.length;i++){
+      if(links[i].tagName=='A' && (links[i].id.search(reg)==0)){
+	links[i].onmouseover=preview
+      }
+    }
+    try{
+      atcb=document.getElementsByClassName('addToCartBtn')
+    }
+    catch(e){
+      atcb=document.querySelectorAll('.addToCartBtn')
+    }
+    if(atcb && atcb.length>0){
+      for(i in atcb ){
+	if(atcb[i].nodeType==1){
+	  atcb[i].onclick=addToCart
+	}
+      }
+    }
+                </script>
+            </div>
+        </div><div class='left' id='left'>
+            <hr class='divider' /><div class='car_selector'>
+                <span class='blk_title'>Ваш автомобиль:</span><ul><li><select id='car_brand' class='car_brand'><option value='0' selected='selected'>Марка</option><option value='1'>Mitsubishi</option><option value='3'>Nissan</option><option value='2'>Subaru</option></select></li><li><select id='car_name' disabled='disabled'><option value='0' selected='selected'>Модель</option></select></li><li><select id='car_mod' disabled='disabled'><option value='0' selected='selected'>Модификация</option></select></li></ul>
+                <script type='text/javascript'>
+  (function(){
+    var cm,mod,cn
+    cn=document.getElementById('car_name')
+    cm=document.getElementById('car_mod')
+    function selectorFiller(id,caller){
+      var p,r,o,resp
+      if(caller.options[caller.selectedIndex].value!=0){
+	p=id.getAttribute('id')+"="+caller.options[caller.selectedIndex].value
+	r=new Request('/',p)
+	r.send()
+	id.options.length=1;
+	id.disabled=true
+	cm.options.length=1;
+	cm.disabled=true
+	r.onResponse=function(){
+	  if(this.root && (this.doctype.indexOf('json')>0) && (resp=JSON.parse(this.root))){
+	    for(var i=0;resp.length>i;i++){
+	      if(o=document.createElement('option')){
+		o.text=resp[i].name
+		o.value=resp[i].id
+		o.setAttribute('url',resp[i].url)
+		id.options.add(o,i+1)
+	      }
+	      else{
+		o=new Option(resp[i].name,resp[i].id)
+		o.setAttribute('url',resp[i].url)
+		id.options[id.options.length]=o
+	      }
+	      id.disabled=false
+	    }
+	  }
+	}
+      }
+      else{
+	id.options.length=1;
+	id.disabled=true
+	cm.options.length=1;
+	cm.disabled=true
+      }
+    }
+    document.getElementById('car_brand').onchange=function(){selectorFiller(cn,this);}
+    cn.onchange=function(){selectorFiller(cm,this);}
+    cm.onchange=function(){
+      var url
+      if(url=this.options[this.selectedIndex].getAttribute('url')){
+	window.location.pathname='/model/'+url
+      }
+      else{
+	window.location.pathname='/model/'+this.options[this.selectedIndex].text
+      }
+
+    }
+  })();
+                </script>
+            </div><div id='catalog_tree' class='catalog_tree'><span class='blk_title'>Категория запчастей:</span><ul><li><a href='/catalog/6486'>автохимия, масла</a></li><li><a href='/catalog/5312'>двигатель (навесное оборудование, электрика)</a></li><li><a href='/catalog/5946'>запчасти для то (грм, ремни, ролики, свечи)</a></li><li><a href='/catalog/5582'>кузов (интерьер, экстерьер, электрика)</a></li><li><a href='/catalog/10604'>мотохимия. масла.</a></li><li><a href='/catalog/5439'>подвеска задняя</a></li><li><a href='/catalog/5945'>подвеска передняя, рулевое управление</a></li><li><a href='/catalog/5944'>тормозная система</a></li><li><a href='/catalog/20158'>тормозные компоненты fremax</a></li><li><a href='/catalog/7498'>трансмиссия</a></li><li><a href='/catalog/7497'>фильтры</a></li><li><a href='/catalog/12865'>распродажа!!!</a></li></ul></div><div class='adv'><span class='blk_title'>Мы на форуме:</span><a href='http://lancer.com.ua/forum/viewtopic.php?t=94555&postdays=0&postorder=asc&start=0'><img title='Отзывы о нас на форуме' alt='Мы на форуме' src='/style/adv.png' width='200' height='122' /></a></div>
+        </div><div id='bottom'>
+            <div class='column fl'><ul class='bottom_nav_links'><li> - <a href='/'>ГЛАВНАЯ</a></li><li> - <a href='/payment'>ОПЛАТА/ДОСТАВКА</a></li><li> - <a href='/contacts'>КОНТАКТЫ</a></li><li> - <a href='/about'>О НАС</a></li><li> - <a href='/partners'>ПАРТНЕРЫ</a></li><li> - <a href='/articles'>СТАТЬИ</a></li><li> - <a href='/buyer'>ОПТОВЫМ ПОКУПАТЕЛЯМ</a></li></ul></div><div class='column fr'>
+                <hr /><ul class='bottom_nav_links'>
+                    <li><strong>Днепр:</strong><br>(067)634-20-45<br />(050)412-09-11<br />(063)394-40-72<br />(095)777-09-91<br /><strong>Киев:</strong><br>(067)568-70-20<br />(093)063-84-35<br /></li>
+                    <li><br /></li>
+                    <li>
+                        <ul>
+                            <li><a href="http://911auto.com.ua/model/mitsubishi_galant%20">запчасти Митсубиси Галант</a></li>
+                            <li><a href="http://911auto.com.ua/model/SUBARU">запчасти Субару</a></li>
+                            <li><a href="http://911auto.com.ua/catalog/6486">Автохимия</a></li>
+                        </ul>
+                    </li>
+                </ul><span class='clear'></span>
+            </div><div class='column'><hr /><ul class='bottom_nav_links'><li>&copy;2012,&nbsp;<a href='mailto:office@911auto.com.ua'>office@911auto.com.ua</a></li><li><br /></li><li>Днепр,<br />ул. Рабочая 152</li><li><br /></li><li>Киев,<br />Софиевская Борщаговка<br />ул. Счастливая 50</li></ul><span class='clear'></span></div>
+        </div>
+        <script type='text/javascript' src='/script/banner.js?1=1'></script>
+    </div>
+</div>
