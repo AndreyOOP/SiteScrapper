@@ -44,7 +44,7 @@ namespace SiteParsingHelper
                 }
                 catch (Exception ex)
                 {
-                    siteResult.Exception = JsonConvert.SerializeObject(new
+                    siteResult.Exception += JsonConvert.SerializeObject(new
                     {
                         UnitName = node.Unit.GetType().Name,
                         Message = ex.Message,
