@@ -115,6 +115,7 @@
     <Content Include="MockedDataAcceptanceTests\Data\A0httpResponse.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="MockedDataAcceptanceTests\Data\C0httpsResponse.html" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
