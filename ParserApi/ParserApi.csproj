@@ -130,6 +130,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Parsers\911Site\Models\A0httpResponse.cs" />
+    <Compile Include="Parsers\911Site\Site911Parser.cs" />
+    <Compile Include="Parsers\911Site\Models\Site911Result.cs" />
     <Compile Include="Parsers\911Site\WorkUnits\A0httpRequest.cs" />
     <Compile Include="Parsers\911Site\Models\Input.cs" />
     <Compile Include="Parsers\911Site\WorkUnits\ISite911WorkUnit.cs" />
