@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.11.23.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.23\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework">
       <HintPath>..\packages\MSTest.TestFramework.1.2.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
@@ -98,8 +101,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FeatureTest\HtmlParserUsage.cs" />
     <Compile Include="FeatureTest\WebRequests.cs" />
     <Compile Include="MockedDataAcceptanceTests\Site911\WorkUnits\A0httpRequestTests.cs" />
+    <Compile Include="MockedDataAcceptanceTests\Site911\WorkUnits\B0parseHtmlTest.cs" />
     <Compile Include="Mocks\HttpMessageHandlerMock.cs" />
     <Compile Include="RealDataAcceptanceTests\911Site\WorkUnits\A0httpRequestTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
