@@ -3,9 +3,9 @@ using ParserApi.Parsers._911Site.Models;
 using ParserApi.Parsers.Site911.WorkUnits;
 using ParserApi.Parsers.Site911Parser;
 using ParserApi.Parsers.Site911Parser.Models;
+using ParserApi.Tests.Mocks;
 using SiteParsingHelper;
 using System.IO;
-using System.Reflection;
 
 namespace ParserApi.Tests.MockedDataAcceptanceTests.Site911.WorkUnits
 {
@@ -16,11 +16,9 @@ namespace ParserApi.Tests.MockedDataAcceptanceTests.Site911.WorkUnits
         [TestMethod]
         public void Execute_B0parseHtml_AsExpected()
         {
-            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"MockedDataAcceptanceTests\Data\A0httpResponse.html");
-
             var a0httpResponse = new A0httpResponse
             {
-                Html = File.ReadAllText(path)
+                Html = File.ReadAllText(@"MockedDataAcceptanceTests\Data\A0httpResponse.html".GetFilePath())
             };
             var siteResult = new Site911Result();
             var result = (ParserExecutorResultBase)siteResult;
@@ -29,7 +27,7 @@ namespace ParserApi.Tests.MockedDataAcceptanceTests.Site911.WorkUnits
             var workUnitResult = (B0parseHtmlResult)(workUnit.Execute(a0httpResponse, ref result));
 
             Assert.AreEqual("Бендикс стартера MMC - MD619865", siteResult.ModelName);
-            Assert.AreEqual("svc=1&q=%3D%3Dqn2GtoXydrn1dDZvwDXvMC", workUnitResult.QueryString);
+            Assert.AreEqual("==qn2GtoXydrn1dDZvwDXvMC", workUnitResult.QueryString);
         }
     }
 }
