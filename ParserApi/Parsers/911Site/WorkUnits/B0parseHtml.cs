@@ -18,7 +18,7 @@ namespace ParserApi.Parsers.Site911.WorkUnits
             htmlDoc.LoadHtml(a0httpResponse.Html);
             
             var productHeader = htmlDoc.DocumentNode.SelectSingleNode("//div[@id='product_list']");
-            var name = productHeader.SelectSingleNode("//table/tr[@class='hl']/td/a").InnerText;
+            var name = productHeader.SelectSingleNode("//table/tr[@class='hl']/td/a")?.InnerText; // not found
             var site911Result = (Site911Result)siteParserResult; 
             site911Result.ModelName = name;
 
