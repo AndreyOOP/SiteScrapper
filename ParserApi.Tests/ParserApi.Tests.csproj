@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.11.23.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.23\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework">
       <HintPath>..\packages\MSTest.TestFramework.1.2.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
@@ -98,11 +101,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FeatureTest\HtmlParserUsage.cs" />
+    <Compile Include="FeatureTest\WebRequests.cs" />
+    <Compile Include="MockedDataAcceptanceTests\Site911\WorkUnits\A0httpRequestTests.cs" />
+    <Compile Include="MockedDataAcceptanceTests\Site911\WorkUnits\B0parseHtmlTest.cs" />
+    <Compile Include="MockedDataAcceptanceTests\Site911\WorkUnits\D0parseHtmlPartDetailsTests.cs" />
+    <Compile Include="Mocks\HttpMessageHandlerMock.cs" />
+    <Compile Include="Mocks\StringExtensions.cs" />
+    <Compile Include="RealDataAcceptanceTests\911Site\WorkUnits\A0httpRequestTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\ValuesControllerTest.cs" />
+    <Compile Include="ControllersTemp\ValuesControllerTest.cs" />
+    <Compile Include="RealDataAcceptanceTests\911Site\WorkUnits\C0httpRequestPartDetailsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
+    <Content Include="MockedDataAcceptanceTests\Data\A0httpResponse.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MockedDataAcceptanceTests\Data\C0httpsResponse.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -112,6 +130,13 @@
       <Project>{3F15C70E-833D-4D16-8225-1837677591DE}</Project>
       <Name>ParserApi</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SiteParsingHelper\SiteParsingHelper.csproj">
+      <Project>{96568495-A61D-4DEC-BB73-BA492767C5A8}</Project>
+      <Name>SiteParsingHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UnitTests\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

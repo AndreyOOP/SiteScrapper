@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.11.23.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.23\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -129,6 +132,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Parsers\911Site\Models\A0httpResponse.cs" />
+    <Compile Include="Parsers\911Site\Models\B0parseHtmlResult.cs" />
+    <Compile Include="Parsers\911Site\Models\C0httpResponse.cs" />
+    <Compile Include="Parsers\911Site\Site911Parser.cs" />
+    <Compile Include="Parsers\911Site\Models\Site911Result.cs" />
+    <Compile Include="Parsers\911Site\WorkUnits\A0httpRequest.cs" />
+    <Compile Include="Parsers\911Site\Models\Input.cs" />
+    <Compile Include="Parsers\911Site\WorkUnits\B0parseHtml.cs" />
+    <Compile Include="Parsers\911Site\WorkUnits\C0httpRequestPartDetails.cs" />
+    <Compile Include="Parsers\911Site\WorkUnits\D0parseHtmlPartDetails.cs" />
+    <Compile Include="Parsers\911Site\WorkUnits\ISite911WorkUnit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -141,7 +155,12 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SiteParsingHelper\SiteParsingHelper.csproj">
+      <Project>{96568495-A61D-4DEC-BB73-BA492767C5A8}</Project>
+      <Name>SiteParsingHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

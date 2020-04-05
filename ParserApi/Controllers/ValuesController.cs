@@ -1,4 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using ParserApi.Parsers._911Site.WorkUnits;
+using ParserApi.Parsers.Site911.WorkUnits;
+using ParserApi.Parsers.Site911Parser;
+using ParserApi.Parsers.Site911Parser.Models;
+using ParserApi.Parsers.Site911Parser.WorkUnits;
+using ParserApi.Parsers.Site911Parser.WorkUnits.Models;
+using SiteParsingHelper.Tree;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace ParserApi.Controllers
@@ -6,27 +13,20 @@ namespace ParserApi.Controllers
     public class ValuesController : ApiController
     {
         [HttpGet]
-        [Route("api/values")]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        [HttpGet]
         [Route("api/{id}")]
-        public TestModel Get([FromUri]int id)
+        public Site911Result Get([FromUri]string id)
         {
-            return new TestModel
-            {
-                Id = 1,
-                Id2 = 2
-            };
-        }
-    }
+            var httpClient = new HttpClient();
+            var tree = new WorkUnitTree(new A0httpRequest(httpClient));
+                           tree.AddNextNode(new WorkUnitTree(new B0parseHtml()))
+                           .AddNextNode(new WorkUnitTree(new C0httpRequestPartDetails(httpClient)))
+                           .AddNextNode(new WorkUnitTree(new D0parseHtmlPartDetails()));
 
-    public class TestModel
-    {
-        public int Id { get; set; }
-        public int Id2 { get; set; }
+            var parser = new Site911Parser(tree);
+
+            var result = parser.Parse(new Input { Id = id });
+
+            return result;
+        }
     }
 }
