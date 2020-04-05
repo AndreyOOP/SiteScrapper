@@ -105,6 +105,7 @@
     <Compile Include="FeatureTest\WebRequests.cs" />
     <Compile Include="MockedDataAcceptanceTests\Site911\WorkUnits\A0httpRequestTests.cs" />
     <Compile Include="MockedDataAcceptanceTests\Site911\WorkUnits\B0parseHtmlTest.cs" />
+    <Compile Include="MockedDataAcceptanceTests\Site911\WorkUnits\D0parseHtmlPartDetailsTests.cs" />
     <Compile Include="Mocks\HttpMessageHandlerMock.cs" />
     <Compile Include="RealDataAcceptanceTests\911Site\WorkUnits\A0httpRequestTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
