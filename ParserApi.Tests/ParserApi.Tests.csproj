@@ -109,13 +109,16 @@
     <Compile Include="RealDataAcceptanceTests\911Site\WorkUnits\A0httpRequestTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ControllersTemp\ValuesControllerTest.cs" />
+    <Compile Include="RealDataAcceptanceTests\911Site\WorkUnits\C0httpRequestPartDetailsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
     <Content Include="MockedDataAcceptanceTests\Data\A0httpResponse.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MockedDataAcceptanceTests\Data\C0httpsResponse.html" />
+    <Content Include="MockedDataAcceptanceTests\Data\C0httpsResponse.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
