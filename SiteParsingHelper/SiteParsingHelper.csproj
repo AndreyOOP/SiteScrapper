@@ -49,6 +49,12 @@
     <Compile Include="Abstraction\IWorkUnit.cs" />
     <Compile Include="Abstraction\IWorkUnitModel.cs" />
     <Compile Include="Abstraction\IWorkUnitTree.cs" />
+    <Compile Include="Event\Abstraction\IExecutionPath.cs" />
+    <Compile Include="Event\ExecutionPath.cs" />
+    <Compile Include="Event\WebParser.cs" />
+    <Compile Include="Event\Abstraction\WorkUnitBase.cs" />
+    <Compile Include="Event\Abstraction\IWebParser.cs" />
+    <Compile Include="Event\Abstraction\IUnit.cs" />
     <Compile Include="ParserExecutorResultBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tree\ExecutionPath.cs" />
