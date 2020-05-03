@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParserApi", "ParserApi\Pars
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParserApi.Tests", "ParserApi.Tests\ParserApi.Tests.csproj", "{283FDF08-E6F7-4560-AF35-DC08EC0BD144}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiteParsingHelperTests", "SiteParsingHelperTests\SiteParsingHelperTests.csproj", "{033B9B75-04F9-4F09-8E66-B76B4F7DF445}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{283FDF08-E6F7-4560-AF35-DC08EC0BD144}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{283FDF08-E6F7-4560-AF35-DC08EC0BD144}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{283FDF08-E6F7-4560-AF35-DC08EC0BD144}.Release|Any CPU.Build.0 = Release|Any CPU
+		{033B9B75-04F9-4F09-8E66-B76B4F7DF445}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{033B9B75-04F9-4F09-8E66-B76B4F7DF445}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{033B9B75-04F9-4F09-8E66-B76B4F7DF445}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{033B9B75-04F9-4F09-8E66-B76B4F7DF445}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
