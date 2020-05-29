@@ -143,6 +143,15 @@
     <Compile Include="Parsers\911Site\WorkUnits\C0httpRequestPartDetails.cs" />
     <Compile Include="Parsers\911Site\WorkUnits\D0parseHtmlPartDetails.cs" />
     <Compile Include="Parsers\911Site\WorkUnits\ISite911WorkUnit.cs" />
+    <Compile Include="Parsers\Site911EventBusPrototype\Models\A_SearchModelByIdRequestInput.cs" />
+    <Compile Include="Parsers\Site911EventBusPrototype\Models\A_SearchModelByIdRequestOutput.cs" />
+    <Compile Include="Parsers\Site911EventBusPrototype\Models\B_ParseHtmlOutput.cs" />
+    <Compile Include="Parsers\Site911EventBusPrototype\Models\C_QueryResultOutput.cs" />
+    <Compile Include="Parsers\Site911EventBusPrototype\Models\Site911ParsingResult.cs" />
+    <Compile Include="Parsers\Site911EventBusPrototype\WorkUnits\A_SearchModelByIdRequest.cs" />
+    <Compile Include="Parsers\Site911EventBusPrototype\WorkUnits\B_ParseHtml.cs" />
+    <Compile Include="Parsers\Site911EventBusPrototype\WorkUnits\C_RequestPartDetails.cs" />
+    <Compile Include="Parsers\Site911EventBusPrototype\WorkUnits\D_ParseHtmlPartDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +165,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CarPartsParser\CarPartsParserPrototype.csproj">
+      <Project>{AC0B3866-DDEA-447F-9F99-842522395654}</Project>
+      <Name>CarPartsParserPrototype</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SiteParsingHelper\SiteParsingHelper.csproj">
       <Project>{96568495-A61D-4DEC-BB73-BA492767C5A8}</Project>
       <Name>SiteParsingHelper</Name>
@@ -164,6 +177,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
