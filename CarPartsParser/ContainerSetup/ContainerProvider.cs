@@ -1,9 +1,11 @@
 ﻿using CarPartsParser.Abstraction.Factories;
+using CarPartsParser.Abstraction.Services;
 using CarPartsParser.Abstraction.WorkUtils;
 using CarPartsParser.Factories;
+using CarPartsParser.Parser.WorkUnitsSiteA;
 using CarPartsParser.Parser.WorkUnitsSiteB;
+using CarPartsParser.Services;
 using CarPartsParser.SiteParsers.RootParser;
-using CarPartsParser.SiteParsers.SiteA;
 using Unity;
 
 namespace CarPartsParser.ContainerSetup
@@ -18,6 +20,10 @@ namespace CarPartsParser.ContainerSetup
                 return container;
 
             container = new UnityContainer();
+
+            container.RegisterType<IServiceA, ServiceA>();
+            container.RegisterType<IServiceB, ServiceB>();
+            container.RegisterType<IServiceProvider, ServiceProvider>();
 
             container.RegisterType<IWorkUnitA, WorkUnit1A>(nameof(WorkUnit1A));
             container.RegisterType<IWorkUnitA, WorkUnit2A>(nameof(WorkUnit2A));

@@ -1,33 +1,61 @@
 ﻿using CarPartsParser.Abstraction.Models;
 using CarPartsParser.Models;
+using CarPartsParser.Parser.Tree;
 using CarPartsParser.SiteParsers.Abstraction.WorkUnits;
-using System.Collections.Generic;
+using Newtonsoft.Json;
+using System;
 
 namespace CarPartsParser.SiteParsers.Abstraction
 {
-    public class WebSiteParser<TUnit> : IWebSiteParser where TUnit : IWorkUnit
+    public class WebSiteParser<TUnit, TOut> : IWebSiteParser<TOut> 
+        where TUnit : IWorkUnit 
+        where TOut : ParserExecutorResultBase, new()
     {
-        private Queue<IWorkUnit> queue = new Queue<IWorkUnit>();
+        private WorkUnitTree tree;
 
-        public IWorkUnitModel Parse(IWorkUnitModel input)
+        public WebSiteParser(WorkUnitTree tree)
         {
-            var model = input;
-            IWorkUnitModel siteResult = new ParserExecutorResult();
+            this.tree = tree;
+        }
 
-            foreach (var unit in queue)
+        public TOut Parse(IWorkUnitModel input)
+        {
+            var node = tree;
+            var model = input;
+            var siteResult = (ParserExecutorResultBase)new TOut();
+
+            for(;;)
             {
-                if (((ParserExecutorResult)siteResult).Exception != null)
+                if (siteResult.Exception != null)
                 {
                     break;
                 }
-                model = unit.Execute(model, ref siteResult);
-            }
-            return siteResult;
-        }
 
-        public void RegisterUnit(TUnit unit)
-        {
-            queue.Enqueue(unit);
+                var modelBeforeUpdate = model;
+
+                try
+                {
+                    siteResult.ExecutionPath += $"{node.Unit.GetType().Name} > ";
+
+                    model = node.Unit.Execute(model, ref siteResult);
+                    
+                    if (node.IsLastNode())
+                        break;
+
+                    node = node.NextNode(modelBeforeUpdate, model);
+                }
+                catch (Exception ex)
+                {
+                    siteResult.Exception = JsonConvert.SerializeObject(new
+                    {
+                        UnitName = node.Unit.GetType().Name,
+                        Message = ex.Message,
+                        Path = siteResult.ExecutionPath
+                    });
+                }
+            }
+
+            return (TOut)siteResult;
         }
     }
 }
