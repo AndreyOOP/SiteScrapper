@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SiteParsingHelper.Event;
+using ParserCoreProject.ParserCore;
 using SiteParsingHelperTests.EventPrototype;
 using System;
 

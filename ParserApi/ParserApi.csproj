@@ -132,17 +132,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Parsers\911Site\Models\A0httpResponse.cs" />
-    <Compile Include="Parsers\911Site\Models\B0parseHtmlResult.cs" />
-    <Compile Include="Parsers\911Site\Models\C0httpResponse.cs" />
-    <Compile Include="Parsers\911Site\Site911Parser.cs" />
-    <Compile Include="Parsers\911Site\Models\Site911Result.cs" />
-    <Compile Include="Parsers\911Site\WorkUnits\A0httpRequest.cs" />
-    <Compile Include="Parsers\911Site\Models\Input.cs" />
-    <Compile Include="Parsers\911Site\WorkUnits\B0parseHtml.cs" />
-    <Compile Include="Parsers\911Site\WorkUnits\C0httpRequestPartDetails.cs" />
-    <Compile Include="Parsers\911Site\WorkUnits\D0parseHtmlPartDetails.cs" />
-    <Compile Include="Parsers\911Site\WorkUnits\ISite911WorkUnit.cs" />
     <Compile Include="Parsers\Site911EventBusPrototype\Models\A_SearchModelByIdRequestInput.cs" />
     <Compile Include="Parsers\Site911EventBusPrototype\Models\A_SearchModelByIdRequestOutput.cs" />
     <Compile Include="Parsers\Site911EventBusPrototype\Models\B_ParseHtmlOutput.cs" />
@@ -165,13 +154,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CarPartsParser\CarPartsParserPrototype.csproj">
-      <Project>{AC0B3866-DDEA-447F-9F99-842522395654}</Project>
-      <Name>CarPartsParserPrototype</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SiteParsingHelper\SiteParsingHelper.csproj">
+    <ProjectReference Include="..\SiteParsingHelper\ParserCoreProject.csproj">
       <Project>{96568495-A61D-4DEC-BB73-BA492767C5A8}</Project>
-      <Name>SiteParsingHelper</Name>
+      <Name>ParserCoreProject</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

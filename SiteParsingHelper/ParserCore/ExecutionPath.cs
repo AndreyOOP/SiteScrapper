@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SiteParsingHelper.Event
+namespace ParserCoreProject.ParserCore
 {
     // ToDo: add unit tests
     public class ExecutionPath : IExecutionPath

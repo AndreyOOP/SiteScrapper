@@ -7,7 +7,7 @@ using System.Collections.Generic;
 // ToDo: avoid recreation of class | make it simpler - path dictionary into ctor
 //       chage to async
 //       maybe should be addition wrapper like site911 parser which uses internally WebParser<>
-namespace SiteParsingHelper.Event
+namespace ParserCoreProject.ParserCore
 {
     public class WebParser<TResult> : IWebParser<TResult> 
         where TResult : new()

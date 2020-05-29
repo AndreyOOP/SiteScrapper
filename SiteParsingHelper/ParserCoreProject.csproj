@@ -45,24 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstraction\IWebSiteParser.cs" />
-    <Compile Include="Abstraction\IWorkUnit.cs" />
-    <Compile Include="Abstraction\IWorkUnitModel.cs" />
-    <Compile Include="Abstraction\IWorkUnitTree.cs" />
-    <Compile Include="Event\Abstraction\IExecutionPath.cs" />
-    <Compile Include="Event\ExecutionPath.cs" />
-    <Compile Include="Event\WebParser.cs" />
-    <Compile Include="Event\Abstraction\WorkUnitBase.cs" />
-    <Compile Include="Event\Abstraction\IWebParser.cs" />
-    <Compile Include="Event\Abstraction\IUnit.cs" />
-    <Compile Include="ParserExecutorResultBase.cs" />
+    <Compile Include="Abstraction\IExecutionPath.cs" />
+    <Compile Include="ParserCore\ExecutionPath.cs" />
+    <Compile Include="ParserCore\WebParser.cs" />
+    <Compile Include="Abstraction\WorkUnitBase.cs" />
+    <Compile Include="Abstraction\IWebParser.cs" />
+    <Compile Include="Abstraction\IUnit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tree\ExecutionPath.cs" />
-    <Compile Include="Tree\WorkUnitTree.cs" />
-    <Compile Include="WebSiteParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
