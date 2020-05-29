@@ -3,17 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarPartsParserPrototype", "CarPartsParser\CarPartsParserPrototype.csproj", "{AC0B3866-DDEA-447F-9F99-842522395654}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarPartsParserPrototypeTests", "CarPartsParserPrototypeTests\CarPartsParserPrototypeTests.csproj", "{50F3E150-8371-4829-8A7A-579D85541D95}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiteParsingHelper", "SiteParsingHelper\SiteParsingHelper.csproj", "{96568495-A61D-4DEC-BB73-BA492767C5A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParserCoreProject", "SiteParsingHelper\ParserCoreProject.csproj", "{96568495-A61D-4DEC-BB73-BA492767C5A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParserApi", "ParserApi\ParserApi.csproj", "{3F15C70E-833D-4D16-8225-1837677591DE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParserApi.Tests", "ParserApi.Tests\ParserApi.Tests.csproj", "{283FDF08-E6F7-4560-AF35-DC08EC0BD144}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiteParsingHelperTests", "SiteParsingHelperTests\SiteParsingHelperTests.csproj", "{033B9B75-04F9-4F09-8E66-B76B4F7DF445}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParserCoreProjectTests", "SiteParsingHelperTests\ParserCoreProjectTests.csproj", "{033B9B75-04F9-4F09-8E66-B76B4F7DF445}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,14 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AC0B3866-DDEA-447F-9F99-842522395654}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC0B3866-DDEA-447F-9F99-842522395654}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC0B3866-DDEA-447F-9F99-842522395654}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC0B3866-DDEA-447F-9F99-842522395654}.Release|Any CPU.Build.0 = Release|Any CPU
-		{50F3E150-8371-4829-8A7A-579D85541D95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50F3E150-8371-4829-8A7A-579D85541D95}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50F3E150-8371-4829-8A7A-579D85541D95}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50F3E150-8371-4829-8A7A-579D85541D95}.Release|Any CPU.Build.0 = Release|Any CPU
 		{96568495-A61D-4DEC-BB73-BA492767C5A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{96568495-A61D-4DEC-BB73-BA492767C5A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96568495-A61D-4DEC-BB73-BA492767C5A8}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -126,17 +126,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ParserApi\ParserApi.csproj">
-      <Project>{3F15C70E-833D-4D16-8225-1837677591DE}</Project>
-      <Name>ParserApi</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SiteParsingHelper\SiteParsingHelper.csproj">
-      <Project>{96568495-A61D-4DEC-BB73-BA492767C5A8}</Project>
-      <Name>SiteParsingHelper</Name>
-    </ProjectReference>
+    <Folder Include="UnitTests\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UnitTests\" />
+    <ProjectReference Include="..\SiteParsingHelper\ParserCoreProject.csproj">
+      <Project>{96568495-a61d-4dec-bb73-ba492767c5a8}</Project>
+      <Name>ParserCoreProject</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
