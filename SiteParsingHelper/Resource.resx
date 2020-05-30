@@ -123,6 +123,9 @@
   <data name="WorkerAlreadySet" xml:space="preserve">
     <value>Worker&lt;{0}, {1}&gt; already set</value>
   </data>
+  <data name="WorkerHasFewImplementation" xml:space="preserve">
+    <value>Worker has few implementations for TIn {0}. Indicate explicitly which one should be selected</value>
+  </data>
   <data name="WorkerIsNotRegistered" xml:space="preserve">
     <value>Worker&lt;{0}, {1}&gt; is not registered</value>
   </data>

@@ -122,5 +122,40 @@ namespace ParserCoreTests.ParserCore.TestWorkersContainer
 
             Assert.ThrowsException<InvalidCastException>(() => workersContainer.Get<A, B>());
         }
+
+        [TestMethod]
+        public void GetIfSingleImplementation_FewWorkerImplementationsForTypeA_ArgumentException()
+        {
+            workersContainer.Add(new WorkerAB());
+            workersContainer.Add(new WorkerAC());
+
+            var exception = Assert.ThrowsException<ArgumentException>(() => workersContainer.GetIfSingleImplementation<A>());
+
+            StringAssert.Contains(exception.Message, "has few implementations");
+        }
+
+        [TestMethod]
+        public void GetIfSingleImplementation_NoWorkerImplementationsForTypeA_ArgumentException()
+        {
+            workersContainer.Add(new WorkerAB());
+            workersContainer.Add(new WorkerAC());
+
+            var exception = Assert.ThrowsException<ArgumentException>(() => workersContainer.GetIfSingleImplementation<B>());
+
+            StringAssert.Contains(exception.Message, "is not registered");
+        }
+
+        [TestMethod]
+        public void GetIfSingleImplementation_SingleWorkerWithAInputType_GetAndExecuted()
+        {
+            workersContainer.Add(new WorkerAB());
+            workersContainer.Add(new WorkerBA());
+
+            dynamic workerAB = workersContainer.GetIfSingleImplementation<A>();
+
+            workerAB.ParseAndExecuteNext(new A()); // call to ParseAndExecuteNext success - note disadvantage that dynamic object
+
+            Assert.AreEqual(typeof(WorkerAB), workerAB.GetType());
+        }
     }
 }

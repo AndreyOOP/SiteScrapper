@@ -1,4 +1,5 @@
 ﻿using ParserCoreProject.Abstraction;
+using System;
 
 namespace ParserCoreProjectTests.ParserCore
 {
@@ -8,7 +9,7 @@ namespace ParserCoreProjectTests.ParserCore
 
     class WorkerAB : IWorker<A, B>
     {
-        public void ParseAndExecuteNext(A model) { }
+        public void ParseAndExecuteNext(A model) { Console.WriteLine("It is really executed!"); }
     }
     class WorkerBA : IWorker<B, A>
     {

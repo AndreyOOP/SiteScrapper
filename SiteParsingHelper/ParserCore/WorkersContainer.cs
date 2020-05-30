@@ -49,6 +49,20 @@ namespace ParserCoreProject.ParserCore
             
             return worker;
         }
+
+        public dynamic GetIfSingleImplementation<TIn>()
+        {
+            var qty = workers.Count(w => w.Key.Item1 == typeof(TIn));
+
+            if(qty == 0)
+                throw new ArgumentException(string.Format(Resource.WorkerIsNotRegistered, typeof(TFirstIn).Name, "AnyOtherType"));
+
+            if (qty > 1)
+                throw new ArgumentException(string.Format(Resource.WorkerHasFewImplementation, typeof(TIn)));
+
+            return workers.First(w => w.Key.Item1 == typeof(TIn)).Value;
+        }
+
         private Tuple<Type, Type> Key<TIn, TOut>() => new Tuple<Type, Type>(typeof(TIn), typeof(TOut));
     }
 }

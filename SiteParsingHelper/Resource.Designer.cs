@@ -79,6 +79,15 @@ namespace ParserCoreProject {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Worker has few implementations for TIn {0}. Indicate explicitly which one should be selected.
+        /// </summary>
+        internal static string WorkerHasFewImplementation {
+            get {
+                return ResourceManager.GetString("WorkerHasFewImplementation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Worker&lt;{0}, {1}&gt; is not registered.
         /// </summary>
         internal static string WorkerIsNotRegistered {
