@@ -87,5 +87,40 @@ namespace ParserCoreTests.ParserCore.TestWorkersContainer
 
             Assert.ThrowsException<InvalidCastException>(() => workersContainer.GetFirst());
         }
+
+        [TestMethod]
+        public void Get_WorkersRegistered_GetSucceed()
+        {
+            var workerAB = new WorkerAB();
+            var workerAC = new WorkerAC();
+            var workerBA = new WorkerBA();
+            var workerAA = new WorkerAA();
+
+            workersContainer.Add(workerAA);
+            workersContainer.Add(workerAB);
+            workersContainer.Add(workerBA);
+            workersContainer.Add(workerAC);
+
+            Assert.AreEqual(workerAC, workersContainer.Get<A, C>());
+            Assert.AreEqual(workerBA, workersContainer.Get<B, A>());
+            Assert.AreEqual(workerAB, workersContainer.Get<A, B>());
+            Assert.AreEqual(workerAA, workersContainer.Get<A, A>());
+        }
+
+        [TestMethod]
+        public void Get_WorkerIsNotRegistered_ArgumentException()
+        {
+            workersContainer.Add(new WorkerAB());
+
+            Assert.ThrowsException<ArgumentException>(() => workersContainer.Get<A, C>());
+        }
+
+        [TestMethod]
+        public void Get_UnexpectedWorkerType_InvalidCastException()
+        {
+            workersContainer.Workers[new Tuple<Type, Type>(typeof(A), typeof(B))] = typeof(string); // some unexpected type != typeof(IWorker<TIn, TOut>)
+
+            Assert.ThrowsException<InvalidCastException>(() => workersContainer.Get<A, B>());
+        }
     }
 }

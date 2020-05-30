@@ -1,6 +1,7 @@
 ﻿using ParserCoreProject.Abstraction;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ParserCoreProject.ParserCore
 {
@@ -24,7 +25,7 @@ namespace ParserCoreProject.ParserCore
         public IWorker<TFirstIn, TFirstOut> GetFirst()
         {
             if (!workers.ContainsKey(Key<TFirstIn, TFirstOut>()))
-                throw new ArgumentException(string.Format(Resource.WorkerAlreadySet, typeof(TFirstIn).Name, typeof(TFirstOut).Name));
+                throw new ArgumentException(string.Format(Resource.WorkerIsNotRegistered, typeof(TFirstIn).Name, typeof(TFirstOut).Name));
 
             var workerObject = workers[Key<TFirstIn, TFirstOut>()];
             var worker = workerObject as IWorker<TFirstIn, TFirstOut>;
@@ -35,6 +36,19 @@ namespace ParserCoreProject.ParserCore
             return worker;
         }
 
+        public IWorker<TIn, TOut> Get<TIn, TOut>()
+        {
+            if (!workers.ContainsKey(Key<TIn, TOut>()))
+                throw new ArgumentException(string.Format(Resource.WorkerIsNotRegistered, typeof(TFirstIn).Name, typeof(TFirstOut).Name));
+
+            var workerObject = workers[Key<TIn, TOut>()];
+            var worker = workerObject as IWorker<TIn, TOut>;
+
+            if (worker == null)
+                throw new InvalidCastException(string.Format(Resource.UnknownWorkerType, typeof(IWorker<TIn, TOut>).Name));
+            
+            return worker;
+        }
         private Tuple<Type, Type> Key<TIn, TOut>() => new Tuple<Type, Type>(typeof(TIn), typeof(TOut));
     }
 }
