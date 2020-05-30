@@ -7,8 +7,8 @@
     <ProjectGuid>{96568495-A61D-4DEC-BB73-BA492767C5A8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SiteParsingHelper</RootNamespace>
-    <AssemblyName>SiteParsingHelper</AssemblyName>
+    <RootNamespace>ParserCoreProject</RootNamespace>
+    <AssemblyName>ParserCoreProject</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -46,16 +46,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstraction\IExecutionPath.cs" />
+    <Compile Include="Abstraction\IWorker.cs" />
     <Compile Include="ParserCore\ExecutionPath.cs" />
     <Compile Include="ParserCore\WebParser.cs" />
     <Compile Include="Abstraction\WorkUnitBase.cs" />
     <Compile Include="Abstraction\IWebParser.cs" />
     <Compile Include="Abstraction\IUnit.cs" />
+    <Compile Include="ParserCore\WorkersContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
