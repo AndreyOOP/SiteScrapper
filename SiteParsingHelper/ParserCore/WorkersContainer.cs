@@ -6,18 +6,18 @@ using System.Linq;
 namespace ParserCoreProject.ParserCore
 {
     /// <summary>
-    /// 
+    /// IWorkersContainer implementation. Allows to register & get workers
     /// </summary>
     /// <typeparam name="TFirstIn">In type of first worker. Parsing begins from this worker</typeparam>
     /// <typeparam name="TFirstOut">Out type of first worker. Parsing begins from this worker</typeparam>
-    public class WorkersContainer<TFirstIn, TFirstOut>
+    public class WorkersContainer<TFirstIn, TFirstOut> : IWorkersContainer<TFirstIn, TFirstOut>
     {
         protected Dictionary<Tuple<Type, Type>, object> workers = new Dictionary<Tuple<Type, Type>, object>();
 
         public void Add<TIn, TOut>(IWorker<TIn, TOut> worker)
         {
             if (workers.ContainsKey(Key<TIn, TOut>()))
-                throw new ArgumentException(string.Format(Resource.WorkerAlreadySet,  typeof(TIn).Name, typeof(TOut).Name));
+                throw new ArgumentException(string.Format(Resource.WorkerAlreadySet, typeof(TIn).Name, typeof(TOut).Name));
 
             workers.Add(Key<TIn, TOut>(), worker);
         }
@@ -46,18 +46,18 @@ namespace ParserCoreProject.ParserCore
 
             if (worker == null)
                 throw new InvalidCastException(string.Format(Resource.UnknownWorkerType, typeof(IWorker<TIn, TOut>).Name));
-            
+
             return worker;
         }
 
         public dynamic GetIfSingleImplementation<TIn>()
         {
-            var qty = workers.Count(w => w.Key.Item1 == typeof(TIn));
+            var qtyOfWorkersWithInputTypeTIn = workers.Count(w => w.Key.Item1 == typeof(TIn));
 
-            if(qty == 0)
+            if (qtyOfWorkersWithInputTypeTIn == 0)
                 throw new ArgumentException(string.Format(Resource.WorkerIsNotRegistered, typeof(TFirstIn).Name, "AnyOtherType"));
 
-            if (qty > 1)
+            if (qtyOfWorkersWithInputTypeTIn > 1)
                 throw new ArgumentException(string.Format(Resource.WorkerHasFewImplementation, typeof(TIn)));
 
             return workers.First(w => w.Key.Item1 == typeof(TIn)).Value;
