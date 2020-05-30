@@ -7,6 +7,14 @@ namespace ParserCoreTests.ParserCore.TestWorkersContainer
     [TestClass]
     public class WorkersContainerTests
     {
+        WorkersContainerProtectedAccessor workersContainer;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            workersContainer = new WorkersContainerProtectedAccessor();
+        }
+
         // Test knows about class implementation
         // From other hand how to check if it is ok? As well shows expected behaviour
         [TestMethod]
@@ -14,7 +22,6 @@ namespace ParserCoreTests.ParserCore.TestWorkersContainer
         {
             var workerAB = new WorkerAB();
             var workerAC = new WorkerAC();
-            var workersContainer = new WorkersContainerProtectedAccessor();
 
             workersContainer.Add(workerAB);
             workersContainer.Add(workerAC);
@@ -27,8 +34,6 @@ namespace ParserCoreTests.ParserCore.TestWorkersContainer
         [TestMethod]
         public void Add_SameWorkers_ArgumentException()
         {
-            var workersContainer = new WorkersContainerProtectedAccessor();
-
             workersContainer.Add(new WorkerAB());
 
             var exception = Assert.ThrowsException<ArgumentException>(() => workersContainer.Add(new WorkerAB()));
@@ -42,13 +47,45 @@ namespace ParserCoreTests.ParserCore.TestWorkersContainer
             var workerAB = new WorkerAB();
             var workerBA = new WorkerBA(); // allowed to add reverse worker BA - reversed of AB
             var workerAA = new WorkerAA(); // allowed to add worker which are not convert type A to A
-            var workersContainer = new WorkersContainerProtectedAccessor();
 
             workersContainer.Add(workerAB);
             workersContainer.Add(workerBA);
             workersContainer.Add(workerAA);
 
             Assert.AreEqual(3, workersContainer.Workers.Count);
+        }
+
+        [TestMethod]
+        public void GetFirst_FewWorkersRegistered_ReturnWorkerIndicatedInWorkersContainerGenerics()
+        {
+            // First registration - WorkersContainer<A, B>
+            var workerAB = new WorkerAB();
+            var workerAC = new WorkerAC();
+
+            workersContainer.Add(workerAC);
+            workersContainer.Add(workerAB);
+
+            Assert.AreEqual(workerAB, workersContainer.GetFirst());
+        }
+
+        [TestMethod]
+        public void GetFirst_WorkerFromWorkersContainerGenericsIsNotRegistered_ArgumentException()
+        {
+            // First registration - WorkersContainer<A, B>
+            var workerAC = new WorkerAC();
+
+            workersContainer.Add(workerAC);
+
+            Assert.ThrowsException<ArgumentException>(() => workersContainer.GetFirst());
+        }
+
+        [TestMethod]
+        public void GetFirst_UnexpectedWorkerType_InvalidCastException()
+        {
+            // First registration - WorkersContainer<A, B>
+            workersContainer.Workers[new Tuple<Type, Type>(typeof(A), typeof(B))] = typeof(string); // some unexpected type != typeof(IWorker<TIn, TOut>)
+
+            Assert.ThrowsException<InvalidCastException>(() => workersContainer.GetFirst());
         }
     }
 }

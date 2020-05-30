@@ -4,7 +4,12 @@ using System.Collections.Generic;
 
 namespace ParserCoreProject.ParserCore
 {
-    public class WorkersContainer<TStartIn, TStartOut>
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TFirstIn">In type of first worker. Parsing begins from this worker</typeparam>
+    /// <typeparam name="TFirstOut">Out type of first worker. Parsing begins from this worker</typeparam>
+    public class WorkersContainer<TFirstIn, TFirstOut>
     {
         protected Dictionary<Tuple<Type, Type>, object> workers = new Dictionary<Tuple<Type, Type>, object>();
 
@@ -16,16 +21,16 @@ namespace ParserCoreProject.ParserCore
             workers.Add(Key<TIn, TOut>(), worker);
         }
 
-        public IWorker<TStartIn, TStartOut> GetFirst()
+        public IWorker<TFirstIn, TFirstOut> GetFirst()
         {
-            if (!workers.ContainsKey(Key<TStartIn, TStartOut>()))
-                throw new ArgumentException(string.Format(Resource.WorkerAlreadySet, typeof(TStartIn).Name, typeof(TStartOut).Name));
+            if (!workers.ContainsKey(Key<TFirstIn, TFirstOut>()))
+                throw new ArgumentException(string.Format(Resource.WorkerAlreadySet, typeof(TFirstIn).Name, typeof(TFirstOut).Name));
 
-            var workerObject = workers[Key<TStartIn, TStartOut>()];
-            var worker = workerObject as IWorker<TStartIn, TStartOut>;
+            var workerObject = workers[Key<TFirstIn, TFirstOut>()];
+            var worker = workerObject as IWorker<TFirstIn, TFirstOut>;
 
             if (worker == null)
-                throw new InvalidCastException(string.Format(Resource.UnknownWorkerType, typeof(IWorker<TStartIn, TStartOut>).Name));
+                throw new InvalidCastException(string.Format(Resource.UnknownWorkerType, typeof(IWorker<TFirstIn, TFirstOut>).Name));
 
             return worker;
         }
