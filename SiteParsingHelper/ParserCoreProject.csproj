@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Abstraction\IExecutionPath.cs" />
     <Compile Include="Abstraction\IWorker.cs" />
+    <Compile Include="Abstraction\WorkerBase.cs" />
     <Compile Include="ParserCore\ExecutionPath.cs" />
     <Compile Include="Abstraction\IWorkersContainer.cs" />
     <Compile Include="ParserCore\WebParser.cs" />
