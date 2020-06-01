@@ -2,7 +2,7 @@
 using ParserCoreProjectTests.ParserCore;
 using System;
 
-namespace ParserCoreTests.ParserCore.TestWorkersContainer
+namespace ParserCoreTests.UnitTests.WorkersContainer
 {
     [TestClass]
     public class WorkersContainerTests

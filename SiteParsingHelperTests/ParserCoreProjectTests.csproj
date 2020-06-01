@@ -52,9 +52,9 @@
   <ItemGroup>
     <Compile Include="EventPrototype\Models.cs" />
     <Compile Include="EventPrototype\Units.cs" />
-    <Compile Include="ParserCore\MockObjects.cs" />
-    <Compile Include="ParserCore\WorkersContainerProtectedAccessor.cs" />
-    <Compile Include="ParserCore\WorkersContainerTests.cs" />
+    <Compile Include="UnitTests\WorkersContainer\WorkersContainerMockObjects.cs" />
+    <Compile Include="UnitTests\WorkersContainer\WorkersContainerProtectedAccessor.cs" />
+    <Compile Include="UnitTests\WorkersContainer\WorkersContainerTests.cs" />
     <Compile Include="WebParserPrototypeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -66,6 +66,10 @@
       <Project>{96568495-A61D-4DEC-BB73-BA492767C5A8}</Project>
       <Name>ParserCoreProject</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AcceptanceTests\" />
+    <Folder Include="Samples\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

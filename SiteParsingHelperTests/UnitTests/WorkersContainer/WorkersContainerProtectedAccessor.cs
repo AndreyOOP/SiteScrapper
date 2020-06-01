@@ -3,7 +3,7 @@ using ParserCoreProjectTests.ParserCore;
 using System;
 using System.Collections.Generic;
 
-namespace ParserCoreTests.ParserCore
+namespace ParserCoreTests.UnitTests.WorkersContainer
 {
     class WorkersContainerProtectedAccessor : WorkersContainer<A, B>
     {

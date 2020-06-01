@@ -1,7 +1,7 @@
 ﻿using ParserCoreProject.Abstraction;
 using System;
 
-namespace ParserCoreProjectTests.ParserCore
+namespace ParserCoreTests.UnitTests.WorkersContainer
 {
     class A { }
     class B { }
