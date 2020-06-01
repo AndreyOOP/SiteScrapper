@@ -5,6 +5,10 @@ using System.Linq;
 
 namespace ParserCoreProject.ParserCore
 {
+    // Improvements: 
+    // - add array | list of workers
+    // - async implementation
+
     /// <summary>
     /// IWorkersContainer implementation. Allows to register & get workers
     /// </summary>

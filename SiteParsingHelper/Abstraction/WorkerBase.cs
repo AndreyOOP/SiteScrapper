@@ -1,5 +1,8 @@
 ﻿namespace ParserCoreProject.Abstraction
 {
+    // Improvements:
+    // - async implementation
+
     /// <summary>
     /// All workers are inherited from this class
     /// It knows how to parse (convert) input model TIn to output TOut & select next worker for execution
@@ -25,7 +28,7 @@
         /// Default implementation - it will select next worker by TOut if it is possible
         /// If it is not possible method has to be overrided & next worker has to be explicitly called
         /// </summary>
-        protected virtual void ExecuteNextWorker(TOut model, bool lastOne = false)
+        protected virtual void ExecuteNextWorker(TOut model)
         {
             object worker = workersContainer.GetIfSingleImplementation<TOut>();
 
