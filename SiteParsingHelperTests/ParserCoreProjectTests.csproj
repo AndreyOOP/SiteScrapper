@@ -52,7 +52,9 @@
   <ItemGroup>
     <Compile Include="EventPrototype\Models.cs" />
     <Compile Include="EventPrototype\Units.cs" />
+    <Compile Include="UnitTests\WorkerBase\WorkerBaseMockObjects.cs" />
     <Compile Include="UnitTests\WorkersContainer\WorkersContainerMockObjects.cs" />
+    <Compile Include="UnitTests\WorkerBase\WorkerBaseTests.cs" />
     <Compile Include="UnitTests\WorkersContainer\WorkersContainerProtectedAccessor.cs" />
     <Compile Include="UnitTests\WorkersContainer\WorkersContainerTests.cs" />
     <Compile Include="WebParserPrototypeTests.cs" />
