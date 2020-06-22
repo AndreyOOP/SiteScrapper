@@ -50,14 +50,16 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventPrototype\Models.cs" />
-    <Compile Include="EventPrototype\Units.cs" />
+    <Compile Include="ToDelete\Models.cs" />
+    <Compile Include="ToDelete\Units.cs" />
+    <Compile Include="Samples\DynamicTests.cs" />
+    <Compile Include="UnitTests\WorkerBase\WBTestPreproc.cs" />
     <Compile Include="UnitTests\WorkerBase\WorkerBaseMockObjects.cs" />
     <Compile Include="UnitTests\WorkersContainer\WorkersContainerMockObjects.cs" />
     <Compile Include="UnitTests\WorkerBase\WorkerBaseTests.cs" />
     <Compile Include="UnitTests\WorkersContainer\WorkersContainerProtectedAccessor.cs" />
     <Compile Include="UnitTests\WorkersContainer\WorkersContainerTests.cs" />
-    <Compile Include="WebParserPrototypeTests.cs" />
+    <Compile Include="ToDelete\WebParserPrototypeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -71,7 +73,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AcceptanceTests\" />
-    <Folder Include="Samples\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

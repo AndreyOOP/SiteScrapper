@@ -1,4 +1,5 @@
 ﻿using ParserCoreProject.Abstraction;
+using System.Collections.Generic;
 
 namespace ParserCoreProjectTests.UnitTests.WorkerBase
 {
@@ -10,7 +11,8 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
 
     class TestWorkerBase<TIn, TOut> : WorkerBase<TIn, TOut, A, B> where TOut : new()
     {
-        protected TestWorkerBase(IWorkersContainer<A, B> workersContainer) : base(workersContainer) { }
+        protected TestWorkerBase(IWorkersContainer<A, B> workersContainer) : base(workersContainer, null) { }
+        protected TestWorkerBase(IWorkersContainer<A, B> workersContainer, IEnumerable<IWorkerPreprocessor> preprocessors) : base(workersContainer, preprocessors) { }
 
         public string Status { get; set; }
 
@@ -36,6 +38,7 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
     class ABFalseOverride : TestWorkerBase<A, B>
     {
         public ABFalseOverride(IWorkersContainer<A, B> workersContainer) : base(workersContainer) { }
+        public ABFalseOverride(IWorkersContainer<A, B> workersContainer, IEnumerable<IWorkerPreprocessor> preprocessors) : base(workersContainer, preprocessors) { }
 
         protected override void ExecuteNextWorker(B model)
         {
