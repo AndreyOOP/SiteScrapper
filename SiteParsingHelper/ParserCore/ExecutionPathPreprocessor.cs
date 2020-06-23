@@ -3,7 +3,7 @@ using System;
 
 namespace ParserCoreProject.ParserCore
 {
-    public class ExecutionPathPreprocessor : IWorkerPreprocessor
+    internal class ExecutionPathPreprocessor : IWorkerPreprocessor
     {
         private ExecutionPath executionPath;
         

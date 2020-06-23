@@ -5,8 +5,7 @@ using System.Text;
 
 namespace ParserCoreProject.ParserCore
 {
-    // ToDo: add unit tests
-    public class ExecutionPath : IExecutionPath
+    internal class ExecutionPath : IExecutionPath
     {
         private int order = 0;
         private Dictionary<string, int> executedUnits { get; set; } = new Dictionary<string, int>();

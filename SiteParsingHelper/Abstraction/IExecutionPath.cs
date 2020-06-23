@@ -1,6 +1,6 @@
 ﻿namespace SiteParsingHelper.Event.Abstraction
 {
-    public interface IExecutionPath
+    internal interface IExecutionPath
     {
         /// <summary>
         /// Adds to execution path name of executed work unit
