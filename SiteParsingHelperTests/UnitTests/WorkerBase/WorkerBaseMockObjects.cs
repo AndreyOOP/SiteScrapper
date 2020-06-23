@@ -1,5 +1,5 @@
 ﻿using ParserCoreProject.Abstraction;
-using System.Collections.Generic;
+using ParserCoreProject.ParserCore;
 
 namespace ParserCoreProjectTests.UnitTests.WorkerBase
 {
@@ -11,8 +11,8 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
 
     class TestWorkerBase<TIn, TOut> : WorkerBase<TIn, TOut, A, B> where TOut : new()
     {
-        protected TestWorkerBase(IWorkersContainer<A, B> workersContainer) : base(workersContainer, null) { }
-        protected TestWorkerBase(IWorkersContainer<A, B> workersContainer, IEnumerable<IWorkerPreprocessor> preprocessors) : base(workersContainer, preprocessors) { }
+        protected TestWorkerBase(IWorkersContainer<A, B> workersContainer) : base(workersContainer, new WorkerPreprocessorsContainer()) { }
+        protected TestWorkerBase(IWorkersContainer<A, B> workersContainer, IWorkerPreprocessorsContainer preprocessorContainer) : base(workersContainer, preprocessorContainer) { }
 
         public string Status { get; set; }
 
@@ -31,6 +31,7 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
     class ABTrue : TestWorkerBase<A, B>
     {
         public ABTrue(IWorkersContainer<A, B> workersContainer) : base(workersContainer) { }
+        public ABTrue(IWorkersContainer<A, B> workersContainer, IWorkerPreprocessorsContainer preprocessorContainer) : base(workersContainer, preprocessorContainer) { }
         protected override bool StopHere => true;
     }
 
@@ -38,7 +39,6 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
     class ABFalseOverride : TestWorkerBase<A, B>
     {
         public ABFalseOverride(IWorkersContainer<A, B> workersContainer) : base(workersContainer) { }
-        public ABFalseOverride(IWorkersContainer<A, B> workersContainer, IEnumerable<IWorkerPreprocessor> preprocessors) : base(workersContainer, preprocessors) { }
 
         protected override void ExecuteNextWorker(B model)
         {

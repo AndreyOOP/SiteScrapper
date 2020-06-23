@@ -54,8 +54,9 @@
     <Compile Include="ToDelete\Units.cs" />
     <Compile Include="Samples\DynamicTests.cs" />
     <Compile Include="UnitTests\ExecutionPathTests.cs" />
-    <Compile Include="UnitTests\WorkerBase\WBTestPreproc.cs" />
+    <Compile Include="UnitTests\WorkerBase\WorkerBasePreprocessorTests.cs" />
     <Compile Include="UnitTests\WorkerBase\WorkerBaseMockObjects.cs" />
+    <Compile Include="UnitTests\WorkerPreprocessorsContainerTests.cs" />
     <Compile Include="UnitTests\WorkersContainer\WorkersContainerMockObjects.cs" />
     <Compile Include="UnitTests\WorkerBase\WorkerBaseTests.cs" />
     <Compile Include="UnitTests\WorkersContainer\WorkersContainerProtectedAccessor.cs" />
