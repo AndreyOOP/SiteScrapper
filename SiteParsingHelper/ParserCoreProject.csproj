@@ -48,10 +48,12 @@
     <Compile Include="Abstraction\IExecutionPath.cs" />
     <Compile Include="Abstraction\IWorker.cs" />
     <Compile Include="Abstraction\IWorkerPreprocessor.cs" />
+    <Compile Include="Abstraction\IWorkerPreprocessorsContainer.cs" />
     <Compile Include="ParserCore\WorkerBase.cs" />
     <Compile Include="ParserCore\ExecutionPath.cs" />
     <Compile Include="Abstraction\IWorkersContainer.cs" />
     <Compile Include="ParserCore\ExecutionPathPreprocessor.cs" />
+    <Compile Include="ParserCore\WorkerPreprocessorsContainer.cs" />
     <Compile Include="ToDelete\WebParser.cs" />
     <Compile Include="ToDelete\WorkUnitBase.cs" />
     <Compile Include="ToDelete\IWebParser.cs" />
