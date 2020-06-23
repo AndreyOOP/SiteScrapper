@@ -1,10 +1,5 @@
-﻿using System.Collections.Generic;
-
-namespace ParserCoreProject.Abstraction
+﻿namespace ParserCoreProject.Abstraction
 {
-    // Improvements:
-    // - async implementation
-
     /// <summary>
     /// All workers are inherited from this class
     /// It knows how to parse (convert) input model TIn to output TOut & select next worker for execution
@@ -12,12 +7,12 @@ namespace ParserCoreProject.Abstraction
     public abstract class WorkerBase<TIn, TOut, TFirstIn, TFirstOut> : IWorker<TIn, TOut>
     {
         protected IWorkersContainer<TFirstIn, TFirstOut> workersContainer;
-        protected IEnumerable<IWorkerPreprocessor> preprocessors;
+        protected IWorkerPreprocessorsContainer preprocessorsContainer;
 
-        protected WorkerBase(IWorkersContainer<TFirstIn, TFirstOut> workersContainer, IEnumerable<IWorkerPreprocessor> preprocessors)
+        protected WorkerBase(IWorkersContainer<TFirstIn, TFirstOut> workersContainer, IWorkerPreprocessorsContainer preprocessorsContainer)
         {
             this.workersContainer = workersContainer;
-            this.preprocessors = preprocessors;
+            this.preprocessorsContainer = preprocessorsContainer;
         }
 
         /// <summary>
@@ -43,9 +38,7 @@ namespace ParserCoreProject.Abstraction
 
         public void ParseAndExecuteNext(TIn model)
         {
-            // ToDo: fix this - prprocessors have to be insert from workersContainer currently each worker can have own preprocessor
-            // interceptor - cycle check | log path
-            foreach (var preprocessor in preprocessors) 
+            foreach (var preprocessor in preprocessorsContainer.GetPreprocessors()) 
             {
                 preprocessor.Execute(this);
             }
