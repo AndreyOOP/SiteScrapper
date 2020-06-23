@@ -31,9 +31,44 @@ namespace ParserCoreProjectTests.UnitTests
 
             Assert.AreEqual(2, preprocessorsContainer.GetPreprocessors().Count());
         }
+
+        [TestMethod]
+        public void GetPreprocessors_ZeroRegistered_BlankCollection()
+        {
+            Assert.AreEqual(0, preprocessorsContainer.GetPreprocessors().Count());
+        }
+
+        [TestMethod]
+        public void GetPreprocessor_PreprocessorTRegistered_GetT()
+        {
+            preprocessorsContainer.RegisterPreprocessor(new TestPreprocessor());
+            preprocessorsContainer.RegisterPreprocessor(new TestPreprocessorB());
+
+            Assert.AreEqual(typeof(TestPreprocessorB), preprocessorsContainer.GetPreprocessor<TestPreprocessorB>().GetType());
+        }
+
+        [TestMethod]
+        public void GetPreprocessor_PreprocessorTNotRegistered_Null()
+        {
+            preprocessorsContainer.RegisterPreprocessor(new TestPreprocessor());
+
+            Assert.IsNull(preprocessorsContainer.GetPreprocessor<TestPreprocessorB>());
+        }
+
+        [TestMethod]
+        public void GetPreprocessor_BlankCollection_Null()
+        {
+            Assert.IsNull(preprocessorsContainer.GetPreprocessor<TestPreprocessorB>());
+        }
     }
 
     class TestPreprocessor : IWorkerPreprocessor
+    {
+        public void Execute(object worker)
+        {
+        }
+    }
+    class TestPreprocessorB : IWorkerPreprocessor
     {
         public void Execute(object worker)
         {

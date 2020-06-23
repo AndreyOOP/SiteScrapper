@@ -7,5 +7,7 @@ namespace ParserCoreProject.Abstraction
         void RegisterPreprocessor(IWorkerPreprocessor preprocessor);
 
         IEnumerable<IWorkerPreprocessor> GetPreprocessors();
+
+        T GetPreprocessor<T>() where T : IWorkerPreprocessor;
     }
 }

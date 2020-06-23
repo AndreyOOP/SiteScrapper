@@ -1,6 +1,7 @@
 ﻿using ParserCoreProject.Abstraction;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ParserCoreProject.ParserCore
 {
@@ -9,6 +10,11 @@ namespace ParserCoreProject.ParserCore
         protected List<IWorkerPreprocessor> preprocessors = new List<IWorkerPreprocessor>();
 
         public IEnumerable<IWorkerPreprocessor> GetPreprocessors() => preprocessors;
+
+        public T GetPreprocessor<T>() where T : IWorkerPreprocessor // ToDo: tests
+        {
+            return preprocessors.OfType<T>().FirstOrDefault();
+        }
 
         public void RegisterPreprocessor(IWorkerPreprocessor preprocessor)
         {
