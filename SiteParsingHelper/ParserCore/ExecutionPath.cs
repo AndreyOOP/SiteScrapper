@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("ParserCoreProjectTests")]
 namespace ParserCoreProject.ParserCore
 {
-    // ToDo: add unit tests
-    public class ExecutionPath : IExecutionPath
+    internal class ExecutionPath : IExecutionPath
     {
         private int order = 0;
         private Dictionary<string, int> executedUnits { get; set; } = new Dictionary<string, int>();
 
+        /// <exception cref="System.ArgumentException">Throwed if same record adds twice</exception>
         public void Add(string name)
         {
             executedUnits.Add(name, order++);
@@ -30,7 +32,7 @@ namespace ParserCoreProject.ParserCore
                 path.Append($"{part.Key} > ");
             }
 
-            return path.Remove(path.Length - 3, 3).ToString();
+            return path.Length == 0 ? "" : path.Remove(path.Length - 3, 3).ToString();
         }
     }
 }
