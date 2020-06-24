@@ -19,7 +19,7 @@ namespace ParserCoreProject.ParserCore
             var workerName = worker.GetType().Name;
             
             if (executionPath.AlreadyExecuted(workerName))
-                throw new Exception("already executed"); // ToDo: change exception & message
+                throw new ArgumentException(string.Format(Resource.CycleReference, workerName));
 
             executionPath.Add(workerName);
         }
