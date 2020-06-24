@@ -7,7 +7,10 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
     class C { }
     class D { }
     class E { }
-    class Result { }
+    class Result 
+    {
+        public string TestStatus { get; set; }
+    }
 
     class TestWorkerBase<TIn, TOut> : WorkerBase<TIn, TOut, A, B, Result> where TOut : new()
     {
@@ -30,7 +33,14 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
     class ABTrue : TestWorkerBase<A, B>
     {
         public ABTrue(IWorkerSharedServices<A, B, Result> sharedServices) : base(sharedServices) { }
+        
         protected override bool StopHere => true;
+
+        protected override B ParseUnit(A model)
+        {
+            sharedServices.Result.TestStatus = $"Set value in {nameof(ABFalse)}";
+            return base.ParseUnit(model);
+        }
     }
 
     // In this way few paths could be executed or select someone by condition

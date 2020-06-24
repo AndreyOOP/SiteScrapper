@@ -40,7 +40,7 @@ namespace ParserCoreProjectTests.UnitTests
             var preprocessorContainer = new WorkerPreprocessorsContainer();
             preprocessorContainer.RegisterPreprocessor(executionPathPreprocessor);
 
-            var sharedServices = new WorkerSharedServices<A, B, Result>(null, preprocessorContainer, null);
+            var sharedServices = new WorkerSharedServices<A, B, Result>(null, preprocessorContainer, new Result());
 
             var worker = new ABTrue(sharedServices);
             worker.ParseAndExecuteNext(new A());

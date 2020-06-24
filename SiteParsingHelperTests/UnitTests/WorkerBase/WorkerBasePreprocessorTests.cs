@@ -13,7 +13,7 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
         [TestInitialize]
         public void Initialize()
         {
-            var workerSharedServices = new WorkerSharedServices<A, B, Result>(new WorkersContainer<A, B>(), new WorkerPreprocessorsContainer(), null);
+            var workerSharedServices = new WorkerSharedServices<A, B, Result>(new WorkersContainer<A, B>(), new WorkerPreprocessorsContainer(), new Result());
 
             preprocessorContainer = workerSharedServices.WorkersPreprocessorsContainer;
 

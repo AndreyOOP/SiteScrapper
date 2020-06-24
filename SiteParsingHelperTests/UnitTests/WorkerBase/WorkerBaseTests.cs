@@ -8,13 +8,15 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
     [TestClass]
     public class WorkerBaseTests
     {
+        Result result;
         IWorkersContainer<A, B> workersContainer;
         IWorkerSharedServices<A, B, Result> workerSharedServices;
 
         [TestInitialize]
         public void Initialize()
         {
-            workerSharedServices = new WorkerSharedServices<A, B, Result>(new WorkersContainer<A, B>(), new WorkerPreprocessorsContainer(), null);
+            result = new Result();
+            workerSharedServices = new WorkerSharedServices<A, B, Result>(new WorkersContainer<A, B>(), new WorkerPreprocessorsContainer(), result);
             workersContainer = workerSharedServices.WorkersContainer;
         }
 
@@ -108,6 +110,17 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
             Assert.AreEqual("BEFalse ParseUnit executed. StopHere = False", workerBE.Status);
             Assert.AreEqual("CDTrue ParseUnit executed. StopHere = True", workerCD.Status);
             Assert.AreEqual("EDTrue ParseUnit executed. StopHere = True", workerED.Status);
+        }
+
+        [TestMethod]
+        public void ParseAndExecuteNext_SingleWorker_ResultUpdated()
+        {
+            var workerAB = new ABTrue(workerSharedServices);
+            workersContainer.Add(workerAB);
+
+            workerAB.ParseAndExecuteNext(new A());
+
+            Assert.AreEqual("Set value in ABFalse", workerSharedServices.Result.TestStatus);
         }
     }
 }
