@@ -61,6 +61,15 @@ namespace ParserCoreProject {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cycle reference. Worker {0} already executed.
+        /// </summary>
+        internal static string CycleReference {
+            get {
+                return ResourceManager.GetString("CycleReference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can not cast to {0} type.
         /// </summary>
         internal static string UnknownWorkerType {

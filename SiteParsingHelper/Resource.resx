@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CycleReference" xml:space="preserve">
+    <value>Cycle reference. Worker {0} already executed</value>
+  </data>
   <data name="UnknownWorkerType" xml:space="preserve">
     <value>Can not cast to {0} type</value>
   </data>
