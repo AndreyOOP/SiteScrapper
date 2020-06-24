@@ -1,5 +1,4 @@
 ﻿using ParserCoreProject.Abstraction;
-using ParserCoreProject.ParserCore;
 
 namespace ParserCoreProjectTests.UnitTests.WorkerBase
 {
@@ -8,11 +7,14 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
     class C { }
     class D { }
     class E { }
-
-    class TestWorkerBase<TIn, TOut> : WorkerBase<TIn, TOut, A, B> where TOut : new()
+    class Result 
     {
-        protected TestWorkerBase(IWorkersContainer<A, B> workersContainer) : base(workersContainer, new WorkerPreprocessorsContainer()) { }
-        protected TestWorkerBase(IWorkersContainer<A, B> workersContainer, IWorkerPreprocessorsContainer preprocessorContainer) : base(workersContainer, preprocessorContainer) { }
+        public string TestStatus { get; set; }
+    }
+
+    class TestWorkerBase<TIn, TOut> : WorkerBase<TIn, TOut, A, B, Result> where TOut : new()
+    {
+        protected TestWorkerBase(IWorkerSharedServices<A, B, Result> sharedServices) : base(sharedServices) { }
 
         public string Status { get; set; }
 
@@ -25,23 +27,31 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
 
     class ABFalse : TestWorkerBase<A, B>
     {
-        public ABFalse(IWorkersContainer<A, B> workersContainer) : base(workersContainer) { }
+        public ABFalse(IWorkerSharedServices<A, B, Result> sharedServices) : base(sharedServices) { }
     }
 
     class ABTrue : TestWorkerBase<A, B>
     {
-        public ABTrue(IWorkersContainer<A, B> workersContainer) : base(workersContainer) { }
-        public ABTrue(IWorkersContainer<A, B> workersContainer, IWorkerPreprocessorsContainer preprocessorContainer) : base(workersContainer, preprocessorContainer) { }
+        public ABTrue(IWorkerSharedServices<A, B, Result> sharedServices) : base(sharedServices) { }
+        
         protected override bool StopHere => true;
+
+        protected override B ParseUnit(A model)
+        {
+            sharedServices.Result.TestStatus = $"Set value in {nameof(ABFalse)}";
+            return base.ParseUnit(model);
+        }
     }
 
     // In this way few paths could be executed or select someone by condition
     class ABFalseOverride : TestWorkerBase<A, B>
     {
-        public ABFalseOverride(IWorkersContainer<A, B> workersContainer) : base(workersContainer) { }
+        public ABFalseOverride(IWorkerSharedServices<A, B, Result> sharedServices) : base(sharedServices) { }
 
         protected override void ExecuteNextWorker(B model)
         {
+            var workersContainer = sharedServices.WorkersContainer;
+
             workersContainer.Get<B, C>().ParseAndExecuteNext(model);
             workersContainer.Get<B, E>().ParseAndExecuteNext(model);
         }
@@ -49,23 +59,23 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
 
     class BCFalse : TestWorkerBase<B, C>
     {
-        public BCFalse(IWorkersContainer<A, B> workersContainer) : base(workersContainer) { }
+        public BCFalse(IWorkerSharedServices<A, B, Result> sharedServices) : base(sharedServices) { }
     }
 
     class BEFalse : TestWorkerBase<B, E>
     {
-        public BEFalse(IWorkersContainer<A, B> workersContainer) : base(workersContainer) { }
+        public BEFalse(IWorkerSharedServices<A, B, Result> sharedServices) : base(sharedServices) { }
     }
 
     class CDTrue : TestWorkerBase<C, D>
     {
-        public CDTrue(IWorkersContainer<A, B> workersContainer) : base(workersContainer) { }
+        public CDTrue(IWorkerSharedServices<A, B, Result> sharedServices) : base(sharedServices) { }
         protected override bool StopHere => true;
     }
 
     class EDTrue : TestWorkerBase<E, D>
     {
-        public EDTrue(IWorkersContainer<A, B> workersContainer) : base(workersContainer) { }
+        public EDTrue(IWorkerSharedServices<A, B, Result> sharedServices) : base(sharedServices) { }
         protected override bool StopHere => true;
     }
 }

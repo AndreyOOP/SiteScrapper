@@ -7,16 +7,18 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
     [TestClass]
     public class WorkerBasePreprocessorTests
     {
-        WorkerPreprocessorsContainer preprocessorContainer;
-        WorkersContainer<A, B> workersContainer;
+        IWorkerPreprocessorsContainer preprocessorContainer;
+        IWorkersContainer<A, B> workersContainer;
 
         [TestInitialize]
         public void Initialize()
         {
-            preprocessorContainer = new WorkerPreprocessorsContainer();
-            
-            workersContainer = new WorkersContainer<A, B>();
-            var worker = new ABTrue(workersContainer, preprocessorContainer);
+            var workerSharedServices = new WorkerSharedServices<A, B, Result>(new WorkersContainer<A, B>(), new WorkerPreprocessorsContainer(), new Result());
+
+            preprocessorContainer = workerSharedServices.WorkersPreprocessorsContainer;
+
+            workersContainer = workerSharedServices.WorkersContainer;
+            var worker = new ABTrue(workerSharedServices);
             workersContainer.Add(worker);
         }
 

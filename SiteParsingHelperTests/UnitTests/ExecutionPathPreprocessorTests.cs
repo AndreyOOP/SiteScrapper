@@ -40,7 +40,9 @@ namespace ParserCoreProjectTests.UnitTests
             var preprocessorContainer = new WorkerPreprocessorsContainer();
             preprocessorContainer.RegisterPreprocessor(executionPathPreprocessor);
 
-            var worker = new ABTrue(null, preprocessorContainer);
+            var sharedServices = new WorkerSharedServices<A, B, Result>(null, preprocessorContainer, new Result());
+
+            var worker = new ABTrue(sharedServices);
             worker.ParseAndExecuteNext(new A());
 
             Assert.AreEqual("ABTrue", executionPath.ToString());
