@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ParserCoreProject.Abstraction;
 using ParserCoreProject.ParserCore;
 using System;
 
@@ -7,18 +8,20 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
     [TestClass]
     public class WorkerBaseTests
     {
-        private WorkersContainer<A, B> workersContainer;
+        IWorkersContainer<A, B> workersContainer;
+        IWorkerSharedServices<A, B, Result> workerSharedServices;
 
         [TestInitialize]
         public void Initialize()
         {
-            workersContainer = new WorkersContainer<A, B>();
+            workerSharedServices = new WorkerSharedServices<A, B, Result>(new WorkersContainer<A, B>(), new WorkerPreprocessorsContainer(), null);
+            workersContainer = workerSharedServices.WorkersContainer;
         }
 
         [TestMethod]
         public void ParseAndExecuteNext_StopHereTrueNoNextWorker_Ok()
         {
-            var workerAB = new ABTrue(workersContainer);
+            var workerAB = new ABTrue(workerSharedServices);
             workersContainer.Add(workerAB);
 
             workerAB.ParseAndExecuteNext(new A());
@@ -28,8 +31,8 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
         [TestMethod]
         public void ParseAndExecuteNext_StopHereTrueWithNextWorker_Ok()
         {
-            var workerAB = new ABTrue(workersContainer);
-            var workerBC = new BCFalse(workersContainer);
+            var workerAB = new ABTrue(workerSharedServices);
+            var workerBC = new BCFalse(workerSharedServices);
             workersContainer.Add(workerAB);
             workersContainer.Add(workerBC);
 
@@ -42,7 +45,7 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
         [TestMethod]
         public void ParseAndExecuteNext_StopHereFalseNoNextWorker_ArgumentException()
         {
-            var workerAB = new ABFalse(workersContainer);
+            var workerAB = new ABFalse(workerSharedServices);
             workersContainer.Add(workerAB);
 
             var exception = Assert.ThrowsException<ArgumentException>(() => workerAB.ParseAndExecuteNext(new A()));
@@ -53,9 +56,9 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
         [TestMethod]
         public void ParseAndExecuteNext_ThreeWorkersInChain_Ok()
         {
-            var workerAB = new ABFalse(workersContainer);
-            var workerBC = new BCFalse(workersContainer);
-            var workerCD = new CDTrue(workersContainer);
+            var workerAB = new ABFalse(workerSharedServices);
+            var workerBC = new BCFalse(workerSharedServices);
+            var workerCD = new CDTrue(workerSharedServices);
 
             workersContainer.Add(workerAB);
             workersContainer.Add(workerBC);
@@ -71,9 +74,9 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
         [TestMethod]
         public void ParseAndExecuteNext_FewWorkersCouldBExecutedNext_ArgumentException()
         {
-            var workerAB = new ABFalse(workersContainer);
-            var workerBC = new BCFalse(workersContainer);
-            var workerBE = new BEFalse(workersContainer);
+            var workerAB = new ABFalse(workerSharedServices);
+            var workerBC = new BCFalse(workerSharedServices);
+            var workerBE = new BEFalse(workerSharedServices);
 
             workersContainer.Add(workerAB);
             workersContainer.Add(workerBC);
@@ -86,11 +89,11 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
         [TestMethod]
         public void ParseAndExecuteNext_FewWorkersCouldBExecutedNextSelectionOverrided_Ok()
         {
-            var workerAB = new ABFalseOverride(workersContainer);
-            var workerBC = new BCFalse(workersContainer);
-            var workerBE = new BEFalse(workersContainer);
-            var workerCD = new CDTrue(workersContainer);
-            var workerED = new EDTrue(workersContainer);
+            var workerAB = new ABFalseOverride(workerSharedServices);
+            var workerBC = new BCFalse(workerSharedServices);
+            var workerBE = new BEFalse(workerSharedServices);
+            var workerCD = new CDTrue(workerSharedServices);
+            var workerED = new EDTrue(workerSharedServices);
 
             workersContainer.Add(workerAB);
             workersContainer.Add(workerBC);

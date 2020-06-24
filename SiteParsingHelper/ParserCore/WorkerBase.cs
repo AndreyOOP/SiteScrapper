@@ -4,15 +4,13 @@
     /// All workers are inherited from this class
     /// It knows how to parse (convert) input model TIn to output TOut & select next worker for execution
     /// </summary>
-    public abstract class WorkerBase<TIn, TOut, TFirstIn, TFirstOut> : IWorker<TIn, TOut>
+    public abstract class WorkerBase<TIn, TOut, TFirstIn, TFirstOut, TResult> : IWorker<TIn, TOut>
     {
-        protected IWorkersContainer<TFirstIn, TFirstOut> workersContainer;
-        protected IWorkerPreprocessorsContainer preprocessorsContainer;
+        protected IWorkerSharedServices<TFirstIn, TFirstOut, TResult> sharedServices;
 
-        protected WorkerBase(IWorkersContainer<TFirstIn, TFirstOut> workersContainer, IWorkerPreprocessorsContainer preprocessorsContainer)
+        protected WorkerBase(IWorkerSharedServices<TFirstIn, TFirstOut, TResult> sharedServices)
         {
-            this.workersContainer = workersContainer;
-            this.preprocessorsContainer = preprocessorsContainer;
+            this.sharedServices = sharedServices;
         }
 
         /// <summary>
@@ -29,7 +27,7 @@
         /// </summary>
         protected virtual void ExecuteNextWorker(TOut model)
         {
-            object worker = workersContainer.GetIfSingleImplementation<TOut>();
+            object worker = sharedServices.WorkersContainer.GetIfSingleImplementation<TOut>();
 
             var methodInfo = worker.GetType().GetMethod(nameof(this.ParseAndExecuteNext));
 
@@ -38,7 +36,7 @@
 
         public void ParseAndExecuteNext(TIn model)
         {
-            foreach (var preprocessor in preprocessorsContainer.GetPreprocessors()) 
+            foreach (var preprocessor in sharedServices.WorkersPreprocessorsContainer.GetPreprocessors()) 
             {
                 preprocessor.Execute(this);
             }
