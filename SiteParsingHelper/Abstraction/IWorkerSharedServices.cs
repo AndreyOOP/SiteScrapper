@@ -1,4 +1,6 @@
-﻿namespace ParserCoreProject.Abstraction
+﻿using System;
+
+namespace ParserCoreProject.Abstraction
 {
     public interface IWorkerSharedServices<TFirstIn, TFirstOut, TResult>
     {
@@ -7,5 +9,7 @@
         IWorkerPreprocessorsContainer WorkersPreprocessorsContainer { get; }
 
         TResult Result { get; }
+
+        Exception ExceptionInParseAndExecuteNext { get; set; }
     }
 }

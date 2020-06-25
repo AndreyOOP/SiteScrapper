@@ -132,4 +132,7 @@
   <data name="WorkerIsNotRegistered" xml:space="preserve">
     <value>Worker&lt;{0}, {1}&gt; is not registered</value>
   </data>
+  <data name="WorkUnitParseAndExecuteExecption" xml:space="preserve">
+    <value>Error during {0} model ParseAndExecuteNext processing</value>
+  </data>
 </root>
