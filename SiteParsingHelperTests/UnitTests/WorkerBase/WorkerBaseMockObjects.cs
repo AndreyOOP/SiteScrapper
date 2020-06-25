@@ -1,4 +1,5 @@
 ﻿using ParserCoreProject.Abstraction;
+using System;
 
 namespace ParserCoreProjectTests.UnitTests.WorkerBase
 {
@@ -77,5 +78,15 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
     {
         public EDTrue(IWorkerSharedServices<A, B, Result> sharedServices) : base(sharedServices) { }
         protected override bool StopHere => true;
+    }
+
+    class BCException : TestWorkerBase<B, C>
+    {
+        public BCException(IWorkerSharedServices<A, B, Result> sharedServices) : base(sharedServices) { }
+
+        protected override void ExecuteNextWorker(C model)
+        {
+            throw new Exception("Test exception");
+        }
     }
 }

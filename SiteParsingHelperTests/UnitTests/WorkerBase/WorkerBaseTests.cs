@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ParserCoreProject.Abstraction;
+using ParserCoreProject.Exceptions;
 using ParserCoreProject.ParserCore;
 using System;
 
@@ -50,9 +51,10 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
             var workerAB = new ABFalse(workerSharedServices);
             workersContainer.Add(workerAB);
 
-            var exception = Assert.ThrowsException<ArgumentException>(() => workerAB.ParseAndExecuteNext(new A()));
+            var exception = Assert.ThrowsException<WorkUnitException>(() => workerAB.ParseAndExecuteNext(new A()));
+            Assert.AreEqual(typeof(ArgumentException), exception.InnerException.GetType());
             Assert.AreEqual("ABFalse ParseUnit executed. StopHere = False", workerAB.Status);
-            Assert.AreEqual("Worker<A, AnyOtherType> is not registered", exception.Message);
+            Assert.AreEqual("Worker<A, AnyOtherType> is not registered", exception.InnerException.Message);
         }
 
         [TestMethod]
@@ -84,8 +86,9 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
             workersContainer.Add(workerBC);
             workersContainer.Add(workerBE);
 
-            var exception = Assert.ThrowsException<ArgumentException>(() => workerAB.ParseAndExecuteNext(new A()));
-            StringAssert.StartsWith(exception.Message, "Worker has few implementations");
+            var exception = Assert.ThrowsException<WorkUnitException>(() => workerAB.ParseAndExecuteNext(new A()));
+            Assert.AreEqual(typeof(ArgumentException), exception.InnerException.GetType());
+            StringAssert.StartsWith(exception.InnerException.Message, "Worker has few implementations");
         }
 
         [TestMethod]
