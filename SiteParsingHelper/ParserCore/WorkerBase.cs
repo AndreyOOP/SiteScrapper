@@ -1,4 +1,8 @@
-﻿namespace ParserCoreProject.Abstraction
+﻿using ParserCoreProject.Exceptions;
+using ParserCoreProject.ParserCore;
+using System;
+
+namespace ParserCoreProject.Abstraction
 {
     /// <summary>
     /// All workers are inherited from this class
@@ -34,19 +38,37 @@
             methodInfo.Invoke(worker, new object[] { model });
         }
 
+
+        /// <exception cref="WorkUnitException">Throws in case of any exception during method execution. Contains inner exception with original exception. 
+        /// Contains ExecutionPath where chain of executed modules stored</exception>
         public void ParseAndExecuteNext(TIn model)
         {
-            foreach (var preprocessor in sharedServices.WorkersPreprocessorsContainer.GetPreprocessors()) 
+            try
             {
-                preprocessor.Execute(this);
+                foreach (var preprocessor in sharedServices.WorkersPreprocessorsContainer.GetPreprocessors())
+                {
+                    preprocessor.Execute(this);
+                }
+
+                TOut outResult = ParseUnit(model);
+
+                if (StopHere == true)
+                    return;
+
+                ExecuteNextWorker(outResult);
+            }
+            catch (Exception ex)
+            {
+                var workUnitException = new WorkUnitException(string.Format(Resource.WorkUnitParseAndExecuteExecption, typeof(TIn).Name), ex);
+                workUnitException.ExecutionPath = sharedServices.WorkersPreprocessorsContainer.GetPreprocessor<ExecutionPathPreprocessor>()?.ExecutionPath;
+
+                sharedServices.ExceptionInParseAndExecuteNext = workUnitException;
             }
 
-            TOut outResult = ParseUnit(model);
-
-            if (StopHere == true)
-                return;
-
-            ExecuteNextWorker(outResult);
+            // If we rethrow exception in catch block - we will have a lot of inner exceptions
+            // currently exception stored to shared data & throwed from first worker
+            if (typeof(TIn) == typeof(TFirstIn) && sharedServices.ExceptionInParseAndExecuteNext != null)
+                throw sharedServices.ExceptionInParseAndExecuteNext;
         }
     }
 }
