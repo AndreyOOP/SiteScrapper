@@ -104,5 +104,14 @@ namespace ParserCoreProject {
                 return ResourceManager.GetString("WorkerIsNotRegistered", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error during {0} model ParseAndExecuteNext processing.
+        /// </summary>
+        internal static string WorkUnitParseAndExecuteExecption {
+            get {
+                return ResourceManager.GetString("WorkUnitParseAndExecuteExecption", resourceCulture);
+            }
+        }
     }
 }
