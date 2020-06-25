@@ -1,4 +1,5 @@
 ﻿using ParserCoreProject.Abstraction;
+using System;
 
 namespace ParserCoreProject.ParserCore
 {
@@ -9,6 +10,8 @@ namespace ParserCoreProject.ParserCore
         public IWorkerPreprocessorsContainer WorkersPreprocessorsContainer { get; }
 
         public TResult Result { get; }
+
+        public Exception ExceptionInParseAndExecuteNext { get; set; }
 
         public WorkerSharedServices(IWorkersContainer<TFirstIn, TFirstOut> workersContainer, IWorkerPreprocessorsContainer workersPreprocessorsContainer, TResult result)
         {
