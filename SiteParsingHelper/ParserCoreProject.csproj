@@ -51,6 +51,7 @@
     <Compile Include="Abstraction\IWorkerPreprocessorsContainer.cs" />
     <Compile Include="Abstraction\IWorkerSharedServices.cs" />
     <Compile Include="Exceptions\WorkUnitException.cs" />
+    <Compile Include="ParserCore\Parser.cs" />
     <Compile Include="ParserCore\WorkerBase.cs" />
     <Compile Include="ParserCore\ExecutionPath.cs" />
     <Compile Include="Abstraction\IWorkersContainer.cs" />
