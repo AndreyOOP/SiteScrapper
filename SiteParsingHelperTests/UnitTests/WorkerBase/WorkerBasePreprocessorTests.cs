@@ -8,24 +8,25 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
     public class WorkerBasePreprocessorTests
     {
         IWorkerPreprocessorsContainer preprocessorContainer;
-        IWorkersContainer<A, B> workersContainer;
+        IWorkersContainer workersContainer;
+        ABTrue worker;
 
         [TestInitialize]
         public void Initialize()
         {
-            var workerSharedServices = new WorkerSharedServices<A, B, Result>(new WorkersContainer<A, B>(), new WorkerPreprocessorsContainer(), new Result());
+            var workerSharedServices = new WorkerSharedServices<Result>(new WorkersContainer<A, B>(), new WorkerPreprocessorsContainer(), new Result());
 
             preprocessorContainer = workerSharedServices.WorkersPreprocessorsContainer;
 
             workersContainer = workerSharedServices.WorkersContainer;
-            var worker = new ABTrue(workerSharedServices);
+            worker = new ABTrue(workerSharedServices);
             workersContainer.Add(worker);
         }
 
         [TestMethod]
         public void ParseAndExecuteNext_NoPreprocessorRegistered_WorkerExecuted()
         {
-            workersContainer.GetFirst().ParseAndExecuteNext(new A());
+            worker.ParseAndExecuteNext(new A());
         }
 
         [TestMethod]
@@ -34,7 +35,7 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
             var preprocessor = new TestPreprocessorA();
             preprocessorContainer.RegisterPreprocessor(preprocessor);
 
-            workersContainer.GetFirst().ParseAndExecuteNext(new A());
+            worker.ParseAndExecuteNext(new A());
 
             Assert.AreEqual("Worker is ABTrue; TestPreprocessorA Executed", preprocessor.Status);
         }
@@ -48,7 +49,7 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
             preprocessorContainer.RegisterPreprocessor(preprocessorA);
             preprocessorContainer.RegisterPreprocessor(preprocessorB);
 
-            workersContainer.GetFirst().ParseAndExecuteNext(new A());
+            worker.ParseAndExecuteNext(new A());
 
             Assert.AreEqual("Worker is ABTrue; TestPreprocessorA Executed", preprocessorA.Status);
             Assert.AreEqual("Worker is ABTrue; TestPreprocessorB Executed", preprocessorB.Status);

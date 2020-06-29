@@ -1,13 +1,12 @@
-﻿using ParserCoreProject.ParserCore;
-using ParserCoreProjectTests.ParserCore;
-using System;
+﻿using ParserCoreProject.Abstraction;
+using ParserCoreProject.ParserCore;
 using System.Collections.Generic;
 
 namespace ParserCoreTests.UnitTests.WorkersContainer
 {
     class WorkersContainerProtectedAccessor : WorkersContainer<A, B>
     {
-        public Dictionary<Tuple<Type, Type>, object> Workers { get; }
+        public Dictionary<IInOutKey, object> Workers { get; }
 
         public WorkersContainerProtectedAccessor()
         {

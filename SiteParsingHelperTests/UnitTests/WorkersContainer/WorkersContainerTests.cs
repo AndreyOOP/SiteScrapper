@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ParserCoreProject.ParserCore;
 using ParserCoreProjectTests.ParserCore;
 using System;
 
@@ -27,8 +28,8 @@ namespace ParserCoreTests.UnitTests.WorkersContainer
             workersContainer.Add(workerAC);
 
             Assert.AreEqual(2, workersContainer.Workers.Count);
-            Assert.AreEqual(workerAB, workersContainer.Workers[new Tuple<Type, Type>(typeof(A), typeof(B))] );
-            Assert.AreEqual(workerAC, workersContainer.Workers[new Tuple<Type, Type>(typeof(A), typeof(C))] );
+            Assert.AreEqual(workerAB, workersContainer.Workers[new InOutKey<A, B>()] );
+            Assert.AreEqual(workerAC, workersContainer.Workers[new InOutKey<A, C>()] );
         }
 
         [TestMethod]
@@ -53,39 +54,6 @@ namespace ParserCoreTests.UnitTests.WorkersContainer
             workersContainer.Add(workerAA);
 
             Assert.AreEqual(3, workersContainer.Workers.Count);
-        }
-
-        [TestMethod]
-        public void GetFirst_FewWorkersRegistered_ReturnWorkerIndicatedInWorkersContainerGenerics()
-        {
-            // First registration - WorkersContainer<A, B>
-            var workerAB = new WorkerAB();
-            var workerAC = new WorkerAC();
-
-            workersContainer.Add(workerAC);
-            workersContainer.Add(workerAB);
-
-            Assert.AreEqual(workerAB, workersContainer.GetFirst());
-        }
-
-        [TestMethod]
-        public void GetFirst_WorkerFromWorkersContainerGenericsIsNotRegistered_ArgumentException()
-        {
-            // First registration - WorkersContainer<A, B>
-            var workerAC = new WorkerAC();
-
-            workersContainer.Add(workerAC);
-
-            Assert.ThrowsException<ArgumentException>(() => workersContainer.GetFirst());
-        }
-
-        [TestMethod]
-        public void GetFirst_UnexpectedWorkerType_InvalidCastException()
-        {
-            // First registration - WorkersContainer<A, B>
-            workersContainer.Workers[new Tuple<Type, Type>(typeof(A), typeof(B))] = typeof(string); // some unexpected type != typeof(IWorker<TIn, TOut>)
-
-            Assert.ThrowsException<InvalidCastException>(() => workersContainer.GetFirst());
         }
 
         [TestMethod]
@@ -118,7 +86,7 @@ namespace ParserCoreTests.UnitTests.WorkersContainer
         [TestMethod]
         public void Get_UnexpectedWorkerType_InvalidCastException()
         {
-            workersContainer.Workers[new Tuple<Type, Type>(typeof(A), typeof(B))] = typeof(string); // some unexpected type != typeof(IWorker<TIn, TOut>)
+            workersContainer.Workers[new InOutKey<A, B>()] = typeof(string); // some unexpected type != typeof(IWorker<TIn, TOut>)
 
             Assert.ThrowsException<InvalidCastException>(() => workersContainer.Get<A, B>());
         }

@@ -15,7 +15,7 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
 
     class TestWorkerBase<TIn, TOut> : WorkerBase<TIn, TOut, A, B, Result> where TOut : new()
     {
-        protected TestWorkerBase(IWorkerSharedServices<A, B, Result> sharedServices) : base(sharedServices) { }
+        protected TestWorkerBase(IWorkerSharedServices<Result> sharedServices) : base(sharedServices) { }
 
         public string Status { get; set; }
 
@@ -28,12 +28,12 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
 
     class ABFalse : TestWorkerBase<A, B>
     {
-        public ABFalse(IWorkerSharedServices<A, B, Result> sharedServices) : base(sharedServices) { }
+        public ABFalse(IWorkerSharedServices<Result> sharedServices) : base(sharedServices) { }
     }
 
     class ABTrue : TestWorkerBase<A, B>
     {
-        public ABTrue(IWorkerSharedServices<A, B, Result> sharedServices) : base(sharedServices) { }
+        public ABTrue(IWorkerSharedServices<Result> sharedServices) : base(sharedServices) { }
         
         protected override bool StopHere => true;
 
@@ -47,7 +47,7 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
     // In this way few paths could be executed or select someone by condition
     class ABFalseOverride : TestWorkerBase<A, B>
     {
-        public ABFalseOverride(IWorkerSharedServices<A, B, Result> sharedServices) : base(sharedServices) { }
+        public ABFalseOverride(IWorkerSharedServices<Result> sharedServices) : base(sharedServices) { }
 
         protected override void ExecuteNextWorker(B model)
         {
@@ -60,29 +60,29 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
 
     class BCFalse : TestWorkerBase<B, C>
     {
-        public BCFalse(IWorkerSharedServices<A, B, Result> sharedServices) : base(sharedServices) { }
+        public BCFalse(IWorkerSharedServices<Result> sharedServices) : base(sharedServices) { }
     }
 
     class BEFalse : TestWorkerBase<B, E>
     {
-        public BEFalse(IWorkerSharedServices<A, B, Result> sharedServices) : base(sharedServices) { }
+        public BEFalse(IWorkerSharedServices<Result> sharedServices) : base(sharedServices) { }
     }
 
     class CDTrue : TestWorkerBase<C, D>
     {
-        public CDTrue(IWorkerSharedServices<A, B, Result> sharedServices) : base(sharedServices) { }
+        public CDTrue(IWorkerSharedServices<Result> sharedServices) : base(sharedServices) { }
         protected override bool StopHere => true;
     }
 
     class EDTrue : TestWorkerBase<E, D>
     {
-        public EDTrue(IWorkerSharedServices<A, B, Result> sharedServices) : base(sharedServices) { }
+        public EDTrue(IWorkerSharedServices<Result> sharedServices) : base(sharedServices) { }
         protected override bool StopHere => true;
     }
 
     class BCException : TestWorkerBase<B, C>
     {
-        public BCException(IWorkerSharedServices<A, B, Result> sharedServices) : base(sharedServices) { }
+        public BCException(IWorkerSharedServices<Result> sharedServices) : base(sharedServices) { }
 
         protected override void ExecuteNextWorker(C model)
         {

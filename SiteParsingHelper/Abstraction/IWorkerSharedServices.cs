@@ -2,9 +2,9 @@
 
 namespace ParserCoreProject.Abstraction
 {
-    public interface IWorkerSharedServices<TFirstIn, TFirstOut, TResult>
+    public interface IWorkerSharedServices<TResult>
     {
-        IWorkersContainer<TFirstIn, TFirstOut> WorkersContainer { get; }
+        IWorkersContainer WorkersContainer { get; }
 
         IWorkerPreprocessorsContainer WorkersPreprocessorsContainer { get; }
 

@@ -3,9 +3,10 @@ using System;
 
 namespace ParserCoreProject.ParserCore
 {
-    public class WorkerSharedServices<TFirstIn, TFirstOut, TResult> : IWorkerSharedServices<TFirstIn, TFirstOut, TResult>
+    // ToDo: Remove
+    public class WorkerSharedServices<TResult> : IWorkerSharedServices<TResult>
     {
-        public IWorkersContainer<TFirstIn, TFirstOut> WorkersContainer { get; }
+        public IWorkersContainer WorkersContainer { get; }
 
         public IWorkerPreprocessorsContainer WorkersPreprocessorsContainer { get; }
 
@@ -13,7 +14,7 @@ namespace ParserCoreProject.ParserCore
 
         public Exception ExceptionInParseAndExecuteNext { get; set; }
 
-        public WorkerSharedServices(IWorkersContainer<TFirstIn, TFirstOut> workersContainer, IWorkerPreprocessorsContainer workersPreprocessorsContainer, TResult result)
+        public WorkerSharedServices(IWorkersContainer workersContainer, IWorkerPreprocessorsContainer workersPreprocessorsContainer, TResult result)
         {
             WorkersContainer = workersContainer;
             WorkersPreprocessorsContainer = workersPreprocessorsContainer;
