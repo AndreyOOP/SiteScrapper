@@ -55,6 +55,7 @@
     <Compile Include="Samples\DynamicTests.cs" />
     <Compile Include="UnitTests\ExecutionPathPreprocessorTests.cs" />
     <Compile Include="UnitTests\ExecutionPathTests.cs" />
+    <Compile Include="UnitTests\InOutKeyTests.cs" />
     <Compile Include="UnitTests\WorkerBase\WorkerBaseExceptionTests.cs" />
     <Compile Include="UnitTests\WorkerBase\WorkerBasePreprocessorTests.cs" />
     <Compile Include="UnitTests\WorkerBase\WorkerBaseMockObjects.cs" />
