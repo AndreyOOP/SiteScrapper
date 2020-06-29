@@ -9,13 +9,13 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
     [TestClass]
     public class WorkerBaseExceptionTests
     {
-        IWorkersContainer<A, B> workersContainer;
-        IWorkerSharedServices<A, B, Result> workerSharedServices;
+        IWorkersContainer workersContainer;
+        IWorkerSharedServices<Result> workerSharedServices;
 
         [TestInitialize]
         public void Initialize()
         {
-            workerSharedServices = new WorkerSharedServices<A, B, Result>(new WorkersContainer<A, B>(), new WorkerPreprocessorsContainer(), null);
+            workerSharedServices = new WorkerSharedServices<Result>(new WorkersContainer<A, B>(), new WorkerPreprocessorsContainer(), null);
             workersContainer = workerSharedServices.WorkersContainer;
         }
 

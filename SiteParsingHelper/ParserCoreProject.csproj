@@ -45,13 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstraction\IEdgeWorkers.cs" />
     <Compile Include="Abstraction\IExecutionPath.cs" />
+    <Compile Include="Abstraction\IInOutKey.cs" />
     <Compile Include="Abstraction\IWorker.cs" />
     <Compile Include="Abstraction\IWorkerPreprocessor.cs" />
     <Compile Include="Abstraction\IWorkerPreprocessorsContainer.cs" />
     <Compile Include="Abstraction\IWorkerSharedServices.cs" />
     <Compile Include="Exceptions\WorkUnitException.cs" />
     <Compile Include="ParserCore\Parser.cs" />
+    <Compile Include="ParserCore\InOutKey.cs" />
     <Compile Include="ParserCore\WorkerBase.cs" />
     <Compile Include="ParserCore\ExecutionPath.cs" />
     <Compile Include="Abstraction\IWorkersContainer.cs" />

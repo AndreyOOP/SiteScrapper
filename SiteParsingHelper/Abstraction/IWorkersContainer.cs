@@ -1,6 +1,6 @@
 ﻿namespace ParserCoreProject.Abstraction
 {
-    public interface IWorkersContainer<TFirstIn, TFirstOut>
+    public interface IWorkersContainer
     {
         /// <summary>
         /// Adds IWorker<TIn, TOut> which converts TIn type to TOut type
@@ -12,11 +12,7 @@
         /// </summary>
         IWorker<TIn, TOut> Get<TIn, TOut>();
 
-        /// <summary>
-        /// Get IWorker from which execution started. It's input/output types indicated in TFirstIn, TFirstOut
-        /// </summary>
-        IWorker<TFirstIn, TFirstOut> GetFirst();
-
+        // ToDo: remove - ? single impementation check rather for new module
         /// <summary>
         /// Get IWorker by its input TIn type. It is possible only if single IWorker per TIn registered. Otherwise ArgumentException throwed
         /// </summary>

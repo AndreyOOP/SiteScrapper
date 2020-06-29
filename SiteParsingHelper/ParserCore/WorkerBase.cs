@@ -10,9 +10,9 @@ namespace ParserCoreProject.Abstraction
     /// </summary>
     public abstract class WorkerBase<TIn, TOut, TFirstIn, TFirstOut, TResult> : IWorker<TIn, TOut>
     {
-        protected IWorkerSharedServices<TFirstIn, TFirstOut, TResult> sharedServices;
+        protected IWorkerSharedServices<TResult> sharedServices;
 
-        protected WorkerBase(IWorkerSharedServices<TFirstIn, TFirstOut, TResult> sharedServices)
+        protected WorkerBase(IWorkerSharedServices<TResult> sharedServices)
         {
             this.sharedServices = sharedServices;
         }

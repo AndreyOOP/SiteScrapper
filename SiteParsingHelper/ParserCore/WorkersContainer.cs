@@ -10,38 +10,28 @@ namespace ParserCoreProject.ParserCore
     /// </summary>
     /// <typeparam name="TFirstIn">In type of first worker. Parsing begins from this worker</typeparam>
     /// <typeparam name="TFirstOut">Out type of first worker. Parsing begins from this worker</typeparam>
-    public class WorkersContainer<TFirstIn, TFirstOut> : IWorkersContainer<TFirstIn, TFirstOut>
+    public class WorkersContainer<TFirstIn, TFirstOut> : IWorkersContainer // ToDo: remove generic
     {
-        protected Dictionary<Tuple<Type, Type>, object> workers = new Dictionary<Tuple<Type, Type>, object>();
+        protected Dictionary<IInOutKey, object> workers = new Dictionary<IInOutKey, object>();
 
         public void Add<TIn, TOut>(IWorker<TIn, TOut> worker)
         {
-            if (workers.ContainsKey(Key<TIn, TOut>()))
+            var key = new InOutKey<TIn, TOut>();
+
+            if (workers.ContainsKey(key))
                 throw new ArgumentException(string.Format(Resource.WorkerAlreadySet, typeof(TIn).Name, typeof(TOut).Name));
 
-            workers.Add(Key<TIn, TOut>(), worker);
-        }
-
-        public IWorker<TFirstIn, TFirstOut> GetFirst()
-        {
-            if (!workers.ContainsKey(Key<TFirstIn, TFirstOut>()))
-                throw new ArgumentException(string.Format(Resource.WorkerIsNotRegistered, typeof(TFirstIn).Name, typeof(TFirstOut).Name));
-
-            var workerObject = workers[Key<TFirstIn, TFirstOut>()];
-            var worker = workerObject as IWorker<TFirstIn, TFirstOut>;
-
-            if (worker == null)
-                throw new InvalidCastException(string.Format(Resource.UnknownWorkerType, typeof(IWorker<TFirstIn, TFirstOut>).Name));
-
-            return worker;
+            workers.Add(key, worker);
         }
 
         public IWorker<TIn, TOut> Get<TIn, TOut>()
         {
-            if (!workers.ContainsKey(Key<TIn, TOut>()))
-                throw new ArgumentException(string.Format(Resource.WorkerIsNotRegistered, typeof(TFirstIn).Name, typeof(TFirstOut).Name));
+            var key = new InOutKey<TIn, TOut>();
 
-            var workerObject = workers[Key<TIn, TOut>()];
+            if (!workers.ContainsKey(key))
+                throw new ArgumentException(string.Format(Resource.WorkerIsNotRegistered, typeof(TIn).Name, typeof(TOut).Name));
+
+            var workerObject = workers[key];
             var worker = workerObject as IWorker<TIn, TOut>;
 
             if (worker == null)
@@ -50,9 +40,10 @@ namespace ParserCoreProject.ParserCore
             return worker;
         }
 
+        // ToDo: remove - ?
         public dynamic GetIfSingleImplementation<TIn>()
         {
-            var qtyOfWorkersWithInputTypeTIn = workers.Count(w => w.Key.Item1 == typeof(TIn));
+            var qtyOfWorkersWithInputTypeTIn = workers.Count(w => w.Key.InType == typeof(TIn));
 
             if (qtyOfWorkersWithInputTypeTIn == 0)
                 throw new ArgumentException(string.Format(Resource.WorkerIsNotRegistered, typeof(TFirstIn).Name, "AnyOtherType"));
@@ -60,9 +51,7 @@ namespace ParserCoreProject.ParserCore
             if (qtyOfWorkersWithInputTypeTIn > 1)
                 throw new ArgumentException(string.Format(Resource.WorkerHasFewImplementation, typeof(TIn)));
 
-            return workers.First(w => w.Key.Item1 == typeof(TIn)).Value;
+            return workers.First(w => w.Key.InType == typeof(TIn)).Value;
         }
-
-        private Tuple<Type, Type> Key<TIn, TOut>() => new Tuple<Type, Type>(typeof(TIn), typeof(TOut));
     }
 }

@@ -34,20 +34,21 @@ namespace ParserApi.Controllers
         [Route("api/core/{id}")]
         public Result5 GetResultParserCore([FromUri]string id)
         {
-            var httpClient = new HttpClient();
+            //var httpClient = new HttpClient();
 
-            var workersContainer = new WorkersContainer<In1, Html2>();
-            var workerPreprocessorsContainer = new WorkerPreprocessorsContainer();
-            var workerSharedServices = new WorkerSharedServices<In1, Html2, Result5>(workersContainer, workerPreprocessorsContainer, new Result5());
+            //var workersContainer = new WorkersContainer<In1, Html2>();
+            //var workerPreprocessorsContainer = new WorkerPreprocessorsContainer();
+            //var workerSharedServices = new WorkerSharedServices<In1, Html2, Result5>(workersContainer, workerPreprocessorsContainer, new Result5());
 
-            workersContainer.Add(new Step1(workerSharedServices, httpClient));
-            workersContainer.Add(new Step2(workerSharedServices, new HtmlDocument()));
-            workersContainer.Add(new Step3(workerSharedServices, httpClient));
-            workersContainer.Add(new Step4(workerSharedServices, new HtmlDocument()));
+            //workersContainer.Add(new Step1(workerSharedServices, httpClient));
+            //workersContainer.Add(new Step2(workerSharedServices, new HtmlDocument()));
+            //workersContainer.Add(new Step3(workerSharedServices, httpClient));
+            //workersContainer.Add(new Step4(workerSharedServices, new HtmlDocument()));
 
-            workersContainer.GetFirst().ParseAndExecuteNext(new In1 { Id = id });
+            //workersContainer.GetFirst().ParseAndExecuteNext(new In1 { Id = id });
 
-            return workerSharedServices.Result;
+            //return workerSharedServices.Result;
+            return null;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace ParserApi.Parsers.Site911Demo.WorkUnits
     {
         private HtmlDocument htmlDocument;
 
-        public Step4(IWorkerSharedServices<In1, Html2, Result5> sharedServices, HtmlDocument htmlDocument) : base(sharedServices)
+        public Step4(IWorkerSharedServices<Result5> sharedServices, HtmlDocument htmlDocument) : base(sharedServices)
         {
             this.htmlDocument = htmlDocument;
         }

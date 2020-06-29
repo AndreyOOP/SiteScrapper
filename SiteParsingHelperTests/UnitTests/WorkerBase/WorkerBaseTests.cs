@@ -10,14 +10,14 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
     public class WorkerBaseTests
     {
         Result result;
-        IWorkersContainer<A, B> workersContainer;
-        IWorkerSharedServices<A, B, Result> workerSharedServices;
+        IWorkersContainer workersContainer;
+        IWorkerSharedServices<Result> workerSharedServices;
 
         [TestInitialize]
         public void Initialize()
         {
             result = new Result();
-            workerSharedServices = new WorkerSharedServices<A, B, Result>(new WorkersContainer<A, B>(), new WorkerPreprocessorsContainer(), result);
+            workerSharedServices = new WorkerSharedServices<Result>(new WorkersContainer<A, B>(), new WorkerPreprocessorsContainer(), result);
             workersContainer = workerSharedServices.WorkersContainer;
         }
 
@@ -68,7 +68,7 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
             workersContainer.Add(workerBC);
             workersContainer.Add(workerCD);
 
-            workersContainer.GetFirst().ParseAndExecuteNext(new A());
+            workerAB.ParseAndExecuteNext(new A());
 
             Assert.AreEqual("ABFalse ParseUnit executed. StopHere = False", workerAB.Status);
             Assert.AreEqual("BCFalse ParseUnit executed. StopHere = False", workerBC.Status);
@@ -106,7 +106,7 @@ namespace ParserCoreProjectTests.UnitTests.WorkerBase
             workersContainer.Add(workerCD);
             workersContainer.Add(workerED);
 
-            workersContainer.GetFirst().ParseAndExecuteNext(new A());
+            workerAB.ParseAndExecuteNext(new A());
 
             Assert.AreEqual("ABFalseOverride ParseUnit executed. StopHere = False", workerAB.Status);
             Assert.AreEqual("BCFalse ParseUnit executed. StopHere = False", workerBC.Status);

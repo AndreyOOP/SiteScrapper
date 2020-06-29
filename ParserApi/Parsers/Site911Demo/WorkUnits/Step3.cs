@@ -11,7 +11,7 @@ namespace ParserApi.Parsers.Site911Demo.WorkUnits
     {
         private readonly HttpClient httpClient;
 
-        public Step3(IWorkerSharedServices<In1, Html2, Result5> sharedServices, HttpClient httpClient) : base(sharedServices)
+        public Step3(IWorkerSharedServices<Result5> sharedServices, HttpClient httpClient) : base(sharedServices)
         {
             this.httpClient = httpClient;
         }
