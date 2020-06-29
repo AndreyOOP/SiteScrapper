@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstraction\IEdgeWorkers.cs" />
     <Compile Include="Abstraction\IExecutionPath.cs" />
     <Compile Include="Abstraction\IInOutKey.cs" />
     <Compile Include="Abstraction\IWorker.cs" />
