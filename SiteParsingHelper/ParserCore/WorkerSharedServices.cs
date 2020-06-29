@@ -17,6 +17,7 @@ namespace ParserCoreProject.ParserCore
         {
             WorkersContainer = workersContainer;
             WorkersPreprocessorsContainer = workersPreprocessorsContainer;
+            WorkersPreprocessorsContainer.RegisterPreprocessor(new ExecutionPathPreprocessor(new ExecutionPath())); // Temp solution
             Result = result;
         }
     }

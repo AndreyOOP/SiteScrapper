@@ -132,6 +132,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Parsers\Site911Demo\Models\Html2.cs" />
+    <Compile Include="Parsers\Site911Demo\Models\In1.cs" />
+    <Compile Include="Parsers\Site911Demo\Models\QueryString3.cs" />
+    <Compile Include="Parsers\Site911Demo\Models\Html4.cs" />
+    <Compile Include="Parsers\Site911Demo\Models\Result5.cs" />
+    <Compile Include="Parsers\Site911Demo\WorkUnits\Step1.cs" />
+    <Compile Include="Parsers\Site911Demo\WorkUnits\Step2.cs" />
+    <Compile Include="Parsers\Site911Demo\WorkUnits\Step3.cs" />
+    <Compile Include="Parsers\Site911Demo\WorkUnits\Step4.cs" />
     <Compile Include="Parsers\Site911EventBusPrototype\Models\A_SearchModelByIdRequestInput.cs" />
     <Compile Include="Parsers\Site911EventBusPrototype\Models\A_SearchModelByIdRequestOutput.cs" />
     <Compile Include="Parsers\Site911EventBusPrototype\Models\B_ParseHtmlOutput.cs" />
