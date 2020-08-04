@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstraction\IInOutKey.cs" />
-    <Compile Include="InOutKey.cs" />
+    <Compile Include="Mappings\KeyToWorker.cs" />
+    <Compile Include="Mappings\TypeToModel.cs" />
+    <Compile Include="Mappings\InOutKey.cs" />
     <Compile Include="IWorker.cs" />
     <Compile Include="Abstraction\IWorkersContainer.cs" />
     <Compile Include="Parser.cs" />
