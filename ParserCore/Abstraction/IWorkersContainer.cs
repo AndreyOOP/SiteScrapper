@@ -1,35 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ParserCore
 {
     public interface IWorkersContainer
     {
         /// <summary>
-        /// Build graph of related workers
+        /// Builds workers execution sequence
         /// </summary>
-        void Register(IEnumerable<KeyToWorker> workers);
+        /// <param name="workers">Unordered list of workers</param>
+        void Register(IEnumerable<object> workers);
 
         /// <summary>
-        /// List of last workers where parsing have to stop
+        /// List of last worker keys where parsing finished
         /// </summary>
         IEnumerable<IInOutKey> Last { get; }
 
+        /// <summary>
+        /// Get list of Workers<TIn, TOut> with their key where <param name="typeIn"> is equal to TIn
+        /// </summary>
+        /// <param name="typeIn">Input model type</param>
         IEnumerable<KeyToWorker> Get(Type typeIn);
-    }
-
-    public class KeyToWorker
-    {
-        public IInOutKey Key { get; set; }
-        public object Worker { get; set; }
-    }
-
-    public class TypeToModel
-    {
-        public Type Type { get; set; }
-        public object Model { get; set; }
     }
 }
