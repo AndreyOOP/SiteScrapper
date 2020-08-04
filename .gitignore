@@ -17,3 +17,7 @@
 /ParserApi/bin
 /SiteParsingHelperTests/bin/Debug
 /SiteParsingHelperTests/obj/Debug
+/ParserCore/bin/Debug
+/ParserCore/obj/Debug
+/ParserCoreTests/bin/Debug
+/ParserCoreTests/obj/Debug
