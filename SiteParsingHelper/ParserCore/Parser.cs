@@ -1,10 +1,34 @@
-﻿using System;
+﻿using ParserCoreProject.Abstraction;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ParserCoreProject.ParserCore
 {
     // parser prototype
-    //public class Parser<TIn, TFirstOut, TResult>
-    //{
+    public class Parser<TResult>
+    {
+        //private WorkersChain workersChain;
+
+        //public Parser(WorkersChain workersChain)
+        //{
+        //    this.workersChain = workersChain;
+        //}
+
+        //public TResult Execute(IEnumerable<object> models)
+        //{
+        //    var list = new List<object>();
+
+        //    foreach(var m in models)
+        //    {
+        //        list.AddRange(
+        //            workersChain.Get(m.GetType()).Select(w => w.Item2.Parse<>(w))
+        //        );
+        //    }
+
+        //    Execute(list);
+        //}
+    }
     //    private WorkerSharedServices<TIn, TFirstOut,TResult> workerSharedServices;
 
     //    public Parser(WorkerSharedServices<TIn, TFirstOut, TResult> workerSharedServices)
