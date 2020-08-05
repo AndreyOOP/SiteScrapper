@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ParserCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -83,6 +84,30 @@ namespace UnitTests.WorkersContainerUnitTest
             var container = new WorkersContainer(graph);
 
             CollectionAssert.AreEqual(new object[] { dg, ef, cj }, container.Last.ToArray());
+        }
+
+        [TestMethod]
+        [DynamicData(nameof(GetData), DynamicDataSourceType.Method)]
+        public void Get_Type_AsExpected(Type inType, int expectedQty)
+        {
+            var graph = new Dictionary<IInOutKey, object>
+            {
+                [ab] = null, [bc] = null, [cd] = null, [ce] = null, [ef] = null
+            };
+            var container = new WorkersContainer(graph);
+
+            var result = container.Get(inType);
+
+            Assert.AreEqual(expectedQty, result.Count());
+        }
+
+        public static IEnumerable<object[]> GetData()
+        {
+            yield return new object[] { typeof(F), 0 };
+            yield return new object[] { typeof(J), 0 };
+            yield return new object[] { typeof(A), 1 };
+            yield return new object[] { typeof(E), 1 };
+            yield return new object[] { typeof(C), 2 };
         }
     }
 }

@@ -4,10 +4,17 @@ using System.Linq;
 
 namespace ParserCore
 {
+    // ToDo: 
+    //   add single worker registration - ?
+    //   add cycles check during registration
+    //   add Register implementation, atm not required
     public class WorkersContainer : IWorkersContainer
     {
         private List<IInOutKey> last = new List<IInOutKey>();
         private Dictionary<IInOutKey, object> workers = new Dictionary<IInOutKey, object>();
+
+        /// <inheritdoc/>
+        public IEnumerable<IInOutKey> Last => last;
 
         /// <param name="workers">Represents workers relations</param>
         public WorkersContainer(Dictionary<IInOutKey, object> workers)
@@ -16,6 +23,7 @@ namespace ParserCore
             last = GetLastWorkers();
         }
 
+        
         public void Register(IEnumerable<object> workers)
         {
             // type check
@@ -26,9 +34,6 @@ namespace ParserCore
 
             throw new NotImplementedException();
         }
-
-        /// <inheritdoc/>
-        public IEnumerable<IInOutKey> Last => last;
 
         public IEnumerable<KeyToWorker> Get(Type typeIn)
         {
@@ -43,6 +48,15 @@ namespace ParserCore
 
             return workers.Keys.Where(key => LastType(key.OutType))
                                .ToList();
+        }
+
+        // ToDo: 
+        /// <summary>
+        /// String representation of current workers graph
+        /// </summary>
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 }
