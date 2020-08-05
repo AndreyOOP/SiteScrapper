@@ -1,32 +1,35 @@
-﻿using System;
+﻿using ParserCore.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ParserCore
 {
-    public class Parser<TIn, TOut>
+    /// <summary>
+    /// Final parsing result has to be stored into TParsingResult => last Worker has to create this model. 
+    /// If <see cref="TParsingResult"/> is complex model which consists of different parts - define TParsingResult model creation logic in PrepareResult method
+    /// </summary>
+    public class ParserBase<TIn, TParsingResult> : IParserBase<TIn, TParsingResult>
     {
-        private IWorkersContainer workersContainer;
+        private readonly IWorkersContainer workersContainer;
 
         /// <summary>
         /// During parsing any partial result stored here, after all final result gathererd together in PrepareResult
         /// </summary>
-        protected Dictionary<Type, object> resultMain;
+        protected Dictionary<Type, object> resultMain = new Dictionary<Type, object>();
 
-        public Parser(IWorkersContainer workersContainer)
+        public ParserBase(IWorkersContainer workersContainer)
         {
             this.workersContainer = workersContainer;
-            resultMain = new Dictionary<Type, object>();
         }
-
-        public TOut Parse(TIn model)
+        
+        /// <inheritdoc/>
+        public TParsingResult Parse(TIn model)
         {
             GetNext(new[] {
                 new TypeToModel { Type = typeof(TIn), Model = model }
             });
-            
+
             return PrepareResult();
         }
 
@@ -34,11 +37,11 @@ namespace ParserCore
         {
             var result = new List<TypeToModel>();
 
-            foreach(var model in models)
+            foreach (var model in models)
             {
                 var workers = workersContainer.Get(model.Type);
 
-                foreach(var worker in workers)
+                foreach (var worker in workers)
                 {
                     var mi1 = worker.Worker.GetType().GetMethod("ToExecute");
                     if (!(bool)mi1.Invoke(worker.Worker, new object[] { model.Model }))
@@ -64,14 +67,8 @@ namespace ParserCore
         }
 
         /// <summary>
-        /// By default just try to get result as TOut type
+        /// By default just try to get result as <see cref="TParsingResult"/> type
         /// </summary>
-        /// <returns></returns>
-        protected virtual TOut PrepareResult()
-        {
-            return (TOut)resultMain[typeof(TOut)];
-        }
+        protected virtual TParsingResult PrepareResult() => resultMain.Get<TParsingResult>();
     }
-
-    
 }

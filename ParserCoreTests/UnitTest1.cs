@@ -21,13 +21,13 @@ namespace ParserCoreTests
             var lst = container.Last;
 
             //var parser = new ConcreeteParser(container);
-            var parser = new Parser<A, C>(container);
+            var parser = new ParserBase<A, C>(container);
 
             var res = parser.Parse(new A());
         }
     }
 
-    public class ConcreeteParser : Parser<A, Result>
+    public class ConcreeteParser : ParserBase<A, Result>
     {
         public ConcreeteParser(IWorkersContainer workersContainer) : base(workersContainer)
         {
