@@ -3,9 +3,13 @@ using System.Collections.Generic;
 
 namespace ParserCore
 {
+    /// <inheritdoc/>
     public class InOutKey<TIn, TOut> : IInOutKey
     {
+        /// <inheritdoc/>
         public Type InType { get => typeof(TIn); }
+
+        /// <inheritdoc/>
         public Type OutType { get => typeof(TOut); }
 
         public override bool Equals(object obj)
