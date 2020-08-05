@@ -9,7 +9,7 @@ namespace ParserCore
     /// Final parsing result has to be stored into TParsingResult => last Worker has to create this model. 
     /// If <see cref="TParsingResult"/> is complex model which consists of different parts - define TParsingResult model creation logic in PrepareResult method
     /// </summary>
-    public class ParserBase<TIn, TParsingResult> : IParserBase<TIn, TParsingResult>
+    public class ParserBase<TIn, TParsingResult> : IParser<TIn, TParsingResult>
     {
         private readonly IWorkersContainer workersContainer;
 
