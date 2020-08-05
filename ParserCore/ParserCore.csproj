@@ -45,7 +45,7 @@
     <Compile Include="Mappings\KeyToWorker.cs" />
     <Compile Include="Mappings\TypeToModel.cs" />
     <Compile Include="Mappings\InOutKey.cs" />
-    <Compile Include="IWorker.cs" />
+    <Compile Include="Abstraction\IWorker.cs" />
     <Compile Include="Abstraction\IWorkersContainer.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
