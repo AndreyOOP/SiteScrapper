@@ -42,19 +42,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstraction\IInOutKey.cs" />
-    <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Abstraction\IParser.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
-    <Compile Include="FinalTypesAndInput.cs" />
-    <Compile Include="Mappings\KeyToWorker.cs" />
-    <Compile Include="Mappings\TypeToModel.cs" />
-    <Compile Include="Mappings\InOutKey.cs" />
+    <Compile Include="Models\FinalTypesAndInput.cs" />
+    <Compile Include="Models\InOutKey.cs" />
     <Compile Include="Abstraction\IWorker.cs" />
     <Compile Include="Abstraction\IWorkersContainer.cs" />
     <Compile Include="ParserBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorkersContainer.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
