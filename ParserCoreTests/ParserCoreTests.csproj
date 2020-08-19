@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="UnitTests\InOutKeyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTests\ParserBaseTests.cs" />
     <Compile Include="UnitTests\WorkersContainerTests.cs" />
   </ItemGroup>
   <ItemGroup>
