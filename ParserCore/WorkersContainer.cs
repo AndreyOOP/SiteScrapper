@@ -8,6 +8,7 @@ namespace ParserCore
     //   add single worker registration - ?
     //   add cycles check during registration
     //   add Register implementation, atm not required
+    //   add String representation of current workers graph
     public class WorkersContainer : IWorkersContainer
     {
         private List<IInOutKey> last = new List<IInOutKey>();
@@ -22,23 +23,10 @@ namespace ParserCore
             this.workers = workers;
             last = GetLastWorkers();
         }
-
         
         public void Register(IEnumerable<object> workers)
         {
-            // type check
-
-            // build graph
-
-            last = GetLastWorkers();
-
             throw new NotImplementedException();
-        }
-
-        public IEnumerable<KeyToWorker> Get(Type typeIn)
-        {
-            return workers.Where(w => w.Key.InType == typeIn)
-                          .Select(x => new KeyToWorker { Key = x.Key, Worker = x.Value });
         }
 
         private List<IInOutKey> GetLastWorkers()
@@ -50,13 +38,10 @@ namespace ParserCore
                                .ToList();
         }
 
-        // ToDo: 
-        /// <summary>
-        /// String representation of current workers graph
-        /// </summary>
-        public override string ToString()
+        public IEnumerable<object> GetWorkers(Type typeIn)
         {
-            return base.ToString();
+            return workers.Where(w => w.Key.InType == typeIn)
+                          .Select(w => w.Value);
         }
     }
 }
