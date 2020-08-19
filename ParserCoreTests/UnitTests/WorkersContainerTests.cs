@@ -96,7 +96,7 @@ namespace UnitTests.WorkersContainerUnitTest
             };
             var container = new WorkersContainer(graph);
 
-            var result = container.Get(inType);
+            var result = container.GetWorkers(inType);
 
             Assert.AreEqual(expectedQty, result.Count());
         }

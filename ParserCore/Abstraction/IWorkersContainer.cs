@@ -17,9 +17,9 @@ namespace ParserCore
         IEnumerable<IInOutKey> Last { get; }
 
         /// <summary>
-        /// Get list of Workers<TIn, TOut> with their key where <param name="typeIn"> is equal to TIn
+        /// Get list of Workers<TIn, TOut> by their TIn type
         /// </summary>
-        /// <param name="typeIn">Input model type</param>
-        IEnumerable<KeyToWorker> Get(Type typeIn);
+        /// <param name="typeIn">Input model type euals to Workers TIn</param>
+        IEnumerable<object> GetWorkers(Type typeIn);
     }
 }

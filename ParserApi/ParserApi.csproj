@@ -163,12 +163,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SiteParsingHelper\ParserCoreProject.csproj">
-      <Project>{96568495-A61D-4DEC-BB73-BA492767C5A8}</Project>
-      <Name>ParserCoreProject</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
