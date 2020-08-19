@@ -45,7 +45,20 @@ namespace ParserCore
                                        .Where(worker => (bool)worker.InvokeMethod(IsExecutableMethod, inType))
                                        .Select(worker => worker.InvokeMethod(ParseMethod, inType))
             );
-            
+            // Below is easier to debug
+            //var outTypes = new List<object>();
+            //foreach (var inType in inTypes)
+            //{
+            //    foreach(var worker in workersContainer.GetWorkers(inType.GetType()))
+            //    {
+            //        if((bool)worker.InvokeMethod(IsExecutableMethod, inType))
+            //        {
+            //            var outType = worker.InvokeMethod(ParseMethod, inType);
+            //            outTypes.Add(outType);
+            //        }
+            //    }
+            //}
+
             var splitted = SplitToFinalTypesAndInput(outTypes);
            
             result = result.Concat(splitted.FinalTypes);
