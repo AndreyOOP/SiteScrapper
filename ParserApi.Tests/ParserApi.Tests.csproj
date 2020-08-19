@@ -128,12 +128,6 @@
   <ItemGroup>
     <Folder Include="UnitTests\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SiteParsingHelper\ParserCoreProject.csproj">
-      <Project>{96568495-a61d-4dec-bb73-ba492767c5a8}</Project>
-      <Name>ParserCoreProject</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
