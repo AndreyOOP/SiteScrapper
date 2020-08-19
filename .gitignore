@@ -21,3 +21,8 @@
 /ParserCore/obj/Debug
 /ParserCoreTests/bin/Debug
 /ParserCoreTests/obj/Debug
+/ParserApi/obj/Release
+/ParserCore/bin/Release
+/ParserCore/obj/Release
+/ParserCoreTests/obj/Release
+/ParserApi.Tests/obj/Release

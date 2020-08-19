@@ -150,6 +150,20 @@
     <Compile Include="Parsers\Site911EventBusPrototype\WorkUnits\B_ParseHtml.cs" />
     <Compile Include="Parsers\Site911EventBusPrototype\WorkUnits\C_RequestPartDetails.cs" />
     <Compile Include="Parsers\Site911EventBusPrototype\WorkUnits\D_ParseHtmlPartDetails.cs" />
+    <Compile Include="Parsers\Site911ParserCore\Models\HtmlQueryResult4.cs" />
+    <Compile Include="Parsers\Site911ParserCore\Models\HtmlSearchResult2.cs" />
+    <Compile Include="Parsers\Site911ParserCore\Models\In.cs" />
+    <Compile Include="Parsers\Site911ParserCore\Models\OutModelName3.cs" />
+    <Compile Include="Parsers\Site911ParserCore\Models\OutTable5.cs" />
+    <Compile Include="Parsers\Site911ParserCore\Models\Result.cs" />
+    <Compile Include="Parsers\Site911ParserCore\Models\StringQuery3.cs" />
+    <Compile Include="Parsers\Site911ParserCore\Site911Parser.cs" />
+    <Compile Include="Parsers\Site911ParserCore\Workers\WorkerBase.cs" />
+    <Compile Include="Parsers\Site911ParserCore\Workers\HtmlQueryResultToOutTable.cs" />
+    <Compile Include="Parsers\Site911ParserCore\Workers\HtmlSearchResultToOutModelName.cs" />
+    <Compile Include="Parsers\Site911ParserCore\Workers\HtmlSearchResultToStringQuery.cs" />
+    <Compile Include="Parsers\Site911ParserCore\Workers\InToHtmlSearchResult.cs" />
+    <Compile Include="Parsers\Site911ParserCore\Workers\StringQueryToHtmlQueryResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +178,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ParserCore\ParserCore.csproj">
+      <Project>{933A95E9-6C87-4AC5-932A-34F0D4C6EBB3}</Project>
+      <Name>ParserCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
