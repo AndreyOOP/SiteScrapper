@@ -44,6 +44,9 @@
     <Compile Include="Abstraction\IInOutKey.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Abstraction\IParser.cs" />
+    <Compile Include="Extensions\ListExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="FinalTypesAndInput.cs" />
     <Compile Include="Mappings\KeyToWorker.cs" />
     <Compile Include="Mappings\TypeToModel.cs" />
     <Compile Include="Mappings\InOutKey.cs" />

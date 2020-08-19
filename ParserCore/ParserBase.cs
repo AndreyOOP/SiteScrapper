@@ -1,5 +1,4 @@
 ﻿using ParserCore.Extensions;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,12 +10,15 @@ namespace ParserCore
     /// </summary>
     public class ParserBase<TIn, TParsingResult> : IParser<TIn, TParsingResult>
     {
+        private const string IsExecutableMethod = nameof(IWorker<object, object>.IsExecutable);
+        private const string ParseMethod = nameof(IWorker<object, object>.Parse);
+
         private readonly IWorkersContainer workersContainer;
 
         /// <summary>
         /// During parsing any partial result stored here, after all final result gathererd together in PrepareResult
         /// </summary>
-        protected Dictionary<Type, object> resultMain = new Dictionary<Type, object>();
+        protected IEnumerable<object> result = new List<object>();
 
         public ParserBase(IWorkersContainer workersContainer)
         {
@@ -26,49 +28,49 @@ namespace ParserCore
         /// <inheritdoc/>
         public TParsingResult Parse(TIn model)
         {
-            GetNext(new[] {
-                new TypeToModel { Type = typeof(TIn), Model = model }
-            });
+            GetFinalTOutModels(new object[] { model });
 
             return PrepareResult();
         }
 
-        protected void GetNext(IEnumerable<TypeToModel> models)
+        /// <summary>
+        /// Find workers based on TIn model types - execute them, if it is last worker add TOut models to result, otherwise find next workers & execute them - repeat it recursively
+        /// </summary>
+        /// <param name="tInTypes">TIn models for which Workers<TIn, TOut> will be executed</param>
+        protected void GetFinalTOutModels(IEnumerable<object> inTypes)
         {
-            var result = new List<TypeToModel>();
+            var outTypes = inTypes.SelectMany
+            (
+                inType => workersContainer.GetWorkers(inType.GetType())
+                                       .Where(worker => (bool)worker.InvokeMethod(IsExecutableMethod, inType))
+                                       .Select(worker => worker.InvokeMethod(ParseMethod, inType))
+            );
+            
+            var splitted = SplitToFinalTypesAndInput(outTypes);
+           
+            result = result.Concat(splitted.FinalTypes);
 
-            foreach (var model in models)
+            if (splitted.InputTypes.Count() > 0)
             {
-                var workers = workersContainer.Get(model.Type);
-
-                foreach (var worker in workers)
-                {
-                    var mi1 = worker.Worker.GetType().GetMethod("ToExecute");
-                    if (!(bool)mi1.Invoke(worker.Worker, new object[] { model.Model }))
-                        continue;
-
-                    var methodInfo = worker.Worker.GetType().GetMethod("Parse"); //nameof(IWorkerBase.Parse)
-                    var outModel = methodInfo.Invoke(worker.Worker, new object[] { model.Model });
-
-                    result.Add(new TypeToModel
-                    {
-                        Type = worker.Key.OutType,
-                        Model = outModel
-                    });
-                }
+                GetFinalTOutModels(splitted.InputTypes);
             }
+        }
 
-            var last = result.Where(r => workersContainer.Last.Any(x => x.OutType == r.Type)).ToDictionary(k => k.Type, v => v.Model);
-            resultMain = resultMain.Concat(last).ToDictionary(k => k.Key, v => v.Value);
+        protected FinalAndInputTypes SplitToFinalTypesAndInput(IEnumerable<object> outTypes)
+        {
+            var groups = outTypes.GroupBy(outType => workersContainer.Last.Any(w => w.OutType == outType.GetType()));
 
-            var next = result.Where(r => workersContainer.Last.All(x => x.OutType != r.Type));
-            if (next.Count() > 0)
-                GetNext(next);
+            return new FinalAndInputTypes
+            {
+                FinalTypes = groups.FirstOrDefault(group => group.Key)?.ToList() ?? new List<object>(),
+                InputTypes = groups.FirstOrDefault(group => !group.Key)?.ToList() ?? new List<object>()
+            };
         }
 
         /// <summary>
         /// By default just try to get result as <see cref="TParsingResult"/> type
         /// </summary>
-        protected virtual TParsingResult PrepareResult() => resultMain.Get<TParsingResult>();
+        protected virtual TParsingResult PrepareResult() => result.Get<TParsingResult>();
     }
+
 }

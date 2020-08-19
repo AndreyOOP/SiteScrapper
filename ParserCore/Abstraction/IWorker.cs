@@ -13,6 +13,6 @@
         /// <summary>
         /// Check if it is possible (is it has) to execute convertion of TIn to TOut models
         /// </summary>
-        bool ToExecute(TIn model);
+        bool IsExecutable(TIn model);
     }
 }
