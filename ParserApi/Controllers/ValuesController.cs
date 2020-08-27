@@ -1,9 +1,9 @@
 ﻿using HtmlAgilityPack;
-using ParserApi.Parsers.Site911Demo.Models;
-using ParserApi.Parsers.Site911Demo.WorkUnits;
-using ParserApi.Parsers.Site911EventBusPrototype.Models;
-using ParserApi.Parsers.Site911EventBusPrototype.WorkUnits;
-//using ParserCoreProject.ParserCore;
+using ParserApi.Parsers.Site911ParserCore;
+using ParserApi.Parsers.Site911ParserCore.Models;
+using ParserApi.Parsers.Site911ParserCore.Workers;
+using ParserCore;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Http;
 
@@ -12,42 +12,28 @@ namespace ParserApi.Controllers
     public class ValuesController : ApiController
     {
         [HttpGet]
-        [Route("api/event/{id}")]
-        public Site911ParsingResult GetEventBusImplementation([FromUri]string id)
-        {
-            //var httpClient = new HttpClient();
-            //var parser = new ParserCoreProject.ParserCore.WebParser<Site911ParsingResult>();
-
-            //parser.RegisterUnit<A_SearchModelByIdRequestInput, A_SearchModelByIdRequestOutput>(new A_SearchModelByIdRequest(parser, httpClient));
-            //parser.RegisterUnit<A_SearchModelByIdRequestOutput, B_ParseHtmlOutput>(new B_ParseHtml(parser, new HtmlDocument()));
-            //parser.RegisterUnit<B_ParseHtmlOutput, C_QueryResultOutput>(new C_RequestPartDetails(parser, httpClient));
-            //parser.RegisterUnit<C_QueryResultOutput, Site911ParsingResult>(new D_ParseHtmlPartDetails(parser, new HtmlDocument()));
-
-            //parser.ExecuteUnit<A_SearchModelByIdRequestInput, A_SearchModelByIdRequestOutput>(new A_SearchModelByIdRequestInput { Id = id });
-
-            //return parser.Result;
-            return null;
-        }
-
-        [HttpGet]
         [Route("api/core/{id}")]
-        public Result5 GetResultParserCore([FromUri]string id)
+        public Result GetResultParserCore([FromUri]string id)
         {
-            //var httpClient = new HttpClient();
+            //var httpClient = new HttpClient(); // problem with the same Html client - no content
+            var parsingGraph = new Dictionary<IInOutKey, object>
+            {
+                [new InOutKey<In, HtmlSearchResult2>()] = new InToHtmlSearchResult(new HttpClient()),
+                [new InOutKey<HtmlSearchResult2, StringQuery3>()] = new HtmlSearchResultToStringQuery(new HtmlDocument()),
+                [new InOutKey<HtmlSearchResult2, OutModelName3>()] = new HtmlSearchResultToOutModelName(new HtmlDocument()),
+                [new InOutKey<StringQuery3, HtmlQueryResult4>()] = new StringQueryToHtmlQueryResult(new HttpClient()),
+                [new InOutKey<HtmlQueryResult4, OutTable5>()] = new HtmlQueryResultToOutTable(new HtmlDocument()),
+            };
+            var workersContainer = new WorkersContainer(parsingGraph);
+            var parser = new Site911Parser(workersContainer);
 
-            //var workersContainer = new WorkersContainer<In1, Html2>();
-            //var workerPreprocessorsContainer = new WorkerPreprocessorsContainer();
-            //var workerSharedServices = new WorkerSharedServices<In1, Html2, Result5>(workersContainer, workerPreprocessorsContainer, new Result5());
+            var inModel = new In 
+            {
+                Id = id
+            };
+            var result = parser.Parse(inModel);
 
-            //workersContainer.Add(new Step1(workerSharedServices, httpClient));
-            //workersContainer.Add(new Step2(workerSharedServices, new HtmlDocument()));
-            //workersContainer.Add(new Step3(workerSharedServices, httpClient));
-            //workersContainer.Add(new Step4(workerSharedServices, new HtmlDocument()));
-
-            //workersContainer.GetFirst().ParseAndExecuteNext(new In1 { Id = id });
-
-            //return workerSharedServices.Result;
-            return null;
+            return result;
         }
     }
 }
