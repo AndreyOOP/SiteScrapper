@@ -8,11 +8,11 @@ namespace ParserCore
     /// </summary>
     public class InMemoryWorkerLogger : ILogger<WorkerLogRecord>
     {
-        public List<WorkerLogRecord> records { get; private set; } = new List<WorkerLogRecord>();
+        public List<WorkerLogRecord> Records { get; private set; } = new List<WorkerLogRecord>();
 
         public void Log(WorkerLogRecord record)
         {
-            records.Add(record);
+            Records.Add(record);
         }
     }
 }
