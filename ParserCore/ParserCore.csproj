@@ -42,7 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstraction\IInOutKey.cs" />
+    <Compile Include="Abstraction\ILogger.cs" />
+    <Compile Include="InMemoryWorkerLogger.cs" />
     <Compile Include="Abstraction\IParser.cs" />
+    <Compile Include="Models\WorkerLogRecord.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Models\FinalTypesAndInput.cs" />
