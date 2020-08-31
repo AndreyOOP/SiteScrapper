@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace ParserApi.Controllers
 {
-    public class ValuesController : ApiController
+    public class ParsingController : ApiController
     {
         [HttpGet]
         [Route("api/core/{id}")]
