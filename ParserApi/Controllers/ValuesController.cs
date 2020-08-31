@@ -15,11 +15,13 @@ namespace ParserApi.Controllers
         [Route("api/core/{id}")]
         public Result GetResultParserCore([FromUri]string id)
         {
-            //var httpClient = new HttpClient(); // problem with the same Html client - no content
+            var defaultSettings = new DefaultSettings();
+            var memoryLogger = new InMemoryWorkerLogger();
+
             var parsingGraph = new Dictionary<IInOutKey, object>
             {
-                [new InOutKey<In, HtmlSearchResult2>()] = new InToHtmlSearchResult(new HttpClient()),
-                [new InOutKey<HtmlSearchResult2, StringQuery3>()] = new HtmlSearchResultToStringQuery(new HtmlDocument()),
+                [new InOutKey<In, HtmlSearchResult2>()] = new LoggingWorker<In, HtmlSearchResult2>(new InToHtmlSearchResult(new HttpClient()), memoryLogger, defaultSettings),
+                [new InOutKey<HtmlSearchResult2, StringQuery3>()] = new LoggingWorker<HtmlSearchResult2, StringQuery3>(new HtmlSearchResultToStringQuery(new HtmlDocument()), memoryLogger, defaultSettings),
                 [new InOutKey<HtmlSearchResult2, OutModelName3>()] = new HtmlSearchResultToOutModelName(new HtmlDocument()),
                 [new InOutKey<StringQuery3, HtmlQueryResult4>()] = new StringQueryToHtmlQueryResult(new HttpClient()),
                 [new InOutKey<HtmlQueryResult4, OutTable5>()] = new HtmlQueryResultToOutTable(new HtmlDocument()),
@@ -32,6 +34,8 @@ namespace ParserApi.Controllers
                 Id = id
             };
             var result = parser.Parse(inModel);
+
+            result.logger = memoryLogger;
 
             return result;
         }
