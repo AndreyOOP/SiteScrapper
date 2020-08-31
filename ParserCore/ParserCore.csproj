@@ -47,6 +47,8 @@
     <Compile Include="Abstraction\ISettings.cs" />
     <Compile Include="Abstraction\IParser.cs" />
     <Compile Include="Models\WorkerLogRecord.cs" />
+    <Compile Include="Abstraction\WorkerLogSettings.cs" />
+    <Compile Include="LoggingWorker.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Models\FinalTypesAndInput.cs" />
