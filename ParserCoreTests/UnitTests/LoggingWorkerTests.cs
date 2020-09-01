@@ -4,7 +4,7 @@ using ParserCore.Abstraction;
 using System;
 using System.Linq;
 
-namespace ParserCoreTests.UnitTests
+namespace UnitTests.LoggingWorkerTests
 {
     #region Test Types
     class In 

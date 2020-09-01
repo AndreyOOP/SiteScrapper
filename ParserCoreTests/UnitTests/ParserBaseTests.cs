@@ -3,7 +3,7 @@ using ParserCore;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ParserCoreTests.UnitTests.ParserBase
+namespace UnitTests.ParserBase
 {
     class A { }
     class B { }
