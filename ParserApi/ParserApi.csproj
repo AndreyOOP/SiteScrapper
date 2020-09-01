@@ -128,7 +128,7 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\ParsingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -150,6 +150,7 @@
     <Compile Include="Parsers\Site911EventBusPrototype\WorkUnits\B_ParseHtml.cs" />
     <Compile Include="Parsers\Site911EventBusPrototype\WorkUnits\C_RequestPartDetails.cs" />
     <Compile Include="Parsers\Site911EventBusPrototype\WorkUnits\D_ParseHtmlPartDetails.cs" />
+    <Compile Include="Parsers\Site911ParserCore\Models\DefaultSettings.cs" />
     <Compile Include="Parsers\Site911ParserCore\Models\HtmlQueryResult4.cs" />
     <Compile Include="Parsers\Site911ParserCore\Models\HtmlSearchResult2.cs" />
     <Compile Include="Parsers\Site911ParserCore\Models\In.cs" />
