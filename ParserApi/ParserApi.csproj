@@ -169,6 +169,7 @@
     <Compile Include="Parsers\Site911\Models\HtmlStep1.cs" />
     <Compile Include="Parsers\Site911\Models\InMod.cs" />
     <Compile Include="Parsers\Site911\Models\PrimaryResultStep2.cs" />
+    <Compile Include="Parsers\Site911\Models\QueryStringStep2.cs" />
     <Compile Include="Parsers\Site911\Site911WorkerBase.cs" />
     <Compile Include="Parsers\Site911\WorkUnits\HtmlStep1ToPrimaryResultStep2.cs" />
     <Compile Include="Parsers\Site911\WorkUnits\InToHtmlStep1.cs" />
