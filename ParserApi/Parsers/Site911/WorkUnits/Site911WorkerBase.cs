@@ -1,7 +1,7 @@
 ﻿using ParserCore;
 using System;
 
-namespace ParserApi.Parsers.Site911
+namespace ParserApi.Parsers.Site911.WorkUnits
 {
     public abstract class Site911WorkerBase<TIn, TOut> : IWorker<TIn, TOut>
     {
