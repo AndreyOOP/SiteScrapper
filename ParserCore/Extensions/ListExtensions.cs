@@ -12,6 +12,6 @@ namespace ParserCore.Extensions
         /// <param name="list">List of objects</param>
         /// <returns>First object of the specified type</returns>
         public static T Get<T>(this IEnumerable<object> list)
-            => (T)list.First(i => i.GetType() == typeof(T));
+            => (T)list.FirstOrDefault(i => i.GetType() == typeof(T));
     }
 }
