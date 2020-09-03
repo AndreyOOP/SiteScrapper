@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 
-namespace ParserApi.FeatureTest
+namespace FeatureTest
 {
     /// <summary>
     /// Samples how to use HttpClient

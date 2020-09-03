@@ -15,7 +15,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 // store usefull things, classify later
-namespace ParserApi.Tests.FeatureTest
+namespace FeatureTest
 {
     // Work with Path
     public static class StringExtensions

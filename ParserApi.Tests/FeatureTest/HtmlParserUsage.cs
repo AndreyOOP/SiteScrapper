@@ -4,9 +4,9 @@ using System;
 using System.IO;
 using System.Reflection;
 
-namespace ParserApi.Tests.FeatureTest
+namespace FeatureTest
 {
-    [TestClass]
+    //[TestClass]
     public class HtmlParserUsage
     {
         //private HtmlDocument htmlDoc;
