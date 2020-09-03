@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ParserApi.Parsers.Site911.Models;
 
-namespace ParserApi.UnitTests
+namespace UnitTests
 {
     [TestClass]
     public class QueryStringStep2Tests

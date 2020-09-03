@@ -105,13 +105,17 @@
     <Compile Include="FeatureTest\HtmlParserUsage.cs" />
     <Compile Include="FeatureTest\WebRequests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTests\Site911\HtmlStep1ToPrimaryResultStep2Tests.cs" />
+    <Compile Include="UnitTests\Site911\HtmlStep1ToQueryStringStep2Tests.cs" />
     <Compile Include="UnitTests\Site911\QueryStringStep2Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="UnitTests\Site911\TestFiles\PrimaryTableExists.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="UnitTests\Site911\TestFiles\Schema.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
