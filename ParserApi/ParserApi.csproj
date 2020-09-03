@@ -166,6 +166,7 @@
     <Compile Include="Parsers\Site911ParserCore\Workers\HtmlSearchResultToStringQuery.cs" />
     <Compile Include="Parsers\Site911ParserCore\Workers\InToHtmlSearchResult.cs" />
     <Compile Include="Parsers\Site911ParserCore\Workers\StringQueryToHtmlQueryResult.cs" />
+    <Compile Include="Parsers\Site911\Site911WorkerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.Designer.cs">
       <AutoGen>True</AutoGen>
