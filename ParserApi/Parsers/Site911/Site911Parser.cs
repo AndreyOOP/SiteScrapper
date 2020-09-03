@@ -4,7 +4,7 @@ using ParserCore.Extensions;
 
 namespace ParserApi.Parsers.Site911ParserCore
 {
-    public class Site911Parser : ParserBase<InMod, Result>
+    public class Site911Parser : ParserBase<In, Result>
     {
         public Site911Parser(IWorkersContainer workersContainer) : base(workersContainer)
         {

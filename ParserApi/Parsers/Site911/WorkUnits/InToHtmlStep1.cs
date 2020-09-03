@@ -5,7 +5,7 @@ using System.Net.Http;
 
 namespace ParserApi.Parsers.Site911.WorkUnits
 {
-    public class InToHtmlStep1 : Site911WorkerBase<InMod, HtmlStep1>
+    public class InToHtmlStep1 : Site911WorkerBase<In, HtmlStep1>
     {
         private readonly HttpClient httpClient;
 
@@ -14,7 +14,7 @@ namespace ParserApi.Parsers.Site911.WorkUnits
             this.httpClient = httpClient;
         }
 
-        public override HtmlStep1 Parse(InMod model)
+        public override HtmlStep1 Parse(In model)
         {
             var searchUri = new Uri(Site911Base, $"/search/{model.Id}");
             var response = httpClient.GetAsync(searchUri).Result;

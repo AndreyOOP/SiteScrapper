@@ -150,7 +150,7 @@
     <Compile Include="Parsers\Site911ParserCore\Workers\StringQueryToHtmlQueryResult.cs" />
     <Compile Include="Parsers\Site911\Models\HtmlStep1.cs" />
     <Compile Include="Parsers\Site911\Models\HtmlStep3.cs" />
-    <Compile Include="Parsers\Site911\Models\InMod.cs" />
+    <Compile Include="Parsers\Site911\Models\In.cs" />
     <Compile Include="Parsers\Site911\Models\PrimaryResultStep2.cs" />
     <Compile Include="Parsers\Site911\Models\QueryStringStep2.cs" />
     <Compile Include="Parsers\Site911\Models\Result.cs" />

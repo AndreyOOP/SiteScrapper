@@ -1,6 +1,6 @@
 ﻿namespace ParserApi.Parsers.Site911.Models
 {
-    public class InMod
+    public class In
     {
         public string Id { get; set; }
     }
