@@ -101,24 +101,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FeatureTest\Backup.cs" />
     <Compile Include="FeatureTest\HtmlParserUsage.cs" />
     <Compile Include="FeatureTest\WebRequests.cs" />
-    <Compile Include="MockedDataAcceptanceTests\Site911\WorkUnits\A0httpRequestTests.cs" />
-    <Compile Include="MockedDataAcceptanceTests\Site911\WorkUnits\B0parseHtmlTest.cs" />
-    <Compile Include="MockedDataAcceptanceTests\Site911\WorkUnits\D0parseHtmlPartDetailsTests.cs" />
-    <Compile Include="Mocks\HttpMessageHandlerMock.cs" />
-    <Compile Include="Mocks\StringExtensions.cs" />
-    <Compile Include="RealDataAcceptanceTests\911Site\WorkUnits\A0httpRequestTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ControllersTemp\ValuesControllerTest.cs" />
-    <Compile Include="RealDataAcceptanceTests\911Site\WorkUnits\C0httpRequestPartDetailsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
-    <Content Include="MockedDataAcceptanceTests\Data\A0httpResponse.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MockedDataAcceptanceTests\Data\C0httpsResponse.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -126,7 +117,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UnitTests\" />
+  <ItemGroup>
+    <Folder Include="AcceptanceTests\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
