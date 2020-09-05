@@ -139,6 +139,7 @@
     <Compile Include="Parsers\Site911\Models\PrimaryResultStep2.cs" />
     <Compile Include="Parsers\Site911\Models\QueryStringStep2.cs" />
     <Compile Include="Parsers\Site911\Models\Result.cs" />
+    <Compile Include="Parsers\Site911\Models\LoggerSettings.cs" />
     <Compile Include="Parsers\Site911\Site911Parser.cs" />
     <Compile Include="Parsers\Site911\WorkUnits\Site911WorkerBase.cs" />
     <Compile Include="Parsers\Site911\WorkUnits\HtmlStep1ToPrimaryResultStep2.cs" />
