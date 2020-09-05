@@ -14,7 +14,8 @@ namespace ParserApi.Parsers.Site911ParserCore
         {
             return new Result
             {
-                Res = result.Get<PrimaryResultStep2>()
+                Primary = result.Get<PrimaryResultStep2>(),
+                Secondary = result.Get<SecondaryResultStep4>()
             };
         }
     }
