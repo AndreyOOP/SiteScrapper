@@ -133,21 +133,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Parsers\Site911ParserCore\Models\DefaultSettings.cs" />
-    <Compile Include="Parsers\Site911ParserCore\Models\HtmlQueryResult4.cs" />
-    <Compile Include="Parsers\Site911ParserCore\Models\HtmlSearchResult2.cs" />
-    <Compile Include="Parsers\Site911ParserCore\Models\In.cs" />
-    <Compile Include="Parsers\Site911ParserCore\Models\OutModelName3.cs" />
-    <Compile Include="Parsers\Site911ParserCore\Models\OutTable5.cs" />
-    <Compile Include="Parsers\Site911ParserCore\Models\Result.cs" />
-    <Compile Include="Parsers\Site911ParserCore\Models\StringQuery3.cs" />
-    <Compile Include="Parsers\Site911ParserCore\Site911Parser.cs" />
-    <Compile Include="Parsers\Site911ParserCore\Workers\WorkerBase.cs" />
-    <Compile Include="Parsers\Site911ParserCore\Workers\HtmlQueryResultToOutTable.cs" />
-    <Compile Include="Parsers\Site911ParserCore\Workers\HtmlSearchResultToOutModelName.cs" />
-    <Compile Include="Parsers\Site911ParserCore\Workers\HtmlSearchResultToStringQuery.cs" />
-    <Compile Include="Parsers\Site911ParserCore\Workers\InToHtmlSearchResult.cs" />
-    <Compile Include="Parsers\Site911ParserCore\Workers\StringQueryToHtmlQueryResult.cs" />
     <Compile Include="Parsers\Site911\Models\HtmlStep1.cs" />
     <Compile Include="Parsers\Site911\Models\HtmlStep3.cs" />
     <Compile Include="Parsers\Site911\Models\In.cs" />
