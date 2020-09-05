@@ -102,5 +102,20 @@ namespace FeatureTest
             Assert.IsTrue(res);
         }
     }
-    
+
+    // simplified Html node creation
+    public static class HtmlExtensions
+    {
+        public static HtmlNode Create(this HtmlDocument htmlDoc, string name, Dictionary<string, string> attr)
+        {
+            var child = htmlDoc.CreateElement(name);
+
+            foreach (var i in attr)
+            {
+                child.Attributes.Add(i.Key, i.Value);
+            }
+            return child;
+        }
+    }
+
 }
