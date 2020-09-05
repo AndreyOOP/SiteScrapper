@@ -1,9 +1,9 @@
-﻿using HtmlAgilityPack;
+﻿using ParserApi.Parsers.Site911.Models;
+using ParserApi.Parsers.Site911.WorkUnits;
 using ParserApi.Parsers.Site911ParserCore;
-using ParserApi.Parsers.Site911ParserCore.Models;
-using ParserApi.Parsers.Site911ParserCore.Workers;
 using ParserCore;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
@@ -12,31 +12,40 @@ namespace ParserApi.Controllers
     public class ParsingController : ApiController
     {
         [HttpGet]
-        [Route("api/core/{id}")]
-        public Result GetResultParserCore([FromUri]string id)
+        [Route("api/parse/{sparePartId}")]
+        public object ParseSingleModel([FromUri]string sparePartId)
         {
-            var defaultSettings = new DefaultSettings();
+            var parseSettings = new ExceptionLoggerSettings();
             var memoryLogger = new InMemoryWorkerLogger();
 
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            
             var parsingGraph = new Dictionary<IInOutKey, object>
             {
-                [new InOutKey<In, HtmlSearchResult2>()] = new LoggingWorker<In, HtmlSearchResult2>(new InToHtmlSearchResult(new HttpClient()), memoryLogger, defaultSettings),
-                [new InOutKey<HtmlSearchResult2, StringQuery3>()] = new LoggingWorker<HtmlSearchResult2, StringQuery3>(new HtmlSearchResultToStringQuery(new HtmlDocument()), memoryLogger, defaultSettings),
-                [new InOutKey<HtmlSearchResult2, OutModelName3>()] = new HtmlSearchResultToOutModelName(new HtmlDocument()),
-                [new InOutKey<StringQuery3, HtmlQueryResult4>()] = new StringQueryToHtmlQueryResult(new HttpClient()),
-                [new InOutKey<HtmlQueryResult4, OutTable5>()] = new HtmlQueryResultToOutTable(new HtmlDocument()),
+                [new InOutKey<In, HtmlStep1>()] = new LoggingWorker<In, HtmlStep1>(new InToHtmlStep1(new HttpClient()), memoryLogger, parseSettings),
+                [new InOutKey<HtmlStep1, PrimaryResultStep2>()] = new LoggingWorker<HtmlStep1, PrimaryResultStep2>(new HtmlStep1ToPrimaryResultStep2(), memoryLogger, parseSettings),
+                [new InOutKey<HtmlStep1, QueryStringStep2>()] = new LoggingWorker<HtmlStep1, QueryStringStep2>(new HtmlStep1ToQueryStringStep2(), memoryLogger, parseSettings),
+                [new InOutKey<QueryStringStep2, HtmlStep3>()] = new LoggingWorker<QueryStringStep2, HtmlStep3>(new QueryStringStep2ToHtmlStep3(new HttpClient()), memoryLogger, parseSettings),
+                [new InOutKey<HtmlStep3, SecondaryResultStep4>()] = new LoggingWorker<HtmlStep3, SecondaryResultStep4>(new HtmlStep3ToSecondaryResultStep4(), memoryLogger, parseSettings),
             };
             var workersContainer = new WorkersContainer(parsingGraph);
             var parser = new Site911Parser(workersContainer);
 
-            var inModel = new In 
+            var inModel = new In
             {
-                Id = id
+                Id = sparePartId
             };
-            var result = parser.Parse(inModel);
 
-            result.logger = memoryLogger;
-
+            var result = new Result();
+            try
+            {
+                result = parser.Parse(inModel);
+                
+            }
+            catch (System.Exception)
+            {
+            }
+            result.Log = memoryLogger.Records;
             return result;
         }
     }

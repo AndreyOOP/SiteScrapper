@@ -101,33 +101,39 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcceptanceTests\Site911\ParseSingleModel.cs" />
+    <Compile Include="FeatureTest\Backup.cs" />
     <Compile Include="FeatureTest\HtmlParserUsage.cs" />
     <Compile Include="FeatureTest\WebRequests.cs" />
-    <Compile Include="MockedDataAcceptanceTests\Site911\WorkUnits\A0httpRequestTests.cs" />
-    <Compile Include="MockedDataAcceptanceTests\Site911\WorkUnits\B0parseHtmlTest.cs" />
-    <Compile Include="MockedDataAcceptanceTests\Site911\WorkUnits\D0parseHtmlPartDetailsTests.cs" />
-    <Compile Include="Mocks\HttpMessageHandlerMock.cs" />
-    <Compile Include="Mocks\StringExtensions.cs" />
-    <Compile Include="RealDataAcceptanceTests\911Site\WorkUnits\A0httpRequestTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ControllersTemp\ValuesControllerTest.cs" />
-    <Compile Include="RealDataAcceptanceTests\911Site\WorkUnits\C0httpRequestPartDetailsTest.cs" />
+    <Compile Include="UnitTests\Extensions\HtmlNodeExtensionsTests.cs" />
+    <Compile Include="UnitTests\Site911\HtmlStep1ToPrimaryResultStep2Tests.cs" />
+    <Compile Include="UnitTests\Site911\HtmlStep1ToQueryStringStep2Tests.cs" />
+    <Compile Include="UnitTests\Site911\HtmlStep3ToSecondaryResultStep4Tests.cs" />
+    <Compile Include="UnitTests\Site911\QueryStringStep2Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
-    <Content Include="MockedDataAcceptanceTests\Data\A0httpResponse.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="UnitTests\Site911\TestFiles\PrimaryTableExists.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="MockedDataAcceptanceTests\Data\C0httpsResponse.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="UnitTests\Site911\TestFiles\Schema.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="UnitTests\Site911\TestFiles\SecondaryTable.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UnitTests\" />
+    <ProjectReference Include="..\ParserApi\ParserApi.csproj">
+      <Project>{3F15C70E-833D-4D16-8225-1837677591DE}</Project>
+      <Name>ParserApi</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
