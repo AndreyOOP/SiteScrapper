@@ -2,6 +2,7 @@
 using ParserApi.Parsers.Site911.WorkUnits;
 using ParserApi.Parsers.Site911ParserCore;
 using ParserCore;
+using ParserCore.Abstraction;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -11,14 +12,21 @@ namespace ParserApi.Controllers
 {
     public class ParsingController : ApiController
     {
+        private WorkerLogSettings parseSettings;
+        private ILogger<WorkerLogRecord> memoryLogger;
+
+        public ParsingController(WorkerLogSettings workerLogSettings, ILogger<WorkerLogRecord> logger)
+        {
+            parseSettings = workerLogSettings;
+            memoryLogger = logger;
+
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+        }
+
         [HttpGet]
         [Route("api/parse/{sparePartId}")]
         public object ParseSingleModel([FromUri]string sparePartId)
         {
-            var parseSettings = new ExceptionLoggerSettings();
-            var memoryLogger = new InMemoryWorkerLogger();
-
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
             
             var parsingGraph = new Dictionary<IInOutKey, object>
             {
@@ -45,7 +53,7 @@ namespace ParserApi.Controllers
             catch (System.Exception)
             {
             }
-            result.Log = memoryLogger.Records;
+            result.Log = ((InMemoryWorkerLogger)memoryLogger).Records; // to fix
             return result;
         }
     }

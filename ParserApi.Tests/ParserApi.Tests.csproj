@@ -132,6 +132,10 @@
       <Project>{3F15C70E-833D-4D16-8225-1837677591DE}</Project>
       <Name>ParserApi</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ParserCore\ParserCore.csproj">
+      <Project>{933A95E9-6C87-4AC5-932A-34F0D4C6EBB3}</Project>
+      <Name>ParserCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
