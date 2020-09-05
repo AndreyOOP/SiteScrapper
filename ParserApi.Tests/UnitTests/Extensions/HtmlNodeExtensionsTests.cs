@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ParserApi.Exceptions;
 using ParserApi.Extensions;
 
-namespace ParserApi.Tests.UnitTests.Extensions
+namespace UnitTests
 {
     [TestClass]
     public class HtmlNodeExtensionsTests

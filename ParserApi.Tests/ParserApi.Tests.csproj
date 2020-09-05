@@ -101,6 +101,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcceptanceTests\Site911\ParseSingleModel.cs" />
     <Compile Include="FeatureTest\Backup.cs" />
     <Compile Include="FeatureTest\HtmlParserUsage.cs" />
     <Compile Include="FeatureTest\WebRequests.cs" />
@@ -132,9 +133,7 @@
       <Name>ParserApi</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AcceptanceTests\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
