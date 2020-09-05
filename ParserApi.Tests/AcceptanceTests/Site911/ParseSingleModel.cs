@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ParserApi;
 using ParserApi.Controllers;
+using ParserApi.Controllers.Models;
 using ParserApi.Parsers.Site911.Models;
 using ParserApi.Parsers.Site911ParserCore;
 using ParserCore;
@@ -33,7 +34,7 @@ namespace AcceptanceTests
         {
             var controller = new ParsingController(container.Resolve<ILogger<WorkerLogRecord>>(), container.Resolve<Site911Parser>());
 
-            var result = (Result)controller.ParseSingleModel(partId);
+            var result = (Result)controller.ParseSingleModel(partId, new RequestParams());
 
             if(primaryTableExist)
                 Assert.IsNotNull(result.Primary);

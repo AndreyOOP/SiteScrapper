@@ -1,8 +1,8 @@
-﻿using ParserApi.Parsers.Site911.Models;
+﻿using ParserApi.Controllers.Models;
+using ParserApi.Parsers.Site911.Models;
 using ParserApi.Parsers.Site911ParserCore;
 using ParserCore;
 using ParserCore.Abstraction;
-using System;
 using System.Net;
 using System.Web.Http;
 
@@ -24,18 +24,24 @@ namespace ParserApi.Controllers
 
         [HttpGet]
         [Route("api/parse/{sparePartId}")]
-        public object ParseSingleModel([FromUri]string sparePartId)
+        public object ParseSingleModel([FromUri]string sparePartId, [FromBody]RequestParams @params)
         {
             var result = new Result();
+
             try
             {
                 result = site911Parser.Parse(new In { Id = sparePartId });
-                
             }
-            catch (Exception)
+            finally
             {
+                var logger = (IInMemoryWorkerLogger)memoryLogger;
+
+                if (@params.showLog)
+                    result.Log = logger.Records;
+                else
+                    result.Log = logger.ErrorRecords;
             }
-            result.Log = ((InMemoryWorkerLogger)memoryLogger).Records; // to fix
+
             return result;
         }
     }
