@@ -108,6 +108,7 @@
     <Compile Include="UnitTests\Extensions\HtmlNodeExtensionsTests.cs" />
     <Compile Include="UnitTests\Site911\HtmlStep1ToPrimaryResultStep2Tests.cs" />
     <Compile Include="UnitTests\Site911\HtmlStep1ToQueryStringStep2Tests.cs" />
+    <Compile Include="UnitTests\Site911\HtmlStep3ToSecondaryResultStep4Tests.cs" />
     <Compile Include="UnitTests\Site911\QueryStringStep2Tests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +117,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="UnitTests\Site911\TestFiles\Schema.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="UnitTests\Site911\TestFiles\SecondaryTable.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
