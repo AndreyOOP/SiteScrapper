@@ -130,6 +130,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ParsingController.cs" />
     <Compile Include="Exceptions\ParsingException.cs" />
+    <Compile Include="Extensions\HtmlNodeExtensions.cs" />
     <Compile Include="Extensions\HttpResponseMessageExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
