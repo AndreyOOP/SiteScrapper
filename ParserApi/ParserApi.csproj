@@ -151,6 +151,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ParsingController.cs" />
+    <Compile Include="Controllers\Models\RequestParams.cs" />
     <Compile Include="Exceptions\ParsingException.cs" />
     <Compile Include="Extensions\HtmlNodeExtensions.cs" />
     <Compile Include="Extensions\HttpResponseMessageExtensions.cs" />
