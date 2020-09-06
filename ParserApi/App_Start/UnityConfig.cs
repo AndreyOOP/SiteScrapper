@@ -19,7 +19,7 @@ namespace ParserApi
 			var container = new UnityContainer();
 
             container.RegisterType<WorkerLogSettings, ExceptionLoggerSettings>(new Mvc.PerRequestLifetimeManager());
-            container.RegisterType<ILogger<WorkerLogRecord>, InMemoryWorkerLogger>(new Mvc.PerRequestLifetimeManager());
+            container.RegisterType<IInMemoryWorkerLogger, InMemoryWorkerLogger>(new Mvc.PerRequestLifetimeManager());
             container.RegisterType<HttpClient>();
 
             RegisterWorkers(container);
