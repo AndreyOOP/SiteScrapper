@@ -1,6 +1,7 @@
 using ParserApi.Parsers.Site911.Models;
 using ParserApi.Parsers.Site911.WorkUnits;
 using ParserApi.Parsers.Site911ParserCore;
+using ParserApi.Services;
 using ParserCore;
 using ParserCore.Abstraction;
 using System.Collections.Generic;
@@ -18,13 +19,14 @@ namespace ParserApi
         {
 			var container = new UnityContainer();
 
-            container.RegisterType<WorkerLogSettings, ExceptionLoggerSettings>(new Mvc.PerRequestLifetimeManager());
+            container.RegisterSingleton<ILoggerSettingsProvider, LoggerSettingsProvider>();
+
+            container.RegisterFactory<WorkerLogSettings>(c => c.Resolve<ILoggerSettingsProvider>().Settings);
             container.RegisterType<IInMemoryWorkerLogger, InMemoryWorkerLogger>(new Mvc.PerRequestLifetimeManager());
             container.RegisterType<HttpClient>();
-
             RegisterWorkers(container);
             RegisterWorkersContainer(container);
-
+            
             container.RegisterType<Site911Parser>();
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);

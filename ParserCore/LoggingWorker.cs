@@ -6,7 +6,7 @@ namespace ParserCore
     /// <summary>
     /// Log decorator of <see cref="IWorker{TIn, TOut}"/>, adds log records to <see cref="ILogger{TRecord}"/> based on <see cref="WorkerLogSettings"/>
     /// </summary>
-    public class LoggingWorker<TIn, TOut> : IWorker<TIn, TOut>, ISettings<WorkerLogSettings>
+    public class LoggingWorker<TIn, TOut> : IWorker<TIn, TOut>
     {
         private WorkerLogSettings settings;
         private ILogger<WorkerLogRecord> logger;
@@ -54,11 +54,6 @@ namespace ParserCore
                 logger.Log(logRecord);
                 throw;
             }
-        }
-
-        public void UpdateSettings(WorkerLogSettings settings)
-        {
-            this.settings = settings;
         }
 
         private WorkerLogRecord AddNormalFlowFields(string methodName, object model)

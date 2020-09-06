@@ -1,7 +1,6 @@
 ﻿using ParserApi.Controllers.Models;
 using ParserApi.Parsers.Site911.Models;
 using ParserApi.Parsers.Site911ParserCore;
-using ParserCore;
 using ParserCore.Abstraction;
 using System.Net;
 using System.Web.Http;
