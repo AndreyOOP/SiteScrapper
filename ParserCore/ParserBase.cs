@@ -26,7 +26,7 @@ namespace ParserCore
         }
         
         /// <inheritdoc/>
-        public TParsingResult Parse(TIn model)
+        public virtual TParsingResult Parse(TIn model)
         {
             GetFinalTOutModels(new object[] { model });
 

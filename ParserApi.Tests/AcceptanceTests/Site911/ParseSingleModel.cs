@@ -21,7 +21,7 @@ namespace AcceptanceTests
             container = UnityConfig.RegisterComponents();
             
             // it is necessary to override types registered as PerRequestLifetimeManager because this time manager works only with http requests
-            container.RegisterType<ILogger<WorkerLogRecord>, InMemoryWorkerLogger>(TypeLifetime.Singleton); 
+            container.RegisterType<IInMemoryWorkerLogger, InMemoryWorkerLogger>(TypeLifetime.Singleton); 
             container.RegisterType<WorkerLogSettings, ExceptionLoggerSettings>(TypeLifetime.Singleton);
         }
 
