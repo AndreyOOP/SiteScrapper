@@ -32,7 +32,7 @@ namespace AcceptanceTests
         [DataRow("MD619867", false, false)]
         public void ParseSingleModel_ModelWithPrimaryAndSecondaryData(string partId, bool primaryTableExist, bool secondaryTableExist)
         {
-            var controller = new ParsingController(container.Resolve<ILogger<WorkerLogRecord>>(), container.Resolve<Site911Parser>());
+            var controller = new ParsingController(container.Resolve<IInMemoryWorkerLogger>(), container.Resolve<Site911Parser>());
 
             var result = (Result)controller.ParseSingleModel(partId, new RequestParams());
 

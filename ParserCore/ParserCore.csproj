@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="Abstraction\IInOutKey.cs" />
     <Compile Include="Abstraction\ILogger.cs" />
-    <Compile Include="Abstraction\IInMemoryWorkerLogger.cs" />
+    <Compile Include="Abstraction\IWorkerLogger.cs" />
     <Compile Include="InMemoryWorkerLogger.cs" />
     <Compile Include="Abstraction\ISettings.cs" />
     <Compile Include="Abstraction\IParser.cs" />

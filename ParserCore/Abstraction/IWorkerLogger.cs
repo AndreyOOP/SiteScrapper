@@ -2,7 +2,7 @@
 
 namespace ParserCore.Abstraction
 {
-    public interface IInMemoryWorkerLogger
+    public interface IWorkerLogger
     {
         /// <summary>
         /// Log records with exception details
@@ -13,5 +13,9 @@ namespace ParserCore.Abstraction
         /// All log records (success and with exception)
         /// </summary>
         List<WorkerLogRecord> Records { get; }
+    }
+
+    public interface IInMemoryWorkerLogger : ILogger<WorkerLogRecord>, IWorkerLogger 
+    { 
     }
 }

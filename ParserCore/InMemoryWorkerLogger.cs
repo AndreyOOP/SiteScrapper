@@ -7,7 +7,7 @@ namespace ParserCore
     /// <summary>
     /// Required to store single execution of parsers log, in case of exception it will be deserialized to output
     /// </summary>
-    public class InMemoryWorkerLogger : ILogger<WorkerLogRecord>, IInMemoryWorkerLogger
+    public class InMemoryWorkerLogger : IInMemoryWorkerLogger
     {
         public List<WorkerLogRecord> Records { get; private set; } = new List<WorkerLogRecord>();
 

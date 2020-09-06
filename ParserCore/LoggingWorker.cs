@@ -12,7 +12,7 @@ namespace ParserCore
         private ILogger<WorkerLogRecord> logger;
         private IWorker<TIn, TOut> worker;
 
-        public LoggingWorker(IWorker<TIn, TOut> worker, ILogger<WorkerLogRecord> logger, WorkerLogSettings settings)
+        public LoggingWorker(IWorker<TIn, TOut> worker, IInMemoryWorkerLogger logger, WorkerLogSettings settings)
         {
             this.settings = settings;
             this.logger = logger;

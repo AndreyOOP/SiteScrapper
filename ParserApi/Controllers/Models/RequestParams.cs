@@ -2,6 +2,6 @@
 {
     public class RequestParams
     {
-        public bool showLog { get; set; } = false;
+        public bool ShowLog { get; set; } = false;
     }
 }

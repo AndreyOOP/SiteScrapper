@@ -11,13 +11,12 @@ namespace ParserApi.Controllers
     public class ParsingController : ApiController
     {
         private Site911Parser site911Parser;
-        private ILogger<WorkerLogRecord> memoryLogger;
+        private IInMemoryWorkerLogger memoryLogger;
 
-
-        public ParsingController(ILogger<WorkerLogRecord> logger, Site911Parser site911Parser)
+        public ParsingController(IInMemoryWorkerLogger memoryLogger, Site911Parser site911Parser)
         {
             this.site911Parser = site911Parser;
-            memoryLogger = logger;
+            this.memoryLogger = memoryLogger;
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
         }
@@ -34,12 +33,7 @@ namespace ParserApi.Controllers
             }
             finally
             {
-                var logger = (IInMemoryWorkerLogger)memoryLogger;
-
-                if (@params.showLog)
-                    result.Log = logger.Records;
-                else
-                    result.Log = logger.ErrorRecords;
+                result.Log = @params.ShowLog ? memoryLogger.Records : memoryLogger.ErrorRecords;
             }
 
             return result;
