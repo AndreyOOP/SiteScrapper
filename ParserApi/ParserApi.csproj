@@ -150,6 +150,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Models\InMemoryLoggerLevel.cs" />
     <Compile Include="Controllers\ParsingController.cs" />
     <Compile Include="Controllers\Models\RequestParams.cs" />
     <Compile Include="Exceptions\ParsingException.cs" />
@@ -179,6 +180,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\ILoggerSettingsProvider.cs" />
+    <Compile Include="Services\ISettings.cs" />
+    <Compile Include="Services\LoggerSettingsProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
