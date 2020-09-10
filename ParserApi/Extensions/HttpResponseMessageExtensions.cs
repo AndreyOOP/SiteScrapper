@@ -4,6 +4,7 @@ using System.Web;
 
 namespace ParserApi.Extensions
 {
+    // ToDo: better rename | split responsibility of getting content & check response status
     public static class HttpResponseMessageExtensions
     {
         /// <summary>
