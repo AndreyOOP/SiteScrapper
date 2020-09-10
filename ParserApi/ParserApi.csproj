@@ -160,6 +160,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Parsers\Autoklad\AutokladParser.cs" />
+    <Compile Include="Parsers\Autoklad\Models\InAK.cs" />
+    <Compile Include="Parsers\Autoklad\Models\ResultAK.cs" />
     <Compile Include="Parsers\Site911\Models\HtmlStep1.cs" />
     <Compile Include="Parsers\Site911\Models\HtmlStep3.cs" />
     <Compile Include="Parsers\Site911\Models\In.cs" />
