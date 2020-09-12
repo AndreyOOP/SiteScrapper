@@ -151,6 +151,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Models\InMemoryLoggerLevel.cs" />
+    <Compile Include="Controllers\Models\ParsersResult.cs" />
     <Compile Include="Controllers\ParsingController.cs" />
     <Compile Include="Controllers\Models\RequestParams.cs" />
     <Compile Include="Controllers\SettingsController.cs" />

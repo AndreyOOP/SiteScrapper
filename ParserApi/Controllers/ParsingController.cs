@@ -3,7 +3,7 @@ using ParserApi.Parsers.Autoklad;
 using ParserApi.Parsers.Autoklad.Models;
 using ParserApi.Parsers.Site911.Models;
 using ParserApi.Parsers.Site911ParserCore;
-using ParserCore.Abstraction;
+using ParserCore;
 using System.Net;
 using System.Web.Http;
 
@@ -13,16 +13,11 @@ namespace ParserApi.Controllers
     {
         private Site911Parser site911Parser;
         private AutokladParser autokladParser;
-        private IInMemoryWorkerLogger memoryLogger911;
-        private IInMemoryWorkerLogger memoryLoggerAK;
 
-        public ParsingController(IInMemoryWorkerLogger memoryLogger911, IInMemoryWorkerLogger memoryLoggerAK, Site911Parser site911Parser, AutokladParser autokladParser)
+        public ParsingController(Site911Parser site911Parser, AutokladParser autokladParser)
         {
             this.site911Parser = site911Parser;
             this.autokladParser = autokladParser;
-
-            this.memoryLogger911 = memoryLogger911;
-            this.memoryLoggerAK = memoryLoggerAK;
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
         }
@@ -31,38 +26,30 @@ namespace ParserApi.Controllers
         [Route("api/parse/{sparePartId}")]
         public object ParseSingleModel([FromUri]string sparePartId, [FromBody]RequestParams @params)
         {
-            var result911 = new Result();
-            var resultAK = new ResultAK();
+            var result911 = GetParsingResult(site911Parser, new In { Id = sparePartId });
+            var resultAK = GetParsingResult(autokladParser, new InAK { Id = sparePartId });
 
-            try
-            {
-                result911 = site911Parser.Parse(new In { Id = sparePartId });
-            }
-            finally
-            {
-                result911.Log = @params.ShowLog ? memoryLogger911.Records : memoryLogger911.ErrorRecords;
-            }
+            result911.Log = @params.ShowLog ? site911Parser.WorkerLogger.Records : site911Parser.WorkerLogger.ErrorRecords;
+            resultAK.Log = @params.ShowLog ? autokladParser.WorkerLogger.Records : autokladParser.WorkerLogger.ErrorRecords;
 
-            try
+            return new ParsersResult
             {
-                resultAK = autokladParser.Parse(new InAK { Id = sparePartId });
-            }
-            finally
-            {
-                resultAK.Log = @params.ShowLog ? memoryLoggerAK.Records : memoryLoggerAK.ErrorRecords;
-            }
-
-            return new Summary
-            {
-                Site911Result = result911,
-                AutokladResult = resultAK
+                Site911 = result911,
+                Autoklad = resultAK
             };
         }
 
-        public class Summary
+        private TOut GetParsingResult<TIn, TOut>(ParserBase<TIn, TOut> parser, TIn model)
         {
-            public Result Site911Result { get; set; }
-            public ResultAK AutokladResult { get; set; }
+            var result = default(TOut);
+            try
+            {
+                result = parser.Parse(model);
+            }
+            catch // supperss parser exception as all of them catched by logger
+            {
+            }
+            return result;
         }
     }
 }
