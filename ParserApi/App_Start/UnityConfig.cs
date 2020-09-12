@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Http;
 using Unity;
+using Unity.Resolution;
 using Unity.WebApi;
 using Mvc = Unity.AspNet.Mvc;
 
@@ -19,6 +20,9 @@ namespace ParserApi
 {
     public static class UnityConfig
     {
+        static string Site911Name = nameof(Site911Parser);
+        static string AutokladName = nameof(AutokladParser);
+
         public static IUnityContainer RegisterComponents()
         {
 			var container = new UnityContainer();
@@ -31,8 +35,6 @@ namespace ParserApi
             ParserAutokladRegistration(container);
 
             container.RegisterFactory<ParsingController>(c => new ParsingController(
-                c.Resolve<IInMemoryWorkerLogger>(nameof(SourceSite.Site911)),
-                c.Resolve<IInMemoryWorkerLogger>(nameof(SourceSite.Autoklad)),
                 c.Resolve<Site911Parser>(),
                 c.Resolve<AutokladParser>()
             ));
@@ -43,7 +45,7 @@ namespace ParserApi
 
         private static void ParserSite911Registration(UnityContainer container)
         {
-            container.RegisterType<IInMemoryWorkerLogger, InMemoryWorkerLogger>(nameof(SourceSite.Site911), new Mvc.PerRequestLifetimeManager());
+            container.RegisterType<IInMemoryWorkerLogger, InMemoryWorkerLogger>(Site911Name, new Mvc.PerRequestLifetimeManager());
 
             container.RegisterType<IWorker<In, HtmlStep1>, InToHtmlStep1>();
             container.RegisterType<IWorker<HtmlStep1, PrimaryResultStep2>, HtmlStep1ToPrimaryResultStep2>();
@@ -51,53 +53,48 @@ namespace ParserApi
             container.RegisterType<IWorker<QueryStringStep2, HtmlStep3>, QueryStringStep2ToHtmlStep3>();
             container.RegisterType<IWorker<HtmlStep3, SecondaryResultStep4>, HtmlStep3ToSecondaryResultStep4>();
 
-            container.RegisterFactory<LoggingWorker<In, HtmlStep1>>(c => new LoggingWorker<In, HtmlStep1>(c.Resolve<IWorker<In, HtmlStep1>>(), c.Resolve<IInMemoryWorkerLogger>(nameof(SourceSite.Site911)), c.Resolve<WorkerLogSettings>()));
-            container.RegisterFactory<LoggingWorker<HtmlStep1, PrimaryResultStep2>>(c => new LoggingWorker<HtmlStep1, PrimaryResultStep2>(c.Resolve<IWorker<HtmlStep1, PrimaryResultStep2>>(), c.Resolve<IInMemoryWorkerLogger>(nameof(SourceSite.Site911)), c.Resolve<WorkerLogSettings>()));
-            container.RegisterFactory<LoggingWorker<HtmlStep1, QueryStringStep2>>(c => new LoggingWorker<HtmlStep1, QueryStringStep2>(c.Resolve<IWorker<HtmlStep1, QueryStringStep2>>(), c.Resolve<IInMemoryWorkerLogger>(nameof(SourceSite.Site911)), c.Resolve<WorkerLogSettings>()));
-            container.RegisterFactory<LoggingWorker<QueryStringStep2, HtmlStep3>>(c => new LoggingWorker<QueryStringStep2, HtmlStep3>(c.Resolve<IWorker<QueryStringStep2, HtmlStep3>>(), c.Resolve<IInMemoryWorkerLogger>(nameof(SourceSite.Site911)), c.Resolve<WorkerLogSettings>()));
-            container.RegisterFactory<LoggingWorker<HtmlStep3, SecondaryResultStep4>>(c => new LoggingWorker<HtmlStep3, SecondaryResultStep4>(c.Resolve<IWorker<HtmlStep3, SecondaryResultStep4>>(), c.Resolve<IInMemoryWorkerLogger>(nameof(SourceSite.Site911)), c.Resolve<WorkerLogSettings>()));
+            container.RegisterType<LoggingWorker<In, HtmlStep1>>();
+            container.RegisterType<LoggingWorker<HtmlStep1, PrimaryResultStep2>>();
+            container.RegisterType<LoggingWorker<HtmlStep1, QueryStringStep2>>();
+            container.RegisterType<LoggingWorker<QueryStringStep2, HtmlStep3>>();
+            container.RegisterType<LoggingWorker<HtmlStep3, SecondaryResultStep4>>();
 
-            container.RegisterFactory<IWorkersContainer>(nameof(SourceSite.Site911), c =>
+            container.RegisterFactory<IWorkersContainer>(Site911Name, c =>
             {
+                var site911Logger = new DependencyOverride<IInMemoryWorkerLogger>(c.Resolve<IInMemoryWorkerLogger>(Site911Name));
                 var parsingGraph = new Dictionary<IInOutKey, object>
                 {
-                    [new InOutKey<In, HtmlStep1>()] = c.Resolve<LoggingWorker<In, HtmlStep1>>(),
-                    [new InOutKey<HtmlStep1, PrimaryResultStep2>()] = c.Resolve<LoggingWorker<HtmlStep1, PrimaryResultStep2>>(),
-                    [new InOutKey<HtmlStep1, QueryStringStep2>()] = c.Resolve<LoggingWorker<HtmlStep1, QueryStringStep2>>(),
-                    [new InOutKey<QueryStringStep2, HtmlStep3>()] = c.Resolve<LoggingWorker<QueryStringStep2, HtmlStep3>>(),
-                    [new InOutKey<HtmlStep3, SecondaryResultStep4>()] = c.Resolve<LoggingWorker<HtmlStep3, SecondaryResultStep4>>(),
+                    [new InOutKey<In, HtmlStep1>()] = c.Resolve<LoggingWorker<In, HtmlStep1>>(site911Logger),
+                    [new InOutKey<HtmlStep1, PrimaryResultStep2>()] = c.Resolve<LoggingWorker<HtmlStep1, PrimaryResultStep2>>(site911Logger),
+                    [new InOutKey<HtmlStep1, QueryStringStep2>()] = c.Resolve<LoggingWorker<HtmlStep1, QueryStringStep2>>(site911Logger),
+                    [new InOutKey<QueryStringStep2, HtmlStep3>()] = c.Resolve<LoggingWorker<QueryStringStep2, HtmlStep3>>(site911Logger),
+                    [new InOutKey<HtmlStep3, SecondaryResultStep4>()] = c.Resolve<LoggingWorker<HtmlStep3, SecondaryResultStep4>>(site911Logger),
                 };
                 return new WorkersContainer(parsingGraph);
             });
 
-            container.RegisterFactory<Site911Parser>(c => new Site911Parser(c.Resolve<IWorkersContainer>(nameof(SourceSite.Site911))));
+            container.RegisterType<Site911Parser>();
         }
 
         private static void ParserAutokladRegistration(UnityContainer container)
         {
-            container.RegisterType<IInMemoryWorkerLogger, InMemoryWorkerLogger>(nameof(SourceSite.Autoklad), new Mvc.PerRequestLifetimeManager());
+            container.RegisterType<IInMemoryWorkerLogger, InMemoryWorkerLogger>(AutokladName, new Mvc.PerRequestLifetimeManager());
 
             container.RegisterType<IWorker<InAK, HtmlS1AK>, InToHtmlS1AK>();
 
-            container.RegisterFactory<LoggingWorker<InAK, HtmlS1AK>>(c => new LoggingWorker<InAK, HtmlS1AK>(c.Resolve<IWorker<InAK, HtmlS1AK>>(), container.Resolve<IInMemoryWorkerLogger>(nameof(SourceSite.Autoklad)), container.Resolve<WorkerLogSettings>()));
+            container.RegisterType<LoggingWorker<InAK, HtmlS1AK>>();
 
-            container.RegisterFactory<IWorkersContainer>(nameof(SourceSite.Autoklad), c =>
+            container.RegisterFactory<IWorkersContainer>(AutokladName, c =>
             {
+                var autokladLogger = new DependencyOverride<IInMemoryWorkerLogger>(c.Resolve<IInMemoryWorkerLogger>(AutokladName));
                 var parsingGraph = new Dictionary<IInOutKey, object>
                 {
-                    [new InOutKey<InAK, HtmlS1AK>()] = c.Resolve<LoggingWorker<InAK, HtmlS1AK>>(),
+                    [new InOutKey<InAK, HtmlS1AK>()] = c.Resolve<LoggingWorker<InAK, HtmlS1AK>>(autokladLogger),
                 };
                 return new WorkersContainer(parsingGraph);
             });
 
-            container.RegisterFactory<AutokladParser>(c => new AutokladParser(c.Resolve<IWorkersContainer>(nameof(SourceSite.Autoklad))));
+            container.RegisterType<AutokladParser>();
         }
-    }
-
-    // ToDo: move out
-    public enum SourceSite
-    {
-        Site911,
-        Autoklad
     }
 }
