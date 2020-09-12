@@ -2,6 +2,7 @@
 using ParserApi;
 using ParserApi.Controllers;
 using ParserApi.Controllers.Models;
+using ParserApi.Parsers;
 using ParserApi.Parsers.Autoklad;
 using ParserApi.Parsers.Site911.Models;
 using ParserApi.Parsers.Site911ParserCore;
@@ -22,8 +23,8 @@ namespace AcceptanceTests
             container = UnityConfig.RegisterComponents();
             
             // it is necessary to override types registered as PerRequestLifetimeManager because this time manager works only with http requests
-            container.RegisterType<IInMemoryWorkerLogger, InMemoryWorkerLogger>(nameof(Site911Parser), TypeLifetime.Singleton);
-            container.RegisterType<IInMemoryWorkerLogger, InMemoryWorkerLogger>(nameof(AutokladParser), TypeLifetime.Singleton);
+            container.RegisterType<IInMemoryWorkerLogger, InMemoryWorkerLogger>(nameof(Parser.Site911), TypeLifetime.Singleton);
+            container.RegisterType<IInMemoryWorkerLogger, InMemoryWorkerLogger>(nameof(Parser.Autoklad), TypeLifetime.Singleton);
             container.RegisterType<WorkerLogSettings, ExceptionLoggerSettings>(TypeLifetime.Singleton);
         }
 

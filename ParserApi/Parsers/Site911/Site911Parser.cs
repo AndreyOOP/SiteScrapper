@@ -11,8 +11,8 @@ namespace ParserApi.Parsers.Site911ParserCore
         public IInMemoryWorkerLogger WorkerLogger { get; }
 
         public Site911Parser(
-            [Dependency(nameof(Site911Parser))]IWorkersContainer workersContainer, 
-            [Dependency(nameof(Site911Parser))]IInMemoryWorkerLogger workerLogger
+            [Dependency(nameof(Parser.Site911))]IWorkersContainer workersContainer, 
+            [Dependency(nameof(Parser.Site911))]IInMemoryWorkerLogger workerLogger
             ) : base(workersContainer)
         {
             WorkerLogger = workerLogger;

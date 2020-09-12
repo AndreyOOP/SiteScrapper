@@ -11,8 +11,8 @@ namespace ParserApi.Parsers.Autoklad
         public IInMemoryWorkerLogger WorkerLogger { get; }
 
         public AutokladParser(
-            [Dependency(nameof(AutokladParser))]IWorkersContainer workersContainer,
-            [Dependency(nameof(AutokladParser))]IInMemoryWorkerLogger workerLogger
+            [Dependency(nameof(Parser.Autoklad))]IWorkersContainer workersContainer,
+            [Dependency(nameof(Parser.Autoklad))]IInMemoryWorkerLogger workerLogger
             ) : base(workersContainer)
         {
             WorkerLogger = workerLogger;

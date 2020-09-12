@@ -1,4 +1,5 @@
 using ParserApi.Controllers;
+using ParserApi.Parsers;
 using ParserApi.Parsers.Autoklad;
 using ParserApi.Parsers.Autoklad.Models;
 using ParserApi.Parsers.Autoklad.WorkUnits;
@@ -20,8 +21,8 @@ namespace ParserApi
 {
     public static class UnityConfig
     {
-        static string Site911Name = nameof(Site911Parser);
-        static string AutokladName = nameof(AutokladParser);
+        static string Site911Name = nameof(Parser.Site911);
+        static string AutokladName = nameof(Parser.Autoklad);
 
         public static IUnityContainer RegisterComponents()
         {
