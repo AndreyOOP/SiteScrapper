@@ -47,13 +47,13 @@ namespace ParserApi
         {
             container.RegisterType<IInMemoryWorkerLogger, InMemoryWorkerLogger>(Site911Name, new Mvc.PerRequestLifetimeManager());
 
-            container.RegisterType<IWorker<In, HtmlStep1>, InToHtmlStep1>();
+            container.RegisterType<IWorker<In911, HtmlStep1>, In911ToHtmlStep1>();
             container.RegisterType<IWorker<HtmlStep1, PrimaryResultStep2>, HtmlStep1ToPrimaryResultStep2>();
             container.RegisterType<IWorker<HtmlStep1, QueryStringStep2>, HtmlStep1ToQueryStringStep2>();
             container.RegisterType<IWorker<QueryStringStep2, HtmlStep3>, QueryStringStep2ToHtmlStep3>();
             container.RegisterType<IWorker<HtmlStep3, SecondaryResultStep4>, HtmlStep3ToSecondaryResultStep4>();
 
-            container.RegisterType<LoggingWorker<In, HtmlStep1>>();
+            container.RegisterType<LoggingWorker<In911, HtmlStep1>>();
             container.RegisterType<LoggingWorker<HtmlStep1, PrimaryResultStep2>>();
             container.RegisterType<LoggingWorker<HtmlStep1, QueryStringStep2>>();
             container.RegisterType<LoggingWorker<QueryStringStep2, HtmlStep3>>();
@@ -64,7 +64,7 @@ namespace ParserApi
                 var site911Logger = new DependencyOverride<IInMemoryWorkerLogger>(c.Resolve<IInMemoryWorkerLogger>(Site911Name));
                 var parsingGraph = new Dictionary<IInOutKey, object>
                 {
-                    [new InOutKey<In, HtmlStep1>()] = c.Resolve<LoggingWorker<In, HtmlStep1>>(site911Logger),
+                    [new InOutKey<In911, HtmlStep1>()] = c.Resolve<LoggingWorker<In911, HtmlStep1>>(site911Logger),
                     [new InOutKey<HtmlStep1, PrimaryResultStep2>()] = c.Resolve<LoggingWorker<HtmlStep1, PrimaryResultStep2>>(site911Logger),
                     [new InOutKey<HtmlStep1, QueryStringStep2>()] = c.Resolve<LoggingWorker<HtmlStep1, QueryStringStep2>>(site911Logger),
                     [new InOutKey<QueryStringStep2, HtmlStep3>()] = c.Resolve<LoggingWorker<QueryStringStep2, HtmlStep3>>(site911Logger),

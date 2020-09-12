@@ -31,8 +31,8 @@ namespace UnitTests
             });
 
             var parserMock = new Mock<Site911Parser>(MockBehavior.Strict, new object[] { null, memoryLogger }); // new object[] - constructor parameters
-            parserMock.Setup(p => p.Parse(It.IsAny<In>()))
-                .Returns(new Result());
+            parserMock.Setup(p => p.Parse(It.IsAny<In911>()))
+                .Returns(new Result911());
             parser = parserMock.Object;
 
             var autokladMock = new Mock<AutokladParser>(MockBehavior.Strict, new object[] { null, memoryLogger });

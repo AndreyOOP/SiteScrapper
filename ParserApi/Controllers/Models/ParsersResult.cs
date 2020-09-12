@@ -5,7 +5,7 @@ namespace ParserApi.Controllers.Models
 {
     public class ParsersResult
     {
-        public Result Site911 { get; set; }
+        public Result911 Site911 { get; set; }
         public ResultAK Autoklad { get; set; }
     }
 }

@@ -26,7 +26,7 @@ namespace ParserApi.Controllers
         [Route("api/parse/{sparePartId}")]
         public object ParseSingleModel([FromUri]string sparePartId, [FromBody]RequestParams @params)
         {
-            var result911 = GetParsingResult(site911Parser, new In { Id = sparePartId });
+            var result911 = GetParsingResult(site911Parser, new In911 { Id = sparePartId });
             var resultAK = GetParsingResult(autokladParser, new InAK { Id = sparePartId });
 
             result911.Log = @params.ShowLog ? site911Parser.WorkerLogger.Records : site911Parser.WorkerLogger.ErrorRecords;

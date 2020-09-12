@@ -6,7 +6,7 @@ using Unity;
 
 namespace ParserApi.Parsers.Site911ParserCore
 {
-    public class Site911Parser : ParserBase<In, Result>
+    public class Site911Parser : ParserBase<In911, Result911>
     {
         public IInMemoryWorkerLogger WorkerLogger { get; }
 
@@ -18,9 +18,9 @@ namespace ParserApi.Parsers.Site911ParserCore
             WorkerLogger = workerLogger;
         }
 
-        protected override Result PrepareResult()
+        protected override Result911 PrepareResult()
         {
-            return new Result
+            return new Result911
             {
                 Primary = result.Get<PrimaryResultStep2>(),
                 Secondary = result.Get<SecondaryResultStep4>()
