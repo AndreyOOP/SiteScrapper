@@ -22,7 +22,7 @@ namespace ParserApi.Parsers.Autoklad
         {
             return new ResultAK
             {
-                HtmlS1 = result.Get<FirstResultAK>()
+                FirstResult = result.Get<FirstResultStoreAK>()
             };
         }
     }

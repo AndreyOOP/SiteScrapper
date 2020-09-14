@@ -2,7 +2,7 @@
 {
     public class ResultAK
     {
-        public object HtmlS1 { get; set; }
+        public object FirstResult { get; set; }
         public object Log { get; set; }
     }
 }
