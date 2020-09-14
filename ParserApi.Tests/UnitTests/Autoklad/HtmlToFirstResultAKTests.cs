@@ -4,7 +4,7 @@ using ParserApi.Parsers.Autoklad.WorkUnits;
 using System.IO;
 using System.Linq;
 
-namespace ParserApi.Tests.UnitTests.Autoklad
+namespace UnitTests
 {
     [TestClass]
     public class HtmlToFirstResultAKTests
@@ -46,7 +46,7 @@ namespace ParserApi.Tests.UnitTests.Autoklad
 
         [TestMethod]
         [DataRow(@"UnitTests\Autoklad\TestFiles\MissingHref.html")]
-        public void Parse_NoHref_(string path)
+        public void Parse_NoHref_PartBrandLinkIsNull(string path)
         {
             var inputModel = new HtmlS1AK
             {

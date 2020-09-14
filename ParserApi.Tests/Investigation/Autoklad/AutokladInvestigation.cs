@@ -5,11 +5,12 @@ using ParserApi.Parsers.Autoklad.WorkUnits;
 using System.IO;
 using System.Net.Http;
 
-namespace ParserApi.Tests.Investigation.Autoklad
+namespace Investigation
 {
     [TestClass]
     public class AutokladInvestigation
     {
+        [Ignore]
         [TestMethod]
         public void GetDataFromWebRequest()
         {
