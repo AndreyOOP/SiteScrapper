@@ -82,8 +82,10 @@ namespace ParserApi
             container.RegisterType<IInMemoryWorkerLogger, InMemoryWorkerLogger>(AutokladName, new Mvc.PerRequestLifetimeManager());
 
             container.RegisterType<IWorker<InAK, HtmlS1AK>, InToHtmlS1AK>();
+            container.RegisterType<IWorker<HtmlS1AK, FirstResultAK>, HtmlToFirstResultAK>();
 
             container.RegisterType<LoggingWorker<InAK, HtmlS1AK>>();
+            container.RegisterType<LoggingWorker<HtmlS1AK, FirstResultAK>>();
 
             container.RegisterFactory<IWorkersContainer>(AutokladName, c =>
             {
@@ -91,6 +93,7 @@ namespace ParserApi
                 var parsingGraph = new Dictionary<IInOutKey, object>
                 {
                     [new InOutKey<InAK, HtmlS1AK>()] = c.Resolve<LoggingWorker<InAK, HtmlS1AK>>(autokladLogger),
+                    [new InOutKey<HtmlS1AK, FirstResultAK>()] = c.Resolve<LoggingWorker<HtmlS1AK, FirstResultAK>>(autokladLogger)
                 };
                 return new WorkersContainer(parsingGraph);
             });
