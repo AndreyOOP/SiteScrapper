@@ -22,7 +22,8 @@ namespace ParserApi.Parsers.Autoklad
         {
             return new ResultAK
             {
-                FirstResult = result.Get<FirstResultStoreAK>()
+                FirstResult = result.Get<FirstResultStoreAK>(),
+                Htmls = result.Get<HtmlsS3>()
             };
         }
     }

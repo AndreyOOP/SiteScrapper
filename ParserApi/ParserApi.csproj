@@ -164,11 +164,13 @@
     <Compile Include="Parsers\Autoklad\AutokladParser.cs" />
     <Compile Include="Parsers\Autoklad\Models\FirstResultAK.cs" />
     <Compile Include="Parsers\Autoklad\Models\FirstResultStoreAK.cs" />
+    <Compile Include="Parsers\Autoklad\Models\HtmlsS3.cs" />
     <Compile Include="Parsers\Autoklad\Models\HtmlS1AK.cs" />
     <Compile Include="Parsers\Autoklad\Models\InAK.cs" />
     <Compile Include="Parsers\Autoklad\Models\ResultAK.cs" />
     <Compile Include="Parsers\Autoklad\WorkUnits\AutokladWorkerBase.cs" />
     <Compile Include="Parsers\Autoklad\WorkUnits\FirstResultStore.cs" />
+    <Compile Include="Parsers\Autoklad\WorkUnits\FirstResultToHtmlsS3.cs" />
     <Compile Include="Parsers\Autoklad\WorkUnits\HtmlToFirstResultAK.cs" />
     <Compile Include="Parsers\Autoklad\WorkUnits\InToHtmlS1AK.cs" />
     <Compile Include="Parsers\Parser.cs" />
