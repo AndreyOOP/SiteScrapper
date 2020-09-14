@@ -123,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcceptanceTests\Site911\ParseSingleModel.cs" />
+    <Compile Include="Investigation\Autoklad\AutokladInvestigation.cs" />
     <Compile Include="Investigation\FeatureTest\Backup.cs" />
     <Compile Include="Investigation\FeatureTest\HtmlParserUsage.cs" />
     <Compile Include="Investigation\FeatureTest\WebRequests.cs" />
@@ -137,6 +138,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
+    <Content Include="Investigation\Autoklad\HtmlStep1.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Investigation\Autoklad\TableWithFirstResult.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="UnitTests\Site911\TestFiles\PrimaryTableExists.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
