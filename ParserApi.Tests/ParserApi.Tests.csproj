@@ -128,6 +128,7 @@
     <Compile Include="Investigation\FeatureTest\HtmlParserUsage.cs" />
     <Compile Include="Investigation\FeatureTest\WebRequests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTests\Autoklad\HtmlToFirstResultAKTests.cs" />
     <Compile Include="UnitTests\Controllers\ParsingControllerTests.cs" />
     <Compile Include="UnitTests\Extensions\HtmlNodeExtensionsTests.cs" />
     <Compile Include="UnitTests\Services\LoggerSettingsProviderTests.cs" />
@@ -142,6 +143,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Investigation\Autoklad\TableWithFirstResult.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="UnitTests\Autoklad\TestFiles\LiItem.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="UnitTests\Autoklad\TestFiles\NoULNode.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="UnitTests\Autoklad\TestFiles\MissingHref.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="UnitTests\Site911\TestFiles\PrimaryTableExists.html">
