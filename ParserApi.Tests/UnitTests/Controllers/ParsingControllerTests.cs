@@ -2,6 +2,8 @@
 using Moq;
 using ParserApi.Controllers;
 using ParserApi.Controllers.Models;
+using ParserApi.Parsers.Autoklad;
+using ParserApi.Parsers.Autoklad.Models;
 using ParserApi.Parsers.Site911.Models;
 using ParserApi.Parsers.Site911ParserCore;
 using ParserCore;
@@ -18,11 +20,6 @@ namespace UnitTests
         [TestInitialize]
         public void Initialize()
         {
-            var parserMock = new Mock<Site911Parser>(MockBehavior.Strict, new object[] { null }); // new object[] - constructor parameters
-            parserMock.Setup(p => p.Parse(It.IsAny<In>()))
-                .Returns(new Result());
-            parser = parserMock.Object;
-
             var memoryLogger = new InMemoryWorkerLogger();
             memoryLogger.Records.Add(new WorkerLogRecord());
             memoryLogger.Records.Add(new WorkerLogRecord { ExceptionMessage = "Msg" });
@@ -32,51 +29,47 @@ namespace UnitTests
                 ExceptionMessage = "Msg",
                 StackTrace = "Trace"
             });
-            
-            controller = new ParsingController(memoryLogger, parser);
+
+            var parserMock = new Mock<Site911Parser>(MockBehavior.Strict, new object[] { null, memoryLogger }); // new object[] - constructor parameters
+            parserMock.Setup(p => p.Parse(It.IsAny<In911>()))
+                .Returns(new Result911());
+            parser = parserMock.Object;
+
+            var autokladMock = new Mock<AutokladParser>(MockBehavior.Strict, new object[] { null, memoryLogger });
+            autokladMock.Setup(p => p.Parse(It.IsAny<InAK>()))
+                .Returns(new ResultAK());
+
+            controller = new ParsingController(parser, autokladMock.Object);
         }
 
         [TestMethod]
         public void ParseSingleModel_ShowLogWithErrors_AllLogRecords()
         {
-            var result = (Result)controller.ParseSingleModel("id", new RequestParams
+            var result = (ParsersResult)controller.ParseSingleModel("id", new RequestParams
             {
                 ShowLog = true
             });
 
-            Assert.AreEqual(4, result.Log.Count());
-        }
-
-        [TestMethod]
-        public void ParseSingleModel_NotShowLogError_ErrorRecords()
-        {
-            var memoryLogger = new InMemoryWorkerLogger();
-            memoryLogger.Records.Add(new WorkerLogRecord { ExceptionMessage = "Msg" });
-
-            controller = new ParsingController(memoryLogger, parser);
-
-            var result = (Result)controller.ParseSingleModel("id", new RequestParams());
-
-            Assert.AreEqual(1, result.Log.Count());
+            Assert.AreEqual(4, result.Site911.Log.Count());
         }
 
         [TestMethod]
         public void ParseSingleModel_NotShowLogErrors_ErrorRecordsOnly()
         {
-            var result = (Result)controller.ParseSingleModel("id", new RequestParams
+            var result = (ParsersResult)controller.ParseSingleModel("id", new RequestParams
             {
                 ShowLog = false
             });
 
-            Assert.AreEqual(3, result.Log.Count());
+            Assert.AreEqual(3, result.Site911.Log.Count());
         }
 
         [TestMethod]
         public void ParseSingleModel_NotShowDefaultLogErrors_ErrorRecordsOnly()
         {
-            var result = (Result)controller.ParseSingleModel("id", new RequestParams());
+            var result = (ParsersResult)controller.ParseSingleModel("id", new RequestParams());
 
-            Assert.AreEqual(3, result.Log.Count());
+            Assert.AreEqual(3, result.Site911.Log.Count());
         }
     }
 }

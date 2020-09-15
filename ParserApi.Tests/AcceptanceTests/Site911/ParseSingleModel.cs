@@ -2,6 +2,8 @@
 using ParserApi;
 using ParserApi.Controllers;
 using ParserApi.Controllers.Models;
+using ParserApi.Parsers;
+using ParserApi.Parsers.Autoklad;
 using ParserApi.Parsers.Site911.Models;
 using ParserApi.Parsers.Site911ParserCore;
 using ParserCore;
@@ -21,7 +23,8 @@ namespace AcceptanceTests
             container = UnityConfig.RegisterComponents();
             
             // it is necessary to override types registered as PerRequestLifetimeManager because this time manager works only with http requests
-            container.RegisterType<IInMemoryWorkerLogger, InMemoryWorkerLogger>(TypeLifetime.Singleton); 
+            container.RegisterType<IInMemoryWorkerLogger, InMemoryWorkerLogger>(nameof(Parser.Site911), TypeLifetime.Singleton);
+            container.RegisterType<IInMemoryWorkerLogger, InMemoryWorkerLogger>(nameof(Parser.Autoklad), TypeLifetime.Singleton);
             container.RegisterType<WorkerLogSettings, ExceptionLoggerSettings>(TypeLifetime.Singleton);
         }
 
@@ -32,15 +35,15 @@ namespace AcceptanceTests
         [DataRow("MD619867", false, false)]
         public void ParseSingleModel_ModelWithPrimaryAndSecondaryData(string partId, bool primaryTableExist, bool secondaryTableExist)
         {
-            var controller = new ParsingController(container.Resolve<IInMemoryWorkerLogger>(), container.Resolve<Site911Parser>());
+            var controller = new ParsingController(container.Resolve<Site911Parser>(), container.Resolve<AutokladParser>());
 
-            var result = (Result)controller.ParseSingleModel(partId, new RequestParams());
+            var result = (ParsersResult)controller.ParseSingleModel(partId, new RequestParams());
 
             if(primaryTableExist)
-                Assert.IsNotNull(result.Primary);
+                Assert.IsNotNull(result.Site911.Primary);
 
             if(secondaryTableExist)
-                Assert.IsNotNull(result.Secondary);
+                Assert.IsNotNull(result.Site911.Secondary);
         }
     }
 }

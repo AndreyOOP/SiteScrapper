@@ -151,6 +151,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Models\InMemoryLoggerLevel.cs" />
+    <Compile Include="Controllers\Models\ParsersResult.cs" />
     <Compile Include="Controllers\ParsingController.cs" />
     <Compile Include="Controllers\Models\RequestParams.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
@@ -160,6 +161,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Parsers\Autoklad\AutokladParser.cs" />
+    <Compile Include="Parsers\Autoklad\Models\AnalogsResultAK.cs" />
+    <Compile Include="Parsers\Autoklad\Models\FirstResultAK.cs" />
+    <Compile Include="Parsers\Autoklad\Models\FirstResultStoreAK.cs" />
+    <Compile Include="Parsers\Autoklad\Models\HtmlsS3.cs" />
+    <Compile Include="Parsers\Autoklad\Models\HtmlS1AK.cs" />
+    <Compile Include="Parsers\Autoklad\Models\InAK.cs" />
+    <Compile Include="Parsers\Autoklad\Models\ResultAK.cs" />
+    <Compile Include="Parsers\Autoklad\WorkUnits\AutokladWorkerBase.cs" />
+    <Compile Include="Parsers\Autoklad\WorkUnits\FirstResultStore.cs" />
+    <Compile Include="Parsers\Autoklad\WorkUnits\FirstResultToHtmlsS3.cs" />
+    <Compile Include="Parsers\Autoklad\WorkUnits\HtmlToSecondResultAK.cs" />
+    <Compile Include="Parsers\Autoklad\WorkUnits\HtmlToFirstResultAK.cs" />
+    <Compile Include="Parsers\Autoklad\WorkUnits\InToHtmlS1AK.cs" />
+    <Compile Include="Parsers\Parser.cs" />
     <Compile Include="Parsers\Site911\Models\HtmlStep1.cs" />
     <Compile Include="Parsers\Site911\Models\HtmlStep3.cs" />
     <Compile Include="Parsers\Site911\Models\In.cs" />

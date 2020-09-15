@@ -123,10 +123,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcceptanceTests\Site911\ParseSingleModel.cs" />
-    <Compile Include="FeatureTest\Backup.cs" />
-    <Compile Include="FeatureTest\HtmlParserUsage.cs" />
-    <Compile Include="FeatureTest\WebRequests.cs" />
+    <Compile Include="Investigation\Autoklad\AutokladInvestigation.cs" />
+    <Compile Include="Investigation\FeatureTest\Backup.cs" />
+    <Compile Include="Investigation\FeatureTest\HtmlParserUsage.cs" />
+    <Compile Include="Investigation\FeatureTest\WebRequests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTests\Autoklad\HtmlToFirstResultAKTests.cs" />
     <Compile Include="UnitTests\Controllers\ParsingControllerTests.cs" />
     <Compile Include="UnitTests\Extensions\HtmlNodeExtensionsTests.cs" />
     <Compile Include="UnitTests\Services\LoggerSettingsProviderTests.cs" />
@@ -137,6 +139,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
+    <Content Include="Investigation\Autoklad\HtmlStep1.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Investigation\Autoklad\TableWithFirstResult.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="UnitTests\Autoklad\TestFiles\LiItem.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="UnitTests\Autoklad\TestFiles\NoULNode.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="UnitTests\Autoklad\TestFiles\MissingHref.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="UnitTests\Site911\TestFiles\PrimaryTableExists.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
