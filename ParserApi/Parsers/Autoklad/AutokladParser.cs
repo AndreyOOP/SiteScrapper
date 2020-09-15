@@ -23,7 +23,7 @@ namespace ParserApi.Parsers.Autoklad
             return new ResultAK
             {
                 FirstResult = result.Get<FirstResultStoreAK>(),
-                Htmls = result.Get<HtmlsS3>()
+                AnalogResult = result.Get<SecondResultAK>()
             };
         }
     }
