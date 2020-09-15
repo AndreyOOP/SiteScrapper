@@ -162,6 +162,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Parsers\Autoklad\AutokladParser.cs" />
+    <Compile Include="Parsers\Autoklad\Models\AnalogsResultAK.cs" />
     <Compile Include="Parsers\Autoklad\Models\FirstResultAK.cs" />
     <Compile Include="Parsers\Autoklad\Models\FirstResultStoreAK.cs" />
     <Compile Include="Parsers\Autoklad\Models\HtmlsS3.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Parsers\Autoklad\WorkUnits\AutokladWorkerBase.cs" />
     <Compile Include="Parsers\Autoklad\WorkUnits\FirstResultStore.cs" />
     <Compile Include="Parsers\Autoklad\WorkUnits\FirstResultToHtmlsS3.cs" />
+    <Compile Include="Parsers\Autoklad\WorkUnits\HtmlToSecondResultAK.cs" />
     <Compile Include="Parsers\Autoklad\WorkUnits\HtmlToFirstResultAK.cs" />
     <Compile Include="Parsers\Autoklad\WorkUnits\InToHtmlS1AK.cs" />
     <Compile Include="Parsers\Parser.cs" />
