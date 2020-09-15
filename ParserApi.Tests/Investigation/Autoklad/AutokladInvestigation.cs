@@ -1,8 +1,11 @@
 ﻿using HtmlAgilityPack;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ParserApi.Extensions;
 using ParserApi.Parsers.Autoklad.Models;
 using ParserApi.Parsers.Autoklad.WorkUnits;
+using System;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 
 namespace Investigation
@@ -10,6 +13,34 @@ namespace Investigation
     [TestClass]
     public class AutokladInvestigation
     {
+        [Ignore]
+        [TestMethod]
+        public void Step3FromWebRequest()
+        {
+            var httpClient = new HttpClient();
+            var searchUri = new Uri(new Uri("https://www.autoklad.ua/"), "buy/toyota_MR984375");
+            var response = httpClient.GetAsync(searchUri).Result;
+            var html = response.GetContent();
+
+            var document = new HtmlDocument();
+            document.LoadHtml(html);
+
+            var analog = document.DocumentNode.SelectSingleNode("//h5[@id='aanalog']");  // the same parse way but asovpad
+            var table = analog.ParentNode.ParentNode.SelectSingleNode(".//div[@id='table_div']");
+            var trs = table.SelectNodes(".//tr[@id='tr']").ToArray();
+
+            var trs2 = analog.ParentNode.ParentNode.SelectNodes(".//div[@id='table_div']//tr[@id='tr']");
+
+            // note depend on city - table could contain few pages
+            // it is possible to do addition request, for first version it is ok
+            var res = trs2.Select(t => new
+            {
+                a = t.SelectSingleNode(".//td[1]/a").InnerText,
+                b = t.SelectSingleNode(".//td[2]").InnerText,
+                c = t.SelectSingleNode(".//td[3]").InnerText,
+            }).ToArray();
+        }
+
         [Ignore]
         [TestMethod]
         public void GetDataFromWebRequest()
