@@ -85,11 +85,13 @@ namespace ParserApi
             container.RegisterType<IWorker<HtmlS1AK, FirstResultAK>, HtmlToFirstResultAK>();
             container.RegisterType<IWorker<FirstResultAK, FirstResultStoreAK>, FirstResultStore>();
             container.RegisterType<IWorker<FirstResultAK, HtmlsS3>, FirstResultToHtmlsS3>();
+            container.RegisterType<IWorker<HtmlsS3, SecondResultAK>, HtmlToSecondResultAK>();
 
             container.RegisterType<LoggingWorker<InAK, HtmlS1AK>>();
             container.RegisterType<LoggingWorker<HtmlS1AK, FirstResultAK>>();
             container.RegisterType<LoggingWorker<FirstResultAK, FirstResultStoreAK>>();
             container.RegisterType<LoggingWorker<FirstResultAK, HtmlsS3>>();
+            container.RegisterType<LoggingWorker<HtmlsS3, SecondResultAK>>();
 
             container.RegisterFactory<IWorkersContainer>(AutokladName, c =>
             {
@@ -99,7 +101,8 @@ namespace ParserApi
                     [new InOutKey<InAK, HtmlS1AK>()] = c.Resolve<LoggingWorker<InAK, HtmlS1AK>>(autokladLogger),
                     [new InOutKey<HtmlS1AK, FirstResultAK>()] = c.Resolve<LoggingWorker<HtmlS1AK, FirstResultAK>>(autokladLogger),
                     [new InOutKey<FirstResultAK, FirstResultStoreAK>()] = c.Resolve<LoggingWorker<FirstResultAK, FirstResultStoreAK>>(autokladLogger),
-                    [new InOutKey<FirstResultAK, HtmlsS3>()] = c.Resolve<LoggingWorker<FirstResultAK, HtmlsS3>>(autokladLogger)
+                    [new InOutKey<FirstResultAK, HtmlsS3>()] = c.Resolve<LoggingWorker<FirstResultAK, HtmlsS3>>(autokladLogger),
+                    [new InOutKey<HtmlsS3, SecondResultAK>()] = c.Resolve<LoggingWorker<HtmlsS3, SecondResultAK>>(autokladLogger),
                 };
                 return new WorkersContainer(parsingGraph);
             });
