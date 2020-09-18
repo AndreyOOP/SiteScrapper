@@ -23,6 +23,17 @@ namespace ParserApi.Controllers
         }
 
         [HttpGet]
+        [Route("api/parse/a")]
+        public object ParseSingleModel()
+        {
+            return new ParsersResult
+            {
+                Site911 = null,
+                Autoklad = null
+            };
+        }
+
+        [HttpGet]
         [Route("api/parse/{sparePartId}")]
         public object ParseSingleModel([FromUri]string sparePartId, [FromBody]RequestParams @params)
         {
