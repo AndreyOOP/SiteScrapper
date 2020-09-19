@@ -22,18 +22,7 @@ namespace ParserApi.Controllers
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
         }
 
-        [HttpGet]
-        [Route("api/parse/a")]
-        public object ParseSingleModel()
-        {
-            return new ParsersResult
-            {
-                Site911 = null,
-                Autoklad = null
-            };
-        }
-
-        [HttpGet]
+        [HttpPost]
         [Route("api/parse/{sparePartId}")]
         public object ParseSingleModel([FromUri]string sparePartId, [FromBody]RequestParams @params)
         {

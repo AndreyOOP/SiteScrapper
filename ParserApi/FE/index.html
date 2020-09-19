@@ -7,15 +7,23 @@
     <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-    <form onsubmit="testApiCall()">
-        <label for="id_search">Search By Id:</label>
-        <input type="text" id="id_search" name="search-by-id"><br><br>
-        <input type="submit" value="Submit">
-    </form>
-    <h3>Search Result</h3>
-    <div id="search_result">
-        some text
+    <div>
+        <h3>Test Samples:</h3>
+        MD619865- primary & additional data <br />
+        MR984375- primary & additional & analogs <br />
+        MD619866- additional data only <br />
+        MD619867- no data <br />
     </div>
+    <br /><br />
+
+    <input type="text" id="part_id" />
+    <a href="#" onclick="parse(document.getElementById('part_id').value)">Parse</a>
+    <br /><br />
+
+     <h3>Search result will be here (maybe):</h3>
+    <div id="search_result">
+    </div>
+
     <script src="js/scripts.js"></script>
 </body>
 </html>
