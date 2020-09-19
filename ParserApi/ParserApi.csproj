@@ -270,4 +270,35 @@
   </Target>
   <Target Name="AfterBuild">
   </Target> -->
+  
+  <!--How to copy file & add Targets (still not work for publishing solution)-->
+  <!--<Target Name="BeforePublish">
+    <Message Text="BeforePublish: Copy index.html from $(MSBuildProjectDirectory)\FE\ to $(MSBuildProjectDirectory)\obj\$(Configuration)\Package\PackageTmp" Importance="high" />
+    <Message Text="$(MSBuildProjectDirectory)\obj\$(Configuration)\Package\PackageTmp" Importance="high" />
+    <Copy
+            SourceFiles="$(MSBuildProjectDirectory)\FE\index.html"
+            DestinationFolder="$(MSBuildProjectDirectory)\obj\$(Configuration)\Package\PackageTmp">
+    </Copy>
+    <Message Text="Hello" Importance="high" />
+    <Message Text="MSBuildProjectDirectory $(MSBuildProjectDirectory)" Importance="high" />
+    <Message Text="MSBuildProjectDefaultTargets $(MSBuildProjectDefaultTargets)" Importance="high" />
+    <Message Text="$(Configuration)" Importance="high" />
+    <Message Text="$(WebProjectOutputDir)" Importance="high" />
+  </Target> 
+  <Target Name="PublishBuild">
+    <Message Text="PublishBuild: Copy index.html from $(MSBuildProjectDirectory)\FE\ to $(MSBuildProjectDirectory)\obj\$(Configuration)\Package\PackageTmp" Importance="high" />
+    <Copy
+            SourceFiles="$(MSBuildProjectDirectory)\FE\index.html"
+            DestinationFolder="$(MSBuildProjectDirectory)\obj\$(Configuration)\Package\PackageTmp">
+    </Copy>
+    <Message Text="Hello" Importance="high" />
+  </Target> 
+  <Target Name="ZZZ" BeforeTargets="MSDeployPublish">
+    <Message Text="PublishBuild: Copy index.html from $(MSBuildProjectDirectory)\FE\ to $(MSBuildProjectDirectory)\obj\$(Configuration)\Package\PackageTmp" Importance="high" />
+    <Copy
+            SourceFiles="$(MSBuildProjectDirectory)\FE\index.html"
+            DestinationFolder="$(MSBuildProjectDirectory)\obj\$(Configuration)\Package\PackageTmp">
+    </Copy>
+    <Message Text="Hello" Importance="high" />
+  </Target>-->
 </Project>
