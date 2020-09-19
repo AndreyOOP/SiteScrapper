@@ -14,15 +14,38 @@
         MD619866- additional data only <br />
         MD619867- no data <br />
     </div>
-    <br /><br />
 
+    <br /><br />
     <input type="text" id="part_id" />
     <a href="#" onclick="parse(document.getElementById('part_id').value)">Parse</a>
+    
     <br /><br />
+    <h3>Search result will be here (maybe):</h3>
+    <table>
+        <caption>Main Table</caption>
+        <thead>
+            <tr>
+                <th>Parser Name</th>
+                <th>Brand</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Link To Source</th>
+            </tr>
+        </thead>
+        <tbody id="tbl_upd">
+            <tr>
+                <td>A</td>
+                <td>B</td>
+                <td>C</td>
+                <td>D</td>
+                <td>E</td>
+            </tr>
+        </tbody>
+    </table>
 
-     <h3>Search result will be here (maybe):</h3>
-    <div id="search_result">
-    </div>
+    <br />
+    <h3>Raw (Json) search result will be here (maybe):</h3>
+    <div id="search_result"></div>
 
     <script src="js/scripts.js"></script>
 </body>
