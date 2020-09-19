@@ -1,4 +1,5 @@
 ﻿using ParserApi.Parsers;
+using ParserCore;
 using System;
 using System.Collections.Generic;
 
@@ -10,7 +11,7 @@ namespace ParserApi.Controllers.Models
         public IEnumerable<PerRequestTableRow> PerRequest { get; set; }
         public IEnumerable<AnalogTableRow> Analogs { get; set; }
         public IEnumerable<SameTableRow> SameIds { get; set; }
-        public object Site911Log { get; set; }
+        public IEnumerable<WorkerLogRecord> Site911Log { get; set; }
         public object AutokladLog { get; set; }
     }
 

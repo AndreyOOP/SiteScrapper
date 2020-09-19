@@ -50,7 +50,7 @@ namespace UnitTests
                 ShowLog = true
             });
 
-            Assert.AreEqual(4, result.Site911.Log.Count());
+            Assert.AreEqual(4, result.Site911Log.Count());
         }
 
         [TestMethod]
@@ -61,7 +61,7 @@ namespace UnitTests
                 ShowLog = false
             });
 
-            Assert.AreEqual(3, result.Site911.Log.Count());
+            Assert.AreEqual(3, result.Site911Log.Count());
         }
 
         [TestMethod]
@@ -69,7 +69,7 @@ namespace UnitTests
         {
             var result = (ParsersResult)controller.ParseSingleModel("id", new RequestParams());
 
-            Assert.AreEqual(3, result.Site911.Log.Count());
+            Assert.AreEqual(3, result.Site911Log.Count());
         }
     }
 }

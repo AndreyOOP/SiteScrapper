@@ -40,10 +40,7 @@ namespace AcceptanceTests
             var result = (ParsersResult)controller.ParseSingleModel(partId, new RequestParams());
 
             if(primaryTableExist)
-                Assert.IsNotNull(result.Site911.Primary);
-
-            if(secondaryTableExist)
-                Assert.IsNotNull(result.Site911.Secondary);
+                Assert.IsNotNull(result.Main);
         }
     }
 }
