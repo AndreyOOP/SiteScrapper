@@ -162,7 +162,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Parsers\Autoklad\AutokladParser.cs" />
-    <Compile Include="Parsers\Autoklad\Models\AnalogsResultAK.cs" />
+    <Compile Include="Parsers\Autoklad\Models\SecondResultAK.cs" />
     <Compile Include="Parsers\Autoklad\Models\FirstResultAK.cs" />
     <Compile Include="Parsers\Autoklad\Models\FirstResultStoreAK.cs" />
     <Compile Include="Parsers\Autoklad\Models\HtmlsS3.cs" />
@@ -270,7 +270,6 @@
   </Target>
   <Target Name="AfterBuild">
   </Target> -->
-  
   <!--How to copy file & add Targets (still not work for publishing solution)-->
   <!--<Target Name="BeforePublish">
     <Message Text="BeforePublish: Copy index.html from $(MSBuildProjectDirectory)\FE\ to $(MSBuildProjectDirectory)\obj\$(Configuration)\Package\PackageTmp" Importance="high" />
