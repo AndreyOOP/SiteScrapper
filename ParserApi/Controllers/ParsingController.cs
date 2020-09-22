@@ -1,14 +1,15 @@
 ﻿using ParserApi.Controllers.Models;
-using ParserApi.Parsers;
 using ParserApi.Parsers.Autoklad;
 using ParserApi.Parsers.Autoklad.Models;
 using ParserApi.Parsers.Site911.Models;
 using ParserApi.Parsers.Site911ParserCore;
 using ParserCore;
-using System.Collections.Generic;
 using System.Net;
 using System.Web.Http;
 using System.Linq;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace ParserApi.Controllers
 {
@@ -35,41 +36,23 @@ namespace ParserApi.Controllers
             result911.Log = @params.ShowLog ? site911Parser.WorkerLogger.Records : site911Parser.WorkerLogger.ErrorRecords;
             resultAK.Log = @params.ShowLog ? autokladParser.WorkerLogger.Records : autokladParser.WorkerLogger.ErrorRecords;
 
-            var result = Create(result911, resultAK, sparePartId);
-            result.Site911Log = result911.Log;
-            result.AutokladLog = resultAK.Log;
-            return result;
-        }
-
-        // ToDo: move to service
-        private ParsersResult Create(Result911 result911, ResultAK resultAK, string partId)
-        {
-            var mainTable = new List<MainPriceTableRow>();
-            mainTable.Add(new MainPriceTableRow 
-            { 
-                ParserName = nameof(Parser.Site911),
-                Name = result911?.Primary?.Name,
-                Brand = "", // todo
-                Price = result911?.Primary?.Price.ToString(),
-                LinkToSource = $"https://911auto.com.ua/search/{partId}"
-            });
-            var resAK = resultAK.FirstResult?.FirstResult?.Select(r => new MainPriceTableRow
+            var json = JsonConvert.SerializeObject(new
             {
-                ParserName = nameof(Parser.Autoklad),
-                Name = r?.Name,
-                Brand = r?.Brand,
-                Price = r?.Price,
-                LinkToSource = $"https://www.autoklad.ua{r?.PartBrandLink}"
-            });
-            if(resAK != null)
-                mainTable.AddRange(resAK);
+                Site911 = result911.RawData,
+                Autoklad = resultAK.RawData
+            }, Formatting.Indented);
 
-            // ToDo: same + analogs + for request
-
-            return new ParsersResult
+            var result = new OutputSummaryWithLog
             {
-                Main = mainTable
+                Parts = result911.Parts?.Concat(resultAK.Parts ?? new List<Part>()),
+                PerRequestParts = result911.PerRequestParts?.Concat(resultAK.PerRequestParts ?? new List<PerRequestPart>()),
+                AnalogParts = result911.AnalogParts?.Concat(resultAK.AnalogParts ?? new List<AnalogPart>()),
+                MatchingParts = result911.MatchingParts?.Concat(resultAK.MatchingParts ?? new List<MatchingPart>()),
+                Json = json,
+                Site911Log = result911.Log,
+                AutokladLog = resultAK.Log
             };
+            return result;
         }
 
         private TOut GetParsingResult<TIn, TOut>(ParserBase<TIn, TOut> parser, TIn model)
@@ -79,7 +62,7 @@ namespace ParserApi.Controllers
             {
                 result = parser.Parse(model);
             }
-            catch // supperss parser exception as all of them catched by logger
+            catch(Exception ex) // supperss parser exception as all of them catched by logger
             {
             }
             return result;
