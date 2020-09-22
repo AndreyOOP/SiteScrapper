@@ -37,10 +37,10 @@ namespace AcceptanceTests
         {
             var controller = new ParsingController(container.Resolve<Site911Parser>(), container.Resolve<AutokladParser>());
 
-            var result = (ParsersResult)controller.ParseSingleModel(partId, new RequestParams());
+            var result = (OutputSummaryWithLog)controller.ParseSingleModel(partId, new RequestParams());
 
             if(primaryTableExist)
-                Assert.IsNotNull(result.Main);
+                Assert.IsNotNull(result.Parts);
         }
     }
 }
