@@ -5,17 +5,25 @@ using System.Collections.Generic;
 
 namespace ParserApi.Controllers.Models
 {
-    public class ParsersResult
+    public class OutputSummary
     {
-        public IEnumerable<MainPriceTableRow> Main { get; set; }
-        public IEnumerable<PerRequestTableRow> PerRequest { get; set; }
-        public IEnumerable<AnalogTableRow> Analogs { get; set; }
-        public IEnumerable<SameTableRow> SameIds { get; set; }
-        public IEnumerable<WorkerLogRecord> Site911Log { get; set; }
-        public object AutokladLog { get; set; }
+        public IEnumerable<Part> Parts { get; set; }
+        public IEnumerable<PerRequestPart> PerRequestParts { get; set; }
+        public IEnumerable<AnalogPart> AnalogParts { get; set; }
+        public IEnumerable<MatchingPart> MatchingParts { get; set; }
     }
 
-    public class MainPriceTableRow
+    public class OutputSummaryWithLog : OutputSummary
+    {
+        /// <summary>
+        /// Represent all parsed data from all parsers. Required for investigation
+        /// </summary>
+        public string Json { get; set; }
+        public IEnumerable<WorkerLogRecord> Site911Log { get; set; }
+        public IEnumerable<WorkerLogRecord> AutokladLog { get; set; }
+    }
+
+    public class Part
     {
         public string ParserName { get; set; }
         public string Brand { get; set; }
@@ -24,9 +32,9 @@ namespace ParserApi.Controllers.Models
         public string LinkToSource { get; set; }
     }
 
-    public class PerRequestTableRow
+    public class PerRequestPart
     {
-        public Parser ParserName { get; set; }
+        public string ParserName { get; set; }
         public string PartId { get; set; }
         public string Brand { get; set; }
         public string Name { get; set; }
@@ -35,17 +43,17 @@ namespace ParserApi.Controllers.Models
         public Uri LinkToSource { get; set; }
     }
 
-    public class AnalogTableRow
+    public class AnalogPart
     {
-        public Parser ParserName { get; set; }
+        public string ParserName { get; set; }
         public string Name { get; set; }
         public string Price { get; set; }
         public Uri LinkToSource { get; set; }
     }
 
-    public class SameTableRow
+    public class MatchingPart
     {
-        public Parser ParserName { get; set; }
+        public string ParserName { get; set; }
         public string Name { get; set; }
         public string Price { get; set; }
         public Uri LinkToSource { get; set; }

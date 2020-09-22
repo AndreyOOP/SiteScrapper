@@ -151,7 +151,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Models\InMemoryLoggerLevel.cs" />
-    <Compile Include="Controllers\Models\ParsersResult.cs" />
+    <Compile Include="Controllers\Models\OutputSummaryWithLog.cs" />
     <Compile Include="Controllers\ParsingController.cs" />
     <Compile Include="Controllers\Models\RequestParams.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
@@ -181,7 +181,7 @@
     <Compile Include="Parsers\Site911\Models\In.cs" />
     <Compile Include="Parsers\Site911\Models\PrimaryResultStep2.cs" />
     <Compile Include="Parsers\Site911\Models\QueryStringStep2.cs" />
-    <Compile Include="Parsers\Site911\Models\Result.cs" />
+    <Compile Include="Parsers\Site911\Models\Result911.cs" />
     <Compile Include="Parsers\Site911\Models\SecondaryResultStep4.cs" />
     <Compile Include="Parsers\Site911\Models\LoggerSettings.cs" />
     <Compile Include="Parsers\Site911\Site911Parser.cs" />
