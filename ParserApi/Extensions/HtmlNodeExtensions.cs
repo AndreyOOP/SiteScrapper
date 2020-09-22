@@ -9,13 +9,12 @@ namespace ParserApi.Extensions
         /// <summary>
         /// In Site911 get value of cell represented by + or - gif picture
         /// </summary>
-        /// <exception cref="ParsingException">Thrown if src attribute is empty or not found</exception>
-        public static bool GetSign(this HtmlNode node)
+        public static bool? GetSign(this HtmlNode node)
         {
             var value = node?.FirstChild?.GetAttributeValue<string>("src", "");
 
             if (string.IsNullOrEmpty(value))
-                throw new ParsingException("Value of 'src' attribute not found");
+                return null;
 
             return value.EndsWith("plus.gif");
         }
