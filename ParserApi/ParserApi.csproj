@@ -203,9 +203,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FE\css\styles.css" />
-    <Content Include="FE\index.html" />
     <Content Include="FE\js\scripts.js" />
     <Content Include="Global.asax" />
+    <Content Include="index.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -1,7 +1,7 @@
-﻿//var hostApi = "https://localhost:44331";
+﻿var hostApi = "https://localhost:44331";
 //var hostApi = "https://localhost:1234";
 //var hostApi = "https://f2e78241c2fe.ngrok.io";
-var hostApi = "http://devpartsparser.azurewebsites.net";
+//var hostApi = "http://devpartsparser.azurewebsites.net";
 
 async function parse(id) {
 
