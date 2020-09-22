@@ -40,9 +40,9 @@ namespace UnitTests
             var result = worker.Parse(htmlStep1);
 
             Assert.AreEqual("Бендикс стартера MMC - MD619865", result.Name);
-            Assert.IsFalse(result.InStockDnepr);
-            Assert.IsTrue(result.InStockKiev);
-            Assert.IsTrue(result.KievOneDay);
+            Assert.IsFalse(result.InStockDnepr ?? false);
+            Assert.IsTrue(result.InStockKiev ?? false);
+            Assert.IsTrue(result.KievOneDay ?? false);
             Assert.AreEqual(1032, result.Price);
         }
     }

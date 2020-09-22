@@ -151,7 +151,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Models\InMemoryLoggerLevel.cs" />
-    <Compile Include="Controllers\Models\ParsersResult.cs" />
+    <Compile Include="Controllers\Models\OutputSummaryWithLog.cs" />
     <Compile Include="Controllers\ParsingController.cs" />
     <Compile Include="Controllers\Models\RequestParams.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
@@ -162,7 +162,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Parsers\Autoklad\AutokladParser.cs" />
-    <Compile Include="Parsers\Autoklad\Models\AnalogsResultAK.cs" />
+    <Compile Include="Parsers\Autoklad\Models\SecondResultAK.cs" />
     <Compile Include="Parsers\Autoklad\Models\FirstResultAK.cs" />
     <Compile Include="Parsers\Autoklad\Models\FirstResultStoreAK.cs" />
     <Compile Include="Parsers\Autoklad\Models\HtmlsS3.cs" />
@@ -181,7 +181,7 @@
     <Compile Include="Parsers\Site911\Models\In.cs" />
     <Compile Include="Parsers\Site911\Models\PrimaryResultStep2.cs" />
     <Compile Include="Parsers\Site911\Models\QueryStringStep2.cs" />
-    <Compile Include="Parsers\Site911\Models\Result.cs" />
+    <Compile Include="Parsers\Site911\Models\Result911.cs" />
     <Compile Include="Parsers\Site911\Models\SecondaryResultStep4.cs" />
     <Compile Include="Parsers\Site911\Models\LoggerSettings.cs" />
     <Compile Include="Parsers\Site911\Site911Parser.cs" />
@@ -202,7 +202,10 @@
     <Compile Include="Services\LoggerSettingsProvider.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FE\css\styles.css" />
+    <Content Include="FE\js\scripts.js" />
     <Content Include="Global.asax" />
+    <Content Include="index.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -213,6 +216,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\DevPartsParser - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\LocalPublish.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ParserCore\ParserCore.csproj">
@@ -266,4 +271,34 @@
   </Target>
   <Target Name="AfterBuild">
   </Target> -->
+  <!--How to copy file & add Targets (still not work for publishing solution)-->
+  <!--<Target Name="BeforePublish">
+    <Message Text="BeforePublish: Copy index.html from $(MSBuildProjectDirectory)\FE\ to $(MSBuildProjectDirectory)\obj\$(Configuration)\Package\PackageTmp" Importance="high" />
+    <Message Text="$(MSBuildProjectDirectory)\obj\$(Configuration)\Package\PackageTmp" Importance="high" />
+    <Copy
+            SourceFiles="$(MSBuildProjectDirectory)\FE\index.html"
+            DestinationFolder="$(MSBuildProjectDirectory)\obj\$(Configuration)\Package\PackageTmp">
+    </Copy>
+    <Message Text="Hello" Importance="high" />
+    <Message Text="MSBuildProjectDirectory $(MSBuildProjectDirectory)" Importance="high" />
+    <Message Text="MSBuildProjectDefaultTargets $(MSBuildProjectDefaultTargets)" Importance="high" />
+    <Message Text="$(Configuration)" Importance="high" />
+    <Message Text="$(WebProjectOutputDir)" Importance="high" />
+  </Target> 
+  <Target Name="PublishBuild">
+    <Message Text="PublishBuild: Copy index.html from $(MSBuildProjectDirectory)\FE\ to $(MSBuildProjectDirectory)\obj\$(Configuration)\Package\PackageTmp" Importance="high" />
+    <Copy
+            SourceFiles="$(MSBuildProjectDirectory)\FE\index.html"
+            DestinationFolder="$(MSBuildProjectDirectory)\obj\$(Configuration)\Package\PackageTmp">
+    </Copy>
+    <Message Text="Hello" Importance="high" />
+  </Target> 
+  <Target Name="ZZZ" BeforeTargets="MSDeployPublish">
+    <Message Text="PublishBuild: Copy index.html from $(MSBuildProjectDirectory)\FE\ to $(MSBuildProjectDirectory)\obj\$(Configuration)\Package\PackageTmp" Importance="high" />
+    <Copy
+            SourceFiles="$(MSBuildProjectDirectory)\FE\index.html"
+            DestinationFolder="$(MSBuildProjectDirectory)\obj\$(Configuration)\Package\PackageTmp">
+    </Copy>
+    <Message Text="Hello" Importance="high" />
+  </Target>-->
 </Project>

@@ -1,0 +1,39 @@
+﻿<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Spare Parts Scrapper</title>
+    <link rel="stylesheet" href="fe/css/styles.css" />
+    <script src="fe/js/scripts.js"></script>
+</head>
+<body>
+    <br />
+    <input type="text" id="part_id" />
+    <a href="#" onclick="parse(document.getElementById('part_id').value)">Parse</a>
+    <div>
+        <h3>Test Samples:</h3>
+        MD619865, MR984375, MD619866, MD619867, 349040, MR995230
+    </div>
+
+    <br />
+    <h3>Search result will be here (maybe):</h3>
+
+    <br />
+    <table id="parts_table_id"></table>
+
+    <br /><br />
+    <table id="per_request_parts_table_id"></table>
+
+    <br /><br />
+    <table id="analog_parts_table_id"></table>
+
+    <br /><br />
+    <table id="matching_parts_table_id"></table>
+
+    <br />
+    <h3>Raw json result:</h3>
+    <div id="search_result"></div>
+
+</body>
+</html>

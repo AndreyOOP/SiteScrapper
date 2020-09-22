@@ -6,6 +6,10 @@ using ParserApi.Parsers.Site911ParserCore;
 using ParserCore;
 using System.Net;
 using System.Web.Http;
+using System.Linq;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace ParserApi.Controllers
 {
@@ -22,7 +26,7 @@ namespace ParserApi.Controllers
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("api/parse/{sparePartId}")]
         public object ParseSingleModel([FromUri]string sparePartId, [FromBody]RequestParams @params)
         {
@@ -32,11 +36,23 @@ namespace ParserApi.Controllers
             result911.Log = @params.ShowLog ? site911Parser.WorkerLogger.Records : site911Parser.WorkerLogger.ErrorRecords;
             resultAK.Log = @params.ShowLog ? autokladParser.WorkerLogger.Records : autokladParser.WorkerLogger.ErrorRecords;
 
-            return new ParsersResult
+            var json = JsonConvert.SerializeObject(new
             {
-                Site911 = result911,
-                Autoklad = resultAK
+                Site911 = result911.RawData,
+                Autoklad = resultAK.RawData
+            }, Formatting.Indented);
+
+            var result = new OutputSummaryWithLog
+            {
+                Parts = result911.Parts?.Concat(resultAK.Parts ?? new List<Part>()),
+                PerRequestParts = result911.PerRequestParts?.Concat(resultAK.PerRequestParts ?? new List<PerRequestPart>()),
+                AnalogParts = result911.AnalogParts?.Concat(resultAK.AnalogParts ?? new List<AnalogPart>()),
+                MatchingParts = result911.MatchingParts?.Concat(resultAK.MatchingParts ?? new List<MatchingPart>()),
+                Json = json,
+                Site911Log = result911.Log,
+                AutokladLog = resultAK.Log
             };
+            return result;
         }
 
         private TOut GetParsingResult<TIn, TOut>(ParserBase<TIn, TOut> parser, TIn model)
@@ -46,7 +62,7 @@ namespace ParserApi.Controllers
             {
                 result = parser.Parse(model);
             }
-            catch // supperss parser exception as all of them catched by logger
+            catch(Exception ex) // supperss parser exception as all of them catched by logger
             {
             }
             return result;
