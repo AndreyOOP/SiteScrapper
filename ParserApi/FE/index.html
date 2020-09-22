@@ -5,48 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Spare Parts Scrapper</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script src="js/scripts.js"></script>
 </head>
 <body>
-    <div>
-        <h3>Test Samples:</h3>
-        MD619865- primary & additional data <br />
-        MR984375- primary & additional & analogs <br />
-        MD619866- additional data only <br />
-        MD619867- no data <br />
-    </div>
-
-    <br /><br />
+    <br />
     <input type="text" id="part_id" />
     <a href="#" onclick="parse(document.getElementById('part_id').value)">Parse</a>
-    
-    <br /><br />
-    <h3>Search result will be here (maybe):</h3>
-    <table>
-        <caption>Main Table</caption>
-        <thead>
-            <tr>
-                <th>Parser Name</th>
-                <th>Brand</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Link To Source</th>
-            </tr>
-        </thead>
-        <tbody id="tbl_upd">
-            <tr>
-                <td>A</td>
-                <td>B</td>
-                <td>C</td>
-                <td>D</td>
-                <td>E</td>
-            </tr>
-        </tbody>
-    </table>
+    <div>
+        <h3>Test Samples:</h3>
+        MD619865, MR984375, MD619866, MD619867, 349040, MR995230
+    </div>
 
     <br />
-    <h3>Raw (Json) search result will be here (maybe):</h3>
+    <h3>Search result will be here (maybe):</h3>
+
+    <br />
+    <table id="parts_table_id"></table>
+
+    <br /><br />
+    <table id="per_request_parts_table_id"></table>
+
+    <br /><br />
+    <table id="analog_parts_table_id"></table>
+
+    <br /><br />
+    <table id="matching_parts_table_id"></table>
+
+    <br />
+    <h3>Raw json result:</h3>
     <div id="search_result"></div>
 
-    <script src="js/scripts.js"></script>
 </body>
 </html>
