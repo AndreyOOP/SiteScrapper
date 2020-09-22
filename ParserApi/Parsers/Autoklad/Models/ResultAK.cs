@@ -1,9 +1,19 @@
-﻿namespace ParserApi.Parsers.Autoklad.Models
+﻿using ParserApi.Controllers.Models;
+using ParserCore;
+using System.Collections.Generic;
+
+namespace ParserApi.Parsers.Autoklad.Models
 {
-    public class ResultAK
+    public class ResultAK : OutputSummary
     {
-        public FirstResultStoreAK FirstResult { get; set; }
-        public object AnalogResult { get; set; }
-        public object Log { get; set; }
+        public RawDataAK RawData { get; set; }
+        public IEnumerable<WorkerLogRecord> Log { get; set; }
+    }
+
+    public class RawDataAK
+    {
+        public IEnumerable<FirstResultAKTableRow> FirstResult { get; set; }
+        public Dictionary<string, List<RowResultAK>> Analogs { get; set; }
+        public Dictionary<string, List<RowResultAK>> Same { get; set; }
     }
 }
