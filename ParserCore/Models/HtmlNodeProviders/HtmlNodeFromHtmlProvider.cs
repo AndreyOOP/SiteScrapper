@@ -3,6 +3,9 @@ using ParserCore.Abstraction;
 
 namespace ParserCore.Models.HtmlNodeProviders
 {
+    /// <summary>
+    /// Provides html node created based on html
+    /// </summary>
     public class HtmlNodeFromHtmlProvider : IHtmlNodeProvider
     {
         private string html;
@@ -21,6 +24,7 @@ namespace ParserCore.Models.HtmlNodeProviders
             }
         }
 
+        /// <param name="html">Html source of the html node</param>
         public HtmlNodeFromHtmlProvider(string html)
         {
             this.html = html;
