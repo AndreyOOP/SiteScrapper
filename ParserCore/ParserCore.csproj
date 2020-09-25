@@ -49,6 +49,7 @@
     <Compile Include="Abstraction\ILogger.cs" />
     <Compile Include="Abstraction\IWorkerLogger.cs" />
     <Compile Include="Attributes\XPathAttribute.cs" />
+    <Compile Include="Extensions\AttributeExtensions.cs" />
     <Compile Include="InMemoryWorkerLogger.cs" />
     <Compile Include="Abstraction\IParser.cs" />
     <Compile Include="Models\HtmlNodeProviders\HtmlNodeFromHtmlProvider.cs" />
