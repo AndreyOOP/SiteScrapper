@@ -65,6 +65,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UnitTests\AttributeExtensionTests.cs" />
     <Compile Include="UnitTests\HtmlNodeProviderTests.cs" />
     <Compile Include="UnitTests\InOutKeyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
