@@ -35,6 +35,9 @@ namespace ParserCore
                                     ?.GetConstructorArgument<string>();
                 if(xPath != null)
                 {
+                    // ToDo: property IEnumerable - SelectNodes()
+                    // ToDo: property - reference type - recursive call
+                    // ToDo: move to service - it will be possible to use outside decorator, possible solution of input IEnumerable<TIn> => IEnumerable<TOut>
                     var value = htmlNode.SelectSingleNode(xPath)?.InnerText;
                     var convertedValue = ConvertToType(value, property.PropertyType);
                     if(convertedValue != null)
