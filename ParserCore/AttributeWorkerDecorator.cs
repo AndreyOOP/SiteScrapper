@@ -1,6 +1,8 @@
 ﻿using ParserCore.Abstraction;
 using ParserCore.Attributes;
 using ParserCore.Extensions;
+using System;
+using System.Globalization;
 
 namespace ParserCore
 {
@@ -34,12 +36,52 @@ namespace ParserCore
                 if(xPath != null)
                 {
                     var value = htmlNode.SelectSingleNode(xPath)?.InnerText;
-                    // ToDo: convert to property type
-                    property.SetValue(tOut, value);
+                    var convertedValue = ConvertToType(value, property.PropertyType);
+                    if(convertedValue != null)
+                        property.SetValue(tOut, convertedValue);
                 }
             }
 
             return tOut;
+        }
+
+        private object ConvertToType(string value, Type type)
+        {
+            try
+            {
+                if (type == typeof(string))
+                    return value;
+
+                if (type == typeof(bool))
+                    return Convert.ToBoolean(value);
+
+                if (type == typeof(int))
+                    return Convert.ToInt32(value);
+
+                if (type == typeof(long))
+                    return Convert.ToInt64(value);
+
+                if (type == typeof(double))
+                    return Convert.ToDouble(value, CultureInfo.InvariantCulture.NumberFormat);
+
+                if (type == typeof(decimal))
+                    return Convert.ToDecimal(value, CultureInfo.InvariantCulture.NumberFormat);
+
+                throw new NotImplementedException($"{nameof(XPathAttribute)} is not implemented for type {type.Name}");
+            }
+            catch (NotImplementedException)
+            {
+                throw;
+            }
+            // in case of converting exception do not set any value to property with attribute
+            catch (OverflowException)
+            {
+                return null;
+            }
+            catch(FormatException)
+            {
+                return null;
+            }
         }
     }
 }

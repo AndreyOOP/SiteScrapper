@@ -2,6 +2,7 @@
 using ParserCore;
 using ParserCore.Attributes;
 using ParserCore.Models.HtmlNodeProviders;
+using System;
 
 namespace UnitTests
 {
@@ -77,4 +78,107 @@ namespace UnitTests
         }
     }
 
+    [TestClass]
+    public class AttributeWorkerDecoratorTypesTests
+    {
+        class TIn : HtmlNodeFromHtmlProvider
+        {
+            public TIn(string html) : base(html) { }
+        }
+
+        class XPathTypesTestClass
+        {
+            [XPath("//div[@id='int']")]
+            public int Int { get; set; }
+
+            [XPath("//div[@id='long']")]
+            public long Long { get; set; }
+
+            [XPath("//div[@id='bool-true']")]
+            public bool True { get; set; }
+
+            [XPath("//div[@id='bool-false']")]
+            public bool False { get; set; }
+
+            [XPath("//div[@id='bool-can-not-parse']")]
+            public bool BoolCanNotParse { get; set; }
+
+            [XPath("//div[@id='double']")]
+            public double Double { get; set; }
+
+            [XPath("//div[@id='decimal']")]
+            public decimal Decimal { get; set; }
+        }
+
+        class XPathTypesTestWorker : IWorker<TIn, XPathTypesTestClass>
+        {
+            public bool IsExecutable(TIn model) => true;
+
+            public XPathTypesTestClass Parse(TIn model) => new XPathTypesTestClass();
+        }
+
+        [TestMethod]
+        [DataRow(@"
+        <html>
+            <div id='int'>123</div>
+            <div id='long'>12345</div>
+            <div id='bool-true'>True</div>
+            <div id='bool-false'>false</div>
+            <div id='bool-can-not-parse'>txt</div>
+            <div id='double'>1.25</div>
+            <div id='decimal'>5.123456789</div>
+        </html>")]
+        public void Parse_DifferentPropertyTypes_ValuesAsExpected(string html)
+        {
+            var attributeWorkerDecorator = new AttributeWorkerDecorator<TIn, XPathTypesTestClass>(new XPathTypesTestWorker());
+
+            var result = attributeWorkerDecorator.Parse(new TIn(html));
+
+            Assert.AreEqual(123, result.Int);
+            Assert.AreEqual(12345, result.Long);
+            Assert.AreEqual(true, result.True);
+            Assert.AreEqual(false, result.False);
+            Assert.AreEqual(default, result.BoolCanNotParse);
+            Assert.AreEqual(1.25, result.Double);
+            Assert.AreEqual(5.123456789m, result.Decimal);
+        }
+
+        
+    }
+
+    [TestClass]
+    public class XPathAppliedToNotSupportedPropertyTypeTest
+    {
+        class TIn : HtmlNodeFromHtmlProvider
+        {
+            public TIn(string html) : base(html) { }
+        }
+
+        class XPathTypesTestClass
+        {
+            [XPath("//div[@id='uint']")]
+            public uint Uint { get; set; }
+        }
+
+        class XPathTypesTestWorker : IWorker<TIn, XPathTypesTestClass>
+        {
+            public bool IsExecutable(TIn model) => true;
+
+            public XPathTypesTestClass Parse(TIn model) => new XPathTypesTestClass();
+        }
+
+        [TestMethod]
+        [DataRow(@"
+        <html>
+            <div id='uint'>123</div>
+        </html>")]
+        public void Parse_XPathAppliedToNotSupportedPropertyType_NotImplementedException(string html)
+        {
+            var attributeWorkerDecorator = new AttributeWorkerDecorator<TIn, XPathTypesTestClass>(new XPathTypesTestWorker());
+
+            var exception = Assert.ThrowsException<NotImplementedException>(() => attributeWorkerDecorator.Parse(new TIn(html)));
+
+            Assert.AreEqual("XPathAttribute is not implemented for type UInt32", exception.Message);
+        }
+    }
 }
