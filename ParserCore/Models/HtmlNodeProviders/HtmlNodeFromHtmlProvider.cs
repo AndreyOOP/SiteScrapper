@@ -11,7 +11,8 @@ namespace ParserCore.Models.HtmlNodeProviders
         private string html;
         private HtmlNode htmlNode;
 
-        public HtmlNode Node {
+        public HtmlNode Node 
+        {
             get
             {
                 if(htmlNode == null)
